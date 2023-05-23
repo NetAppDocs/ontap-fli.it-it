@@ -1,0 +1,18 @@
+---
+permalink: san-migration/concept_fli_offline_post_migration_tasks.html 
+sidebar: sidebar 
+keywords: fli, offline, post-migration, tasks 
+summary: Eventuali rimedi dei server in sospeso non eseguiti in precedenza vengono eseguiti durante la post-migrazione. 
+---
+= Attività post-migrazione offline FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Eventuali rimedi dei server in sospeso non eseguiti in precedenza vengono eseguiti durante la post-migrazione.
+
+Il software di terze parti viene rimosso, il software NetApp viene installato e configurato, quindi l'host viene attivato accedendo alle LUN su NetApp. Consultare l'argomento _correzione host_ per esempi di correzione post-migrazione per tipi di host specifici.
+
+Esaminare i log per verificare la presenza di errori, controllare i percorsi ed eseguire i test delle applicazioni per verificare che la migrazione sia stata completata correttamente.

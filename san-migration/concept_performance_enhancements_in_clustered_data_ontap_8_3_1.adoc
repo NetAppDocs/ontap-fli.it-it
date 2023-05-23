@@ -1,0 +1,48 @@
+---
+permalink: san-migration/concept_performance_enhancements_in_clustered_data_ontap_8_3_1.html 
+sidebar: sidebar 
+keywords: performance, enhancements, ontap 8.3.1 
+summary: 'Sono stati apportati alcuni miglioramenti a FLI per una migliore gestione delle performance e per impedire che si verifichi la mancanza di workload. I miglioramenti di FLI in ONTAP 8.3.1 includono un nuovo comando di accelerazione e l"importazione di LUN mostrano miglioramenti che mostrano il throughput e i gruppi di policy di QoS.' 
+---
+= Miglioramenti delle performance in ONTAP 8.3.1
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sono stati apportati alcuni miglioramenti a FLI per una migliore gestione delle performance e per impedire che si verifichi la mancanza di workload. I miglioramenti di FLI in ONTAP 8.3.1 includono un nuovo comando di accelerazione e l'importazione di LUN mostrano miglioramenti che mostrano il throughput e i gruppi di policy di QoS.
+
+Il `LUN import throttle` il comando viene utilizzato per limitare la velocità massima alla quale è possibile eseguire un'importazione.
+
+[listing]
+----
+cluster::*> lun import throttle -vserver fli_72C -path /vol/flivol/72Clun1 -max-throughput-limit
+
+{<integer>[KB|MB|GB|TB|PB]}  Maximum Throughput Limit (per sec)
+----
+Utilizzare `instance` passare a. `lun import show` Per visualizzare informazioni estese sull'importazione del LUN, incluse le informazioni relative all'acceleratore e alla qualità del servizio.
+
+[listing]
+----
+cluster::*> lun import show -instance
+
+    Vserver Name: fli_72C
+    LUN Path: /vol/flivol/72Clun1
+    Foreign Disk Serial Number: D0i1E+G8Wg6m
+    Import Home Node: ontaptme-fc-cluster-01
+    Import Current Node: ontaptme-fc-cluster-01
+    Operation In Progress: import
+    Admin State: stopped
+    Operational State: stopped
+    Percent Complete: 0
+    Blocks Imported: -
+    Blocks Compared: -
+    Total Blocks: 6297480
+    Estimated Remaining Duration: -
+    Failure Reason: -
+    Maximum Throughput Limit(per sec): -
+    Current Throughput (per sec): -
+    QoS Policy Group: -
+----
+I valori per `current throughput` mostra il tasso corrente di throughput delle operazioni di importazione o verifica. Gli utenti devono controllare questo valore prima di impostare un valore di accelerazione. È vuoto quando non è in esecuzione. Il `QoS policy group` Mostra il gruppo QoS se è stato utilizzato l'acceleratore di importazione LUN.

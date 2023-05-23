@@ -1,0 +1,77 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, netapp lun layouts tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sui layout LUN.' 
+---
+= Foglio di lavoro Site Survey and Planning scheda NetApp LUN Layout
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sui layout LUN.
+
+Di seguito viene riportato un esempio di come configurare la scheda NetApp LUN Layout.
+
+|===
+7+| Informazioni sul LUN NetApp 
+
+
+ a| 
+Controller dello storage
+ a| 
+Aggregato
+ a| 
+Volume Name (Nome volume)
+ a| 
+Volume Size (dimensione volume)
+ a| 
+Garanzia sui volumi
+ a| 
+Riserva di snap
+ a| 
+LUN Name (Nome LUN)
+
+|===
+|===
+7+| Informazioni sul LUN NetApp 
+
+
+ a| 
+NUMERO DI SERIE
+ a| 
+Tipo di LUN
+ a| 
+Prefisso personalizzato
+ a| 
+LUN Description (Descrizione LUN)
+ a| 
+Dimensione GB
+ a| 
+LUN Reservation (prenotazione LUN)
+ a| 
+Riserva frazionaria
+
+|===
+|===
+7+| Informazioni sul LUN NetApp 
+
+
+ a| 
+Dimensionamento automatico del volume
+ a| 
+Elimina automaticamente snap
+ a| 
+IGroup
+ a| 
+ID LUN
+ a| 
+Tipo di host
+ a| 
+Drive Letter
+ a| 
+Host
+
+|===

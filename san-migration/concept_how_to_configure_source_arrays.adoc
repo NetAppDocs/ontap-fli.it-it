@@ -1,0 +1,14 @@
+---
+permalink: san-migration/concept_how_to_configure_source_arrays.html 
+sidebar: sidebar 
+keywords: configure, source, arrays 
+summary: 'Consultare la documentazione dell"array di origine per aggiungere una voce host per le porte iniziatore (mascheramento LUN, igroup in NetApp Parlance). Queste informazioni possono essere recuperate dalla sezione Storage Groups del foglio di lavoro Site Survey and Planning.' 
+---
+= Come configurare gli array di origine
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Consultare la documentazione dell'array di origine per aggiungere una voce host per le porte iniziatore (mascheramento LUN, igroup in NetApp Parlance). Queste informazioni possono essere recuperate dalla sezione Storage Groups del foglio di lavoro Site Survey and Planning.

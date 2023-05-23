@@ -1,0 +1,91 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, hba and zone information tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sull"HBA e sulla zona.' 
+---
+= Scheda HBA (Site Survey and Planning) e informazioni zona del foglio di lavoro
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sull'HBA e sulla zona.
+
+Di seguito viene riportato un esempio di configurazione dell'HBA e della scheda informazioni zona.
+
+[cols="4*"]
+|===
+4+| Dettagli fabric 
+
+
+ a| 
+Host Name (Nome host)
+ a| 
+Descrizione
+ a| 
+PN. WWN
+ a| 
+Nome fabric
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+HBA0
+ a| 
+21:00:00:24:ff:xx:xx:xx
+ a| 
+PROD A.
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+HBA1
+ a| 
+21:00:00:24:ff:xx:xx:xx
+ a| 
+PROD B
+
+|===
+[cols="4*"]
+|===
+4+| Dettagli fabric 
+
+
+ a| 
+VSAN/dominio
+ a| 
+Numero di porta
+ a| 
+Appartenenza alla zona di pre-migrazione
+ a| 
+Iscrizione alla zona post-migrazione
+
+
+
+ a| 
+10
+ a| 
+fc2/3
+ a| 
+Rx21_AMS2100
+ a| 
+Rx21_flicDOT
+
+
+
+ a| 
+10
+ a| 
+fc2/3
+ a| 
+Rx21_AMS2100
+ a| 
+Rx21_flicDOT
+
+|===

@@ -1,0 +1,128 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_source_luns_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, source luns tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sui LUN di origine.' 
+---
+= Scheda LUN di origine del foglio di lavoro Site Survey and Planning (analisi del sito e pianificazione)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sui LUN di origine.
+
+Di seguito viene riportato un esempio di come configurare la scheda LUN di origine.
+
+|===
+5+| LUN di origine 
+
+
+ a| 
+LUN mascherati
+
+
+
+ a| 
+Nome del gruppo di storage
+ a| 
+Host LUN ID (ID LUN host)
+ a| 
+ID LUN array
+ a| 
+Spesso/sottile
+ a| 
+UID
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+0
+ a| 
+30
+ a| 
+Spesso
+ a| 
+60060e801046b96004f2bf460000001e
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+1
+ a| 
+14
+ a| 
+Spesso
+ a| 
+60060e801046b96004f2bf460000000e
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+2
+ a| 
+15
+ a| 
+Spesso
+ a| 
+60060e801046b96004f2bf460000000f
+
+|===
+|===
+5+| LUN di origine 
+
+
+ a| 
+Tutti I LUN .2a
+| Prefisso personalizzato 
+
+
+ a| 
+LUN Name (Nome LUN)
+ a| 
+UID
+ a| 
+Settore iniziale
+ a| 
+Offset partizione
+ a| 
+
+
+
+| LUN 30  a| 
+ a| 
+ a| 
+368050176
+ a| 
+0
+
+
+
+ a| 
+LUN 14
+ a| 
+ a| 
+ a| 
+33619968
+ a| 
+0
+
+
+
+ a| 
+LUN 15
+ a| 
+ a| 
+ a| 
+33619968
+ a| 
+0
+
+|===

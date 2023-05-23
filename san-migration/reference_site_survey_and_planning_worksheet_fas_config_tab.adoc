@@ -1,0 +1,111 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_fas_config_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, fas config tab 
+summary: 'Nell"ambito del foglio di lavoro per l"analisi e la pianificazione del sito, è disponibile una scheda contenente informazioni sulla configurazione di FAS.' 
+---
+= Scheda Configurazione FAS del foglio di lavoro per l'analisi e la pianificazione del sito
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro per l'analisi e la pianificazione del sito, è disponibile una scheda contenente informazioni sulla configurazione di FAS.
+
+Di seguito viene riportato un esempio di configurazione della scheda Configurazione FAS.
+
+|===
+| Nome cluster | Indirizzo IP di gestione del cluster | Disponibilità delle credenziali di gestione del cluster 2+| Host del gestore di sistema ONTAP 
+
+
+|  |  |  | *Indirizzo IP* | *Credenziali disponibili* 
+
+
+|  |  |  |  |  
+|===
+|===
+6+| Porte di rete 
+
+
+| Nodo | Nome interfaccia | Tipo di porta | Velocità della porta | Nome/ID VLAN | IFGRP 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+| Nome SVM | Tipo | Protocolli | Aggregato | Volume root SVM 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+| SVM | Volume | Aggregato | Dimensione | SAN 
+
+
+|  |  |  | *Nome LUN* | *Dimensione LUN* 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+6+| Interfacce di rete SVM 
+
+
+| SVM | Nome interfaccia | Ruolo dell'interfaccia | Indirizzo IP/Netmask | Nodo principale/porta principale | Gruppo di failover 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+6+| Porte di destinazione FCP SVM 
+
+
+| SVM | Nome porta FCP | PN. WWN | WWNN | Nodo principale | Porta home 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+6+| Porte iniziatore FCP nodo 
+
+
+| Nome del nodo | Nome porta FCP | PN. WWN | WWN | Nodo Homer | Porta home 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===

@@ -1,0 +1,177 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_questionnaire_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, questionnaire tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente le informazioni sul progetto di migrazione del questionario di migrazione iniziale.' 
+---
+= Scheda del questionario del foglio di lavoro Site Survey and Planning
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente le informazioni sul progetto di migrazione del questionario di migrazione iniziale.
+
+Di seguito viene riportato un esempio di come impostare la scheda Questionnaire.
+
+|===
+3+| Informazioni sul progetto di migrazione 
+
+
+ a| 
+Tipo di progetto
+ a| 
+☐ migrazione dei dati
+
+☐ altro
+ a| 
+
+
+
+ a| 
+Obiettivi della migrazione dei dati
+ a| 
+& N. 91;obiettivi e n. 93;
+ a| 
+
+
+
+ a| 
+Dispositivi di origine
+ a| 
+Storage: [Tipo di storage]
+
+No N. di dispositivi: [N. di array]
+
+Con thin provisioning: ☐ Sì ☐ No
+ a| 
+Enumerare tutti i dispositivi
+
+
+
+ a| 
+Dispositivi client
+ a| 
+Sistema operativo: [Versione sistema operativo]
+
+Boot SAN: ☐ Sì ☐ No
+
+MPIO: [Versione MPIO]
+
+HBA: [Fornitore HBA, modello, firmware]
+ a| 
+
+
+
+ a| 
+Switch Fabric
+ a| 
+Fornitore:
+
+Modello:
+
+Firmware:
+
+No N. di porte:
+ a| 
+
+
+
+ a| 
+Protocolli correnti
+ a| 
+☐ FCP
+
+☐ iSCSI
+ a| 
+
+
+
+ a| 
+Volume Manager
+ a| 
+Fornitore:
+
+Prodotto:
+
+Versione:
+ a| 
+
+
+
+ a| 
+Dispositivi di destinazione (storage)
+ a| 
+Storage: [Storage]
+
+No [Numero]
+
+Con thin provisioning: ☐ Sì ☐ No
+ a| 
+Per questo servizio, solo filer NetApp
+
+
+
+ a| 
+Quantità di dati da migrare (in TB)
+ a| 
+E n. 91;quantità di dati& n. 93;
+ a| 
+Riepilogo e dettagli (ciascun dispositivo di origine)
+
+
+
+ a| 
+Numero di LUN
+ a| 
+91;numero di LUN e 93;
+ a| 
+Riepilogo e dettagli (ciascun dispositivo di origine)
+
+
+
+ a| 
+Riorganizzazione dei dati
+ a| 
+☐ Sì☐ No
+ a| 
+Il cliente desidera spostare volumi/directory/cartelle/file in diverse strutture di dati come parte della migrazione?
+
+
+
+ a| 
+Aspettative di interruzione
+ a| 
+Finestra di disservizio
+
+☐ Pre-defined ☐ flessibile
+
+Criteri della finestra Standard Maintenance: [Info]
+ a| 
+Numero e durata delle interruzioni che possono essere utilizzate. Elencare le finestre di manutenzione, se presenti.
+
+
+
+ a| 
+Intervallo di tempo desiderato per il completamento
+ a| 
+91;intervallo di tempo desiderato per il completamento& n. 93;& n. 91;sensibilità temporale& n. 93;
+ a| 
+
+
+
+ a| 
+Altre informazioni pertinenti
+ a| 
+& 91;altre informazioni pertinenti& 93;
+ a| 
+
+
+
+ a| 
+Nome e sede dell'organizzazione del cliente (città e stato)
+ a| 
+ a| 
+
+|===

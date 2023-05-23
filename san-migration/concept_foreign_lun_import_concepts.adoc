@@ -1,0 +1,32 @@
+---
+permalink: san-migration/concept_foreign_lun_import_concepts.html 
+sidebar: sidebar 
+keywords: foreign, lun, import, concepts 
+summary: La comprensione dei concetti di base di FLI aiuta a ottenere un funzionamento corretto e riduce il lavoro di configurazione iniziale. 
+---
+= Concetti relativi all'importazione di LUN esterni
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La comprensione dei concetti di base di FLI aiuta a ottenere un funzionamento corretto e riduce il lavoro di configurazione iniziale.
+
+* *Array straniero*
++
+Un array esterno è un dispositivo di storage che non esegue ONTAP. Questo tipo di array viene anche definito array di terze parti o array di origine. Nel caso di una transizione da 7-Mode a ONTAP, l'array esterno sarebbe un array prodotto da NetApp con ONTAP 7-Mode.
+
+* *LUN esterna*
++
+Un LUN esterno è un LUN contenente i dati dell'utente ospitati su un array di terze parti che utilizza il formato di disco nativo dell'array.
+
+* *Relazione LUN FLI*
++
+Una relazione LUN FLI è un'associazione persistente tra lo storage di origine e quello di destinazione per l'importazione dei dati. Gli endpoint di origine e di destinazione sono LUN.
+
+* *Importazione LUN*
++
+L'importazione del LUN è un processo che consente di trasferire i dati in un LUN esterno dal formato di terze parti a un LUN in formato NetApp nativo.
+
+

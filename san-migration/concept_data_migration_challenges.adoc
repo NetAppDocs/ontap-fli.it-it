@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_data_migration_challenges.html 
+sidebar: sidebar 
+keywords: data, migration, challenges 
+summary: 'Alcune delle sfide poste dalla migrazione dei dati sono il downtime esteso, il rischio potenziale, le scarse risorse e l"inadeguatezza delle competenze.' 
+---
+= Sfide legate alla migrazione dei dati
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Alcune delle sfide poste dalla migrazione dei dati sono il downtime esteso, il rischio potenziale, le scarse risorse e l'inadeguatezza delle competenze.
+
+I requisiti di disponibilità dei dati sono diventati sempre più esigenti e i downtime sono inaccettabili, in modo che le operazioni di business guidino il processo di migrazione dei dati. Fattori di rischio come l'impatto delle performance sui sistemi di produzione, il potenziale danneggiamento dei dati e la perdita sono una preoccupazione in qualsiasi processo di migrazione dei dati.

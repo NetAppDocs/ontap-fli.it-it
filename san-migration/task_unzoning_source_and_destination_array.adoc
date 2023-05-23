@@ -1,0 +1,90 @@
+---
+permalink: san-migration/task_unzoning_source_and_destination_array.html 
+sidebar: sidebar 
+keywords: unzone, source, destination, array 
+summary: Una volta completate tutte le migrazioni, le transizioni e le verifiche, è possibile dismettere gli array di origine e di destinazione. 
+---
+= Unzoning array di origine e destinazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una volta completate tutte le migrazioni, le transizioni e le verifiche, è possibile dismettere gli array di origine e di destinazione.
+
+Per separare gli array di origine e di destinazione, rimuovere lo storage di origine dalla zona di destinazione da entrambi i fabric.
+
+Esempio di fabric Brocade
+
+.Fasi
+. Rimuovere la zona dallo zoneset nel tessuto A.
++
+[listing]
+----
+cfgDelete "PROD_LEFT", "ZONE_AMS2100_cDOT_Initiator_fabA"
+zoneDelete "ZONE_AMS2100_cDOT_Initiator_fabA"
+----
+. Attivare le zone nel fabric A.
++
+[listing]
+----
+cfgEnable "PROD_LEFT"
+cfgSave
+----
+. Rimuovere la zona dallo zoneset nel tessuto B.
++
+[listing]
+----
+cfgDelete "PROD_RIGHT", "ZONE_AMS2100_cDOT_Initiator_fabB"
+zoneDelete "ZONE_AMS2100_cDOT_Initiator_fabA"
+----
+. Attivare le zone nel fabric B.
++
+[listing]
+----
+cfgEnable "PROD_RIGHT"
+cfgSave
+----
+
+
+Esempio di fabric Cisco
+
+.Fasi
+. Rimuovere la zona dallo zoneset nel tessuto A.
++
+[listing]
+----
+conf t
+zoneset name PROD_LEFT vsan 10
+no member ZONE_AMS2100_cDOT_Initiator_fabA
+no zone name ZONE_AMS2100_cDOT_Initiator_fabA vsan 10
+exit
+----
+. Attivare le zone nel fabric A.
++
+[listing]
+----
+zoneset activate name PROD_LEFT vsan 10
+end
+copy running-config startup-config
+----
+. Rimuovere la zona dallo zoneset nel tessuto B.
++
+[listing]
+----
+conf t
+zoneset name PROD_RIGHT vsan 10
+no member ZONE_AMS2100_cDOT_Initiator_fabB
+no zone name ZONE_AMS2100_cDOT_Initiator_fabB vsan 10
+exit
+----
+. Attivare le zone nel fabric B.
++
+[listing]
+----
+zoneset activate name PROD_RIGHT vsan 10
+end
+Copy running-config startup-config
+----
+

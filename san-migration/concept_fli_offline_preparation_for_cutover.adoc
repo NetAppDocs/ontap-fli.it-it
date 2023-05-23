@@ -1,0 +1,17 @@
+---
+permalink: san-migration/concept_fli_offline_preparation_for_cutover.html 
+redirect: ontap-fli/san-migration/task_rebooting_the_host_to_validate_system_state.html 
+sidebar: sidebar 
+keywords: fli, offline, preparation, cutover 
+summary: 'Durante la pre-migrazione delle importazioni di LUN esterne, convalidare e verificare gli host e i percorsi dei LUN di origine. Dopo il riavvio, l"host viene arrestato in preparazione della migrazione.' 
+---
+= FLI offline: Preparazione per il cutover
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante la pre-migrazione delle importazioni di LUN esterne, convalidare e verificare gli host e i percorsi dei LUN di origine. Dopo il riavvio, l'host viene arrestato in preparazione della migrazione.
+
+Una volta completata la migrazione e la correzione, gli host possono essere collegati al nuovo storage di destinazione e le applicazioni possono essere verificate dagli utenti finali.

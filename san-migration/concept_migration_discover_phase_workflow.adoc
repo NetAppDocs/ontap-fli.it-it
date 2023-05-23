@@ -1,0 +1,59 @@
+---
+permalink: san-migration/concept_migration_discover_phase_workflow.html 
+sidebar: sidebar 
+keywords: discover phase workflow 
+summary: La fase di rilevamento del processo di migrazione si concentra sulla raccolta delle informazioni utilizzate per la risoluzione degli host e sulla creazione di piani di migrazione nelle fasi successive. La raccolta della maggior parte delle informazioni viene automatizzata utilizzando uno strumento di raccolta dati, ad esempio OneCollect. 
+---
+= Scopri il flusso di lavoro della fase
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di rilevamento del processo di migrazione si concentra sulla raccolta delle informazioni utilizzate per la risoluzione degli host e sulla creazione di piani di migrazione nelle fasi successive. La raccolta della maggior parte delle informazioni viene automatizzata utilizzando uno strumento di raccolta dati, ad esempio OneCollect.
+
+La figura seguente mostra il flusso di lavoro della fase di rilevamento.
+
+image::../media/discover_phase_1.png[scopri la fase 1]
+
+Le attività della fase di rilevamento sono elencate nella tabella seguente.
+
+[cols="2*"]
+|===
+| Componente | Attività 
+
+
+ a| 
+Host
+ a| 
+. Identificare le WWPN HBA (utilizzate per la creazione di zone).
+. Identificare le informazioni del LUN (dimensioni, numeri di serie, layout delle partizioni e offset).
+. Identificare la configurazione MPIO di terze parti, il sistema operativo host, i modelli HBA/CNA e il firmware e così via.
+
+
+
+
+ a| 
+Fabric
+ a| 
+Identificare le zone di storage host-to-source. (Questi vengono rimossi dopo la migrazione).
+
+
+
+ a| 
+Storage di destinazione
+ a| 
+Identificare le WWPN per le porte che verranno utilizzate per l'utilizzo di iniziatore/destinazione.
+
+
+
+ a| 
+Storage di origine
+ a| 
+. Identificare le WWPN (utilizzate per la creazione di zone).
+. Identificare i LUN mappati all'host.
+. Identificare i record iniziatori per l'host.
+
+
+|===

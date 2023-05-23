@@ -1,0 +1,52 @@
+---
+permalink: san-migration/task_brocade_fabric_example.html 
+sidebar: sidebar 
+keywords: brocade, fabric, example 
+summary: Questa procedura illustra la rimozione dello storage di origine e della zona host da un fabric zoneset Brocade. 
+---
+= Esempio di fabric Brocade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questa procedura illustra la rimozione dello storage di origine e della zona host da un fabric zoneset Brocade.
+
+[NOTE]
+====
+Il nome della zona per gli esempi è _rx21_AMS2100_.
+
+====
+.Fasi
+. Rimuovere la zona dallo zoneset nel tessuto A.
++
+[listing]
+----
+cfgDelete "PROD_LEFT", "rx21_AMS2100"
+cfgDelete "PROD_LEFT", "rx22_AMS2100"
+cfgDelete "PROD_LEFT", "rx20_AMS2100"
+----
+. Attivare lo zoneset nel fabric A.
++
+[listing]
+----
+cfgEnable "PROD_LEFT"
+cfgSave
+----
+. Rimuovere la zona dallo zoneset nel tessuto B.
++
+[listing]
+----
+cfgDelete "PROD_RIGHT", "rx21_AMS2100"
+cfgDelete "PROD_RIGHT", "rx22_AMS2100"
+cfgDelete "PROD_RIGHT", "rx20_AMS2100"
+----
+. Attivare lo zoneset nel fabric B.
++
+[listing]
+----
+cfgEnable "PROD_RIGHT"
+cfgSave
+----
+

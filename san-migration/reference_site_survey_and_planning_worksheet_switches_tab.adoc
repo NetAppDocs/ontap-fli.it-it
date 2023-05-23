@@ -1,0 +1,64 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_switches_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, switches tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario impostare una scheda contenente le informazioni sullo switch di migrazione.' 
+---
+= Scheda interruttori del foglio di lavoro Site Survey and Planning (analisi del sito
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario impostare una scheda contenente le informazioni sullo switch di migrazione.
+
+Di seguito viene riportato un esempio di configurazione della scheda Switch.
+
+|===
+8+| Switch 
+
+
+ a| 
+Corrente
+ a| 
+Consigliato da NetApp
+
+
+
+ a| 
+Host Name (Nome host)
+ a| 
+Indirizzo IP
+ a| 
+Vendor
+ a| 
+Modello
+ a| 
+Nome fabric
+ a| 
+VSAN/dominio
+ a| 
+Firmware
+ a| 
+Firmware
+
+
+
+ a| 
+C9506-1-A.
+ a| 
+10.x.x.x
+ a| 
+Cisco
+ a| 
+9506
+ a| 
+PROD A.
+ a| 
+10
+ a| 
+3.3 (5 a)
+ a| 
+
+|===

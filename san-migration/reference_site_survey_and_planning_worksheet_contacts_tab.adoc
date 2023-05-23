@@ -1,0 +1,36 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_contacts_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, contacts tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente le informazioni di contatto del progetto di migrazione.' 
+---
+= Scheda Contatti del foglio di lavoro Site Survey and Planning
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente le informazioni di contatto del progetto di migrazione.
+
+Di seguito viene riportato un esempio di configurazione della scheda Contatti.
+
+[cols="6*"]
+|===
+6+| Informazioni di contatto sul progetto di migrazione 
+
+
+ a| 
+Nome risorsa
+ a| 
+Organizzazione
+ a| 
+Ruolo del progetto
+ a| 
+Telefono ufficio
+ a| 
+Telefono cellulare
+ a| 
+E-mail
+
+|===

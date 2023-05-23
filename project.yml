@@ -1,0 +1,32 @@
+---
+settings:
+  name: ONTAP FLI
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  langs: it-it,us-en,ja-jp,ko-kr,zh-cn,zh-tw,de-de,es-es,fr-fr
+sidebar:
+  entries:
+  - title: ONTAP documenti FLI
+    url: "/index.html"
+  - section: san-migration
+  - title: Note legali
+    url: "/reference_legal_notices.html"
+homepage:
+  tiles:
+  - title: Flussi di lavoro FLI
+    links:
+    - title: Workflow offline
+      url: "/san-migration/concept_fli_offline_workflow.html"
+    - title: Workflow online
+      url: "/san-migration/concept_fli_online_workflow.html"
+    - title: Workflow di transizione da FLI 7-Mode a ONTAP
+      url: "/san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html"
+    - title: FLI con automazione del workflow (WFA)
+      url: "/san-migration/concept_fli_using_workflow_automation_wfa.html"
+product-family:
+  name: ONTAP
+  repo: ontap-family
+  sidebar_label: Tutta la documentazione del prodotto ONTAP

@@ -1,0 +1,24 @@
+---
+permalink: san-migration/concept_fli_supported_configurations.html 
+sidebar: sidebar 
+keywords: fli, supported, configurations 
+summary: 'L"ambiente FLI deve essere implementato in modo supportato per garantire il corretto funzionamento e supporto. Man mano che i tecnici qualificano le nuove configurazioni, l"elenco delle configurazioni supportate cambierà. Fare riferimento alla matrice di interoperabilità NetApp per verificare il supporto per configurazioni specifiche.' 
+---
+= Configurazioni supportate da FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'ambiente FLI deve essere implementato in modo supportato per garantire il corretto funzionamento e supporto. Man mano che i tecnici qualificano le nuove configurazioni, l'elenco delle configurazioni supportate cambierà. Fare riferimento alla matrice di interoperabilità NetApp per verificare il supporto per configurazioni specifiche.
+
+ONTAP 8.3 e versioni successive sono gli unici storage di destinazione supportati. Le migrazioni verso storage di terze parti non sono supportate.
+
+Per un elenco degli array di storage di origine, degli switch e del firmware supportati, consultare la matrice di interoperabilità. Il programma di migrazione dei dati fornirà il supporto per le configurazioni nella matrice di interoperabilità NetApp.
+
+Una volta completata l'importazione e migrate tutte le LUN ai controller NetApp, assicurarsi che tutte le configurazioni siano supportate.
+
+*Informazioni correlate*
+
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"]

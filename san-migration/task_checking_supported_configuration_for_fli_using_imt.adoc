@@ -1,0 +1,32 @@
+---
+permalink: san-migration/task_checking_supported_configuration_for_fli_using_imt.html 
+sidebar: sidebar 
+keywords: check, supported configurations, fli using imt 
+summary: 'È necessario utilizzare lo strumento matrice di interoperabilità (IMT) per trovare informazioni sulle configurazioni dei prodotti NetApp compatibili con prodotti e componenti di terze parti qualificati da NetApp.' 
+---
+= Verifica delle configurazioni supportate per gli FLI mediante IMT
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario utilizzare lo strumento matrice di interoperabilità (IMT) per trovare informazioni sulle configurazioni dei prodotti NetApp compatibili con prodotti e componenti di terze parti qualificati da NetApp.
+
+[NOTE]
+====
+A partire da ONTAP 9.9.1, se l'array non è elencato come supportato in IMT, è possibile utilizzare l'applicazione DI migrazione LUN SAN sul sito del supporto NetApp per determinare se l'array potrebbe essere supportato.
+
+====
+.Fasi
+. Accedere al tool Interoperability Matrix.
+. Cercare il modello di array.
+. Selezionare la soluzione *Foreign LUN Import (FLI) Back-end Interoperability*.
+. Selezionare *FAS model* e *ONTAP version* per determinare le configurazioni supportate.
+. Per le configurazioni host supportate front-end, fare clic su *Crea vista end-to-end con host SAN ONTAP*.
+. Per le configurazioni supportate dallo switch, fare clic su *Crea vista end-to-end per SWITCH SAN* dalla scheda *host SAN ONTAP*.
+
+
+*Informazioni correlate*
+
+https://mysupport.netapp.com/NOW/products/interoperability["Interoperabilità NetApp"]

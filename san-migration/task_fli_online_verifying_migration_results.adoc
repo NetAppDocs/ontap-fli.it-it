@@ -1,0 +1,66 @@
+---
+permalink: san-migration/task_fli_online_verifying_migration_results.html 
+sidebar: sidebar 
+keywords: fli online, verify, migration, results 
+summary: Un lavoro di verifica è facoltativo, ma consigliato. Si tratta di un confronto blocco per blocco delle LUN di origine e di destinazione. Verificare che i processi richiedano quasi lo stesso tempo o un tempo leggermente superiore rispetto al tempo di migrazione. 
+---
+= FLI online: Verifica dei risultati della migrazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un lavoro di verifica è facoltativo, ma consigliato. Si tratta di un confronto blocco per blocco delle LUN di origine e di destinazione. Verificare che i processi richiedano quasi lo stesso tempo o un tempo leggermente superiore rispetto al tempo di migrazione.
+
+Avviare il processo di verifica per confrontare i LUN di origine e di destinazione. Monitorare l'avanzamento della verifica. I LUN sottoposti a verifica devono essere offline per tutta la durata della sessione di verifica. La sessione di verifica potrebbe essere lunga perché si tratta di un confronto blocco per blocco tra LUN di origine e LUN di destinazione. Anche se non è richiesta la verifica, è consigliabile verificare un sottoinsieme delle LUN importate/migrate per sentirsi a proprio agio nel processo di importazione. Queste verifiche si aggiungono a quelle eseguite durante le migrazioni di test/pilota.
+
+[NOTE]
+====
+Questo processo è disgregativo.
+
+====
+[NOTE]
+====
+La verifica dell'importazione del LUN deve essere esplicitamente interrotta prima di riportare il LUN in linea. In caso contrario, il LUN online non riesce. Vedere il seguente output CLI.
+
+====
+.Fasi
+. Offline i LUN da verificare. <The disruption window begins here>
++
+[listing]
+----
+cluster::*> lun offline -vserver fli_72C -path /vol/flivol/72Clun1
+Warning: This command will take LUN "/vol/flivol/72Clun1" in Vserver "fli_72C" offline.
+Do you want to continue? {y|n}: y
+----
+. Avviare la verifica del LUN.
++
+[listing]
+----
+lun import verify start -vserver fli_72C -path /vol/flivol/72Clun1
+----
+. Visualizzare lo stato di verifica del LUN.
++
+[listing]
+----
+ontaptme-fc-cluster::*> lun import show -vserver fli_72C -path /vol/flivol/72Clun1
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+fli_72C D0i1E+G8Wg6m   /vol/flivol/72Clun1 verify    started
+                                                                        9
+----
+. Interrompere la verifica del LUN. Questo passaggio deve essere eseguito manualmente anche se lo stato indica che la verifica è completa.
++
+[listing]
+----
+lun import verify stop -vserver fli_72C -path /vol/flivol/72Clun1
+----
+. Online il LUN al termine della verifica. <The disruption window ends here>
++
+[listing]
+----
+lun online -vserver fli_72C -path /vol/flivol/72Clun1
+----
+

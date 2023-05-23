@@ -1,0 +1,164 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, destination storage devices tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sui dispositivi di storage di destinazione.' 
+---
+= Foglio di lavoro Site Survey and Planning scheda Destination Storage Devices (dispositivi di storage di
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sui dispositivi di storage di destinazione.
+
+[cols="6*"]
+|===
+6+| Sistemi storage 
+
+
+ a| 
+Nome cluster
+ a| 
+Indirizzo IP
+ a| 
+Modalità array
+ a| 
+ONTAP
+ a| 
+server virtuale
+ a| 
+Tipo di porta
+
+
+
+ a| 
+DataMig-cDOT
+ a| 
+10.x.x.x
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+datamig
+ a| 
+Destinazione
+
+
+
+ a| 
+DataMig-cDOT
+ a| 
+10.x.x.x
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+datamig
+ a| 
+Destinazione
+
+
+
+ a| 
+DataMig-cDOT
+ a| 
+10.x.x.x
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+DataMig-01
+ a| 
+Iniziatore
+
+
+
+ a| 
+DataMig-cDOT
+ a| 
+10.x.x.x
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+DataMig-01
+ a| 
+Iniziatore
+
+|===
+[cols="5*"]
+|===
+5+| Sistemi storage 
+
+
+ a| 
+Port Name (Nome porta)
+ a| 
+Nome LIF
+ a| 
+PN. WWN
+ a| 
+Nome fabric
+ a| 
+Tipo di destinazione
+
+
+
+ a| 
+0c
+ a| 
+eseguire la migro1
+ a| 
+20:01:00:a0:98:2f:xx:xx
+ a| 
+PROD A.
+ a| 
+Destinazione
+
+
+
+ a| 
+0d
+ a| 
+eseguire la migra2
+ a| 
+20:01:00:a0:98:2f:xx:xx
+ a| 
+PROD B
+ a| 
+Destinazione
+
+
+
+ a| 
+0a
+ a| 
+n/a.
+ a| 
+50:0a:09:81:00:xx:xx:xx
+ a| 
+PROD A.
+ a| 
+Destinazione
+
+
+
+ a| 
+0b
+ a| 
+n/a.
+ a| 
+50:0a:09:81:00:xx:xx:xx
+ a| 
+PROD B
+ a| 
+Destinazione
+
+|===
+Di seguito viene riportato un esempio di come configurare la scheda Destination Storage Devices (periferiche di memorizzazione di destinazione).

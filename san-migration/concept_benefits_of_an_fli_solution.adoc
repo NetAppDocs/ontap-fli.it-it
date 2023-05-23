@@ -1,0 +1,21 @@
+---
+permalink: san-migration/concept_benefits_of_an_fli_solution.html 
+sidebar: sidebar 
+keywords: benefits, fli-based, solution 
+summary: La soluzione FLI è progettata per offrire ai clienti NetApp un valore eccezionale grazie a questi vantaggi. 
+---
+= Vantaggi di una soluzione basata su FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La soluzione FLI è progettata per offrire ai clienti NetApp un valore eccezionale grazie a questi vantaggi.
+
+* FLI è integrato in ONTAP e non richiede licenze aggiuntive.
+* FLI utilizza la tecnologia FlexArray, ma non richiede una licenza FlexArray.
+* FLI non richiede un'appliance hardware aggiuntiva per la migrazione dei dati.
+* Le soluzioni basate su FLI supportano una vasta gamma di tipi di migrazione e configurazioni di piattaforme storage di terze parti.
+* FLI allinea automaticamente i LUN e può migrare un LUN ospitato in un aggregato a 32 bit in un aggregato a 64 bit ospitato su un array ONTAP. Questo rende FLI per 7-Mode a ONTAP una scelta eccellente per la transizione di LUN in hosting 7-Mode che sono ospitati su aggregati a 32 bit e/o sono disallineati.
+

@@ -1,0 +1,27 @@
+---
+permalink: san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html 
+sidebar: sidebar 
+keywords: fli, 7-mode, ontap, transition, workflow 
+summary: Questa sezione fornisce un esempio del flusso di lavoro di transizione da FLI 7-Mode a ONTAP. Il workflow di transizione può essere eseguito come workflow online o offline. 
+---
+= Workflow di transizione da FLI 7-Mode a ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questa sezione fornisce un esempio del flusso di lavoro di transizione da FLI 7-Mode a ONTAP. Il workflow di transizione può essere eseguito come workflow online o offline.
+
+La transizione FLI è consigliata quando il LUN di origine è ospitato su un aggregato a 32 bit e/o il LUN è disallineato. La transizione da FLI 7-Mode a ONTAP è in grado di combinare la transizione del LUN da 7-Mode a ONTAP, oltre alla correzione dell'allineamento del LUN e alla transizione del LUN da un aggregato a 32 bit a 64 bit. Altri metodi di transizione del LUN, incluso 7-Mode Transition Tool (7MTT), possono richiedere la correzione dell'allineamento del LUN e/o la conversione di un aggregato da 32 bit a 64 bit prima della transizione a ONTAP.
+
+Il flusso di lavoro di transizione da FLI 7-Mode a ONTAP può essere un flusso di lavoro online o offline. Questi flussi di lavoro sono funzionalmente identici ai due flussi di lavoro di migrazione offline e online FLI corrispondenti, con l'eccezione che l'array di origine è uno storage array NetApp 7-Mode. Entrambi i flussi di lavoro condividono le stesse regole e procedure degli equivalenti di migrazione. Questo include l'elenco di supporto operativo degli host del workflow online FLI.
+
+L'esempio fornito dovrebbe fornire una panoramica completa del processo FLI 7-Mode to ONTAP. Il flusso di transizione da FLI 7-mode a ONTAP include le seguenti attività:
+
+. Preparazione degli array di origine e di destinazione
+. Esecuzione di un cutover dirompente
+. Importazione dei dati
+. Verifica dei risultati della migrazione
+. Task post-migrazione della transizione FLI
+

@@ -1,0 +1,33 @@
+---
+permalink: san-migration/reference_sample_site_survey_and_planning_worksheet.html 
+sidebar: sidebar 
+keywords: sample, site, survey and planning, worksheet 
+summary: Durante le fasi di analisi e pianificazione della metodologia di migrazione sarà necessario documentare la configurazione esistente, le configurazioni di destinazione, le lacune e i piani di correzione utilizzando un foglio di lavoro Site Survey and Planning. 
+---
+= Esempio di foglio di lavoro Site Survey and Planning
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante le fasi di analisi e pianificazione della metodologia di migrazione sarà necessario documentare la configurazione esistente, le configurazioni di destinazione, le lacune e i piani di correzione utilizzando un foglio di lavoro Site Survey and Planning.
+
+Questa sezione fornisce esempi di tipi di informazioni che il foglio di calcolo Site Survey and Planning dovrebbe contenere. Si consiglia di utilizzare le seguenti schede:
+
+* Contatto
+* Questionario
+* Switch
+* Dispositivi di storage (origine)
+* Dispositivi di storage (destinazione)
+* Host
+* HBA e informazioni sulla zona
+* LUN di origine
+* Gruppi di storage
+* Dettagli LUN
+* Layout del LUN NetApp
+* Pianificazione della migrazione
+* Stato aggregato
+* Config. FAS
+* Script CLI SDS
+

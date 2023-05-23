@@ -1,0 +1,24 @@
+---
+permalink: san-migration/concept_gap_analysis_report.html 
+sidebar: sidebar 
+keywords: gap, analysis, report 
+summary: 'L"analisi delle lacune è un report dell"ambiente attuale e consigliato da NetApp. Presenta tutti gli aggiornamenti consigliati per l"ambiente del cliente che dovranno essere eseguiti dopo la migrazione.' 
+---
+= Report di analisi delle lacune
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'analisi delle lacune è un report dell'ambiente attuale e consigliato da NetApp. Presenta tutti gli aggiornamenti consigliati per l'ambiente del cliente che dovranno essere eseguiti dopo la migrazione.
+
+La configurazione di destinazione (post-migrazione) include i dettagli per ciascun host (configurazione del sistema operativo, MPIO, dettagli HBA, versione del kit di utility host e così via). Sono inoltre disponibili informazioni su altri prodotti richiesti da NetApp, come SnapDrive e SnapManager.
+
+Le modifiche richieste in genere non vengono effettuate fino all'evento di migrazione effettivo, a causa della necessità abituale di pianificare le finestre di manutenzione. In genere, qualsiasi modifica apportata alla configurazione MPIO prima della migrazione influirà anche sul supporto dello storage corrente.
+
+La sezione NetApp Recommended (consigliata NetApp) completata nella sezione host del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito) fungerà da report di analisi delle lacune. L'analisi delle lacune deve essere completata per ogni host incluso nel progetto di migrazione. Il report di analisi delle lacune completato deve essere rivisto con il cliente.
+
+Di seguito viene riportato un esempio di report di analisi Gap.
+
+image::../media/create_the_gap_analysis_report_1.png[creare il report di analisi delle lacune 1]

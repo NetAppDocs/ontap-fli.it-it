@@ -1,0 +1,39 @@
+---
+permalink: san-migration/concept_target_and_initiator_port_zoning.html 
+sidebar: sidebar 
+keywords: target, initiator, port, zoning 
+summary: 'La migrazione FLI richiede l"accesso alle LUN dello storage di origine da parte dello storage NetApp. Ciò si ottiene tramite lo zoning delle porte di destinazione dello storage di origine con le porte di iniziazione dello storage di destinazione.' 
+---
+= Zoning delle porte di destinazione e iniziatore
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La migrazione FLI richiede l'accesso alle LUN dello storage di origine da parte dello storage NetApp. Ciò si ottiene tramite lo zoning delle porte di destinazione dello storage di origine con le porte di iniziazione dello storage di destinazione.
+
+Le zone storage-to-host di origine esistenti non vengono modificate e disattivate dopo la migrazione. Le zone di storage host-to-destination vengono create per consentire l'accesso delle LUN migrate dallo storage di destinazione da parte dell'host.
+
+Uno scenario di migrazione standard con FLI richiede quattro zone distinte:
+
+* Zona 1: Dallo storage di origine allo storage di destinazione (fabric di produzione A)
+* Zona 2: Dallo storage di origine allo storage di destinazione (fabric di produzione B)
+* Zona 3: Storage da host a destinazione (fabric di produzione A)
+* Zona 4: Storage da host a destinazione (fabric di produzione B)
+
+
+Segui queste Best practice per lo zoning:
+
+* Non combinare porte di destinazione dello storage di origine e porte di destinazione dello storage nella stessa zona.
+* Non combinare le porte iniziatore dello storage di destinazione e le porte host nella stessa zona.
+* Non combinare la destinazione dello storage di destinazione e le porte di iniziatore nella stessa zona.
+* Con almeno due porte da ciascun controller per la ridondanza.
+* NetApp consiglia un singolo iniziatore e una singola zoning di destinazione.
+
+
+[NOTE]
+====
+Dopo aver eseguito la suddivisione in zone delle porte di destinazione dello storage di origine con le porte di iniziatore dello storage di destinazione, lo storage di origine sarà visibile nello storage di destinazione utilizzando il comando show dell'array di storage.quando lo storage array viene rilevato per la prima volta, i controller NetApp potrebbero non visualizzare automaticamente l'array. Risolvere il problema ripristinando la porta dello switch a cui sono collegate le porte ONTAP Initiator.
+
+====

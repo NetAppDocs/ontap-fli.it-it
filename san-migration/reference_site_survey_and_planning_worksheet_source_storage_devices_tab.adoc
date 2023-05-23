@@ -1,0 +1,153 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, source storage devices tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sui dispositivi storage di origine della migrazione.' 
+---
+= Scheda Source Storage Devices (dispositivi di storage di origine) del foglio di lavoro Site Survey and Pl
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sui dispositivi storage di origine della migrazione.
+
+Di seguito viene riportato un esempio di come configurare la scheda Source Storage Devices (periferiche di storage di origine).
+
+|===
+5+| Sistemi storage 
+
+
+ a| 
+Nome array
+ a| 
+Indirizzo IP
+ a| 
+Vendor
+ a| 
+Modello di array
+ a| 
+Microcodice FW/ONTAP
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X
+
+|===
+|===
+5+| Sistemi storage 
+
+
+ a| 
+Controller/nodo
+ a| 
+Port Name (Nome porta)
+ a| 
+PN. WWN
+ a| 
+Nome fabric
+ a| 
+Tipo di destinazione
+
+
+
+ a| 
+Controller 0
+ a| 
+0a
+ a| 
+50060E80xxxxxxxx
+ a| 
+Fabric di produzione A
+ a| 
+Origine
+
+
+
+ a| 
+Controller 0
+ a| 
+0e
+ a| 
+50060E80xxxxxxxx
+ a| 
+Fabric di produzione B
+ a| 
+Origine
+
+
+
+ a| 
+Controller 1
+ a| 
+1a
+ a| 
+50060E80xxxxxxxx
+ a| 
+Fabric di produzione A
+ a| 
+Origine
+
+
+
+ a| 
+Controller 1
+ a| 
+1e
+ a| 
+50060E80xxxxxxxx
+ a| 
+Fabric di produzione A
+ a| 
+Origine
+
+|===

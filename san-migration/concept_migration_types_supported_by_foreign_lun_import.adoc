@@ -1,0 +1,24 @@
+---
+permalink: san-migration/concept_migration_types_supported_by_foreign_lun_import.html 
+sidebar: sidebar 
+keywords: migration, types, supported, foreign, lun, import 
+summary: 'FLI supporta quattro tipi principali di flussi di lavoro di migrazione: Online, offline, di transizione e automatizzato. La scelta del flusso di lavoro da utilizzare dipende dalla configurazione e da altri fattori.' 
+---
+= Tipi di migrazione supportati da Foreign LUN Import
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+FLI supporta quattro tipi principali di flussi di lavoro di migrazione: Online, offline, di transizione e automatizzato. La scelta del flusso di lavoro da utilizzare dipende dalla configurazione e da altri fattori.
+
+* In una migrazione online, FLI da array di terze parti consente al sistema client di rimanere online durante la migrazione (richiede un sistema operativo host Windows, Linux o ESXi).
+* In una migrazione offline, FLI da array di terze parti porta il sistema client offline e copia i dati nel nuovo LUN prima di riportarli online.
+* In una migrazione di transizione, FLI passa da ONTAP in 7-Mode a ONTAP. Dal punto di vista funzionale si tratta dello stesso processo, ad eccezione del fatto che l'array di origine è ONTAP. Il flusso di lavoro di transizione è disponibile in modalità online o offline.
+* In una migrazione automatica, FLI utilizza il software di automazione del workflow (WFA) per automatizzare alcune parti del processo di migrazione. FLI con WFA è disponibile in modalità online o offline.
+
+
+Dal punto di vista dell'architettura, le tre migrazioni e il flusso di lavoro di transizione sono abbastanza simili. Tutti e quattro si affidano alla tecnologia FlexArray di NetApp per consentire al controller ONTAP di agire come iniziatore davanti a un array di origine e di utilizzare tale posizione per copiare il blocco LUN per blocco dall'origine a un LUN sull'array ONTAP di destinazione.
+
+Le differenze tra i flussi di lavoro hanno a che fare con quando si verificano tagli, la lunghezza della finestra di interruzione, l'utilizzo dell'automazione o se l'array di origine è un array NetApp che esegue ONTAP 7-Mode o un array di terze parti.

@@ -1,0 +1,39 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, migration schedule tab 
+summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sulla pianificazione della migrazione.' 
+---
+= Scheda Pianificazione della migrazione del foglio di lavoro Site Survey and Planning
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nell'ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sulla pianificazione della migrazione.
+
+Di seguito viene riportato un esempio di come impostare la scheda Pianificazione della migrazione.
+
+|===
+8+| Pianificazione della migrazione 
+
+
+ a| 
+Data di migrazione
+ a| 
+Host
+ a| 
+SISTEMA OPERATIVO
+ a| 
+Applicazione
+ a| 
+Controller dello storage
+ a| 
+UID LUN
+ a| 
+Dimensione LUN
+ a| 
+Stato
+
+|===

@@ -1,0 +1,30 @@
+---
+permalink: san-migration/reference_host_remediation.html 
+sidebar: sidebar 
+keywords: host remediation 
+summary: 'A seconda del tipo di migrazione, il ripristino dell"host può avvenire inline nella migrazione (importazione LUN esterna online e 7-Mode in ONTAP) o potrebbe verificarsi dopo il completamento della migrazione (importazione LUN esterna offline).' 
+---
+= Correzione dell'host
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A seconda del tipo di migrazione, il ripristino dell'host può avvenire inline nella migrazione (importazione LUN esterna online e 7-Mode in ONTAP) o potrebbe verificarsi dopo il completamento della migrazione (importazione LUN esterna offline).
+
+Utilizzare per le procedure di risoluzione dei problemi per diversi sistemi operativi host. Consulta la tua analisi delle lacune, mettiti insieme durante le fasi di pianificazione e analisi e la documentazione NetApp e vendor appropriata per le fasi specifiche della migrazione.
+
+[NOTE]
+====
+FLI utilizza le stesse procedure di risoluzione dei problemi che sarebbero state utilizzate con il 7MTT. Pertanto, è opportuno utilizzare lo stesso documento di correzione piuttosto che documentare più volte tali procedure in luoghi diversi.
+
+====
+[NOTE]
+====
+Per il ripristino CAW, utilizzare il processo di correzione CAW/ATS di ESXi.
+
+====
+*Informazioni correlate*
+
+https://docs.netapp.com/us-en/ontap-7mode-transition/san-host/index.html["Transizione e correzione degli host SAN"]

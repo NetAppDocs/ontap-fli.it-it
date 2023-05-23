@@ -1,0 +1,62 @@
+---
+permalink: san-migration/concept_migration_plan_phase_workflow.html 
+sidebar: sidebar 
+keywords: plan, phase, workflow 
+summary: La fase di pianificazione del processo di migrazione dei dati si concentra sulle attività necessarie per creare piani di migrazione dettagliati e per assicurarsi che tutto sia pronto per la migrazione effettiva. La maggior parte del lavoro di migrazione è la pianificazione eseguita durante questa fase. 
+---
+= Workflow della fase di pianificazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di pianificazione del processo di migrazione dei dati si concentra sulle attività necessarie per creare piani di migrazione dettagliati e per assicurarsi che tutto sia pronto per la migrazione effettiva. La maggior parte del lavoro di migrazione è la pianificazione eseguita durante questa fase.
+
+La fase di pianificazione prevede lo sviluppo di un piano di correzione utilizzando le informazioni di analisi delle lacune dell'host raccolte nella fase di analisi. Utilizzare le informazioni di correzione dell'host durante la pianificazione. Una volta verificata la connettività end-to-end, viene eseguita una migrazione di test per assicurarsi che tutto sia configurato correttamente prima di iniziare la migrazione in produzione.
+
+La figura seguente mostra il flusso di lavoro del piano.
+
+image::../media/plan_and_prepare_phase_1.png[pianificare e preparare la fase 1]
+
+Le attività della fase di pianificazione sono elencate nella seguente tabella.
+
+[cols="2*"]
+|===
+| Componente | Attività 
+
+
+ a| 
+Fabric
+ a| 
+. Eseguire il backup delle zone esistenti.
+. Mettere in zona lo storage di origine allo storage di destinazione.
+
+
+
+
+ a| 
+Storage di destinazione
+ a| 
+. Collegare le porte dell'iniziatore al fabric.
+. Rilevare lo storage di origine e testare il LUN. Contrassegnare il LUN di origine come esterno.
+. Creare un LUN di test utilizzando un LUN esterno.
+. Creare un LUN di test di igroup e mappare il LUN di test.
+. LUN di test offline.
+. Creare una relazione di importazione e avviare la migrazione di test.
+. Eliminare la relazione di importazione e annullare la mappatura del LUN di test.
+. Rimuovere il LUN di prova.
+
+
+
+
+ a| 
+Storage di origine
+ a| 
+. Creare un gruppo di host per lo storage di destinazione utilizzando le WWPN della porta iniziatore.
+. Creare un LUN di prova (1 GB).
+. Assegnare il LUN di test (mappa/maschera) al gruppo host dello storage di destinazione.
+. Rimuovere il LUN di prova.
+
+
+|===

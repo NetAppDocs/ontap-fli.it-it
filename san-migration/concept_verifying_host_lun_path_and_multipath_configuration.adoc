@@ -1,0 +1,15 @@
+---
+permalink: san-migration/concept_verifying_host_lun_path_and_multipath_configuration.html 
+redirect: ontap-fli/san-migration/task_multipath_verification_for_windows_hosts.html 
+sidebar: sidebar 
+keywords: verify, host lun path, multipath, configuration, verification 
+summary: Prima di eseguire qualsiasi migrazione, verificare che il multipathing sia configurato correttamente e funzioni correttamente. Tutti i percorsi disponibili per le LUN devono essere attivi. 
+---
+= Verifica del percorso del LUN host e verifica della configurazione del multipath
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di eseguire qualsiasi migrazione, verificare che il multipathing sia configurato correttamente e funzioni correttamente. Tutti i percorsi disponibili per le LUN devono essere attivi.

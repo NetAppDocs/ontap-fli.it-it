@@ -1,0 +1,58 @@
+---
+permalink: san-migration/concept_fli_zoning_requirements.html 
+sidebar: sidebar 
+keywords: fli, zoning, requirements 
+summary: Uno scenario di migrazione standard con FLI richiede quattro zone distinte. È necessario includere porte specifiche in ciascuna zona. 
+---
+= Requisiti di zoning FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Uno scenario di migrazione standard con FLI richiede quattro zone distinte. È necessario includere porte specifiche in ciascuna zona.
+
+* Zona 1: Dallo storage di origine allo storage di destinazione (fabric di produzione A)
++
+La zona 1 deve contenere tutti gli iniziatori dello storage di destinazione su tutti i nodi e tutte le porte di destinazione dello storage di origine nel fabric A. I membri della zona includono:
+
++
+** ONTAP -- Node1 -- 0a
+** ONTAP -- Node2 -- 0a
+** AMS2100 -- Ctrl0 -- 0a
+** AMS2100 -- CTRL1 -- 1a
+
+
+* Zona 2: Dallo storage di origine allo storage di destinazione (fabric di produzione B)
++
+La zona 2 deve contenere tutte le porte di iniziatore dello storage di destinazione su tutti i nodi e tutte le porte di destinazione dello storage di origine nel fabric B. I membri della zona 2 includono:
+
++
+** ONTAP -- Node1 -- 0b
+** ONTAP -- Node2 -- 0b
+** AMS2100 -- Ctrl0 -- 0e
+** AMS2100 -- CTRL1 -- 1e
+
+
+* Zona 3: Storage da host a destinazione (fabric di produzione A)
++
+La zona 3 deve contenere la porta 1 dell'adattatore bus host (HBA) e le porte del controller di destinazione nel fabric di produzione A. I membri della zona 3 includono:
+
++
+** ONTAP -- lif1
+** ONTAP -- lif3
+** Host -- HBA0
+
+
+* Zona 4: Storage da host a destinazione (fabric di produzione B)
++
+La zona 4 deve contenere la porta HBA 2 e le porte del controller di destinazione nel fabric di produzione B. I membri della zona 4 includono:
+
++
+** ONTAP -- lif2
+** ONTAP -- lif4
+** Host -- HBA1
+
+
+

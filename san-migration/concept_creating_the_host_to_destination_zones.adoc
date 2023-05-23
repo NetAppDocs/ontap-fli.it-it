@@ -1,0 +1,133 @@
+---
+permalink: san-migration/concept_creating_the_host_to_destination_zones.html 
+sidebar: sidebar 
+keywords: create, host, destination, zones 
+summary: 'Sarà necessario creare le zone host-to-destination. Esistono due tipi di fabric di produzione: Fabric A e Fabric B.' 
+---
+= Creazione dell'host nelle zone di destinazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sarà necessario creare le zone host-to-destination. Esistono due tipi di fabric di produzione: Fabric A e Fabric B.
+
+Di seguito viene illustrata la suddivisione in zone dello storage di destinazione e host.
+
+image::../media/host_and_destination_storage_zoning.gif[Zoning dello storage di destinazione e host]
+
+Zone di produzione disponibili nel fabric di produzione A.
+
+[cols="3*"]
+|===
+| Zona | PN. WWN | Membri di zona 
+
+
+ a| 
+Zona: Rx21_flicDOT
+ a| 
+21:00:00:24:ff:30:14:c5
+
+20:01:00:a0:98:2f:94:d1
+
+20:03:00:a0:98:2f:94:d1
+ a| 
+RX21 HBA 0
+
+FlicDOT life1
+
+FlicDOT life3
+
+
+
+ a| 
+Zona: rx22_FlicDOT
+ a| 
+21:00:00:24:ff:30:04:85
+
+20:01:00:a0:98:2f:94:d1
+
+20:03:00:a0:98:2f:94:d1
+ a| 
+RX22 HBA 0
+
+FlicDOT life1
+
+FlicDOT life3
+
+
+
+ a| 
+Zona: rx20_FlicDOT
+ a| 
+21:00:00:24:ff:30:03:ea
+
+20:01:00:a0:98:2f:94:d1
+
+20:03:00:a0:98:2f:94:d1
+ a| 
+RX20 HBA 0
+
+FlicDOT life1
+
+FlicDOT life3
+
+|===
+Zone di produzione disponibili nel fabric di produzione B.
+
+[cols="3*"]
+|===
+| Zona | PN. WWN | Membri di zona 
+
+
+ a| 
+Zona: Rx21_flicDOT
+ a| 
+21:00:00:24:ff:30:14:c4
+
+20:02:00:a0:98:2f:94:d1
+
+20:04:00:a0:98:2f:94:d1
+ a| 
+HBA RX21 1
+
+FlicDOT life2
+
+FlicDOT lif4
+
+
+
+ a| 
+Zona: rx22_FlicDOT
+ a| 
+21:00:00:24:ff:30:04:84
+
+20:02:00:a0:98:2f:94:d1
+
+20:04:00:a0:98:2f:94:d1
+ a| 
+HBA RX22 1
+
+FlicDOT life2
+
+FlicDOT lif4
+
+
+
+ a| 
+Zona: rx20_FlicDOT
+ a| 
+21:00:00:24:ff:30:03:eb
+
+20:02:00:a0:98:2f:94:d1
+
+20:04:00:a0:98:2f:94:d1
+ a| 
+HBA RX20 1
+
+FlicDOT life2
+
+FlicDOT lif4
+
+|===

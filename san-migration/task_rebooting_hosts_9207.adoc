@@ -1,0 +1,23 @@
+---
+permalink: san-migration/task_rebooting_hosts_9207.html 
+sidebar: sidebar 
+keywords: reboot, hosts 
+summary: 'È possibile riavviare gli host prima di avviare questo flusso di lavoro per verificare che l"host si trovi in uno stato sicuramente funzionante.' 
+---
+= Riavvio degli host
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile riavviare gli host prima di avviare questo flusso di lavoro per verificare che l'host si trovi in uno stato sicuramente funzionante.
+
+Questo sarebbe anche un buon momento per fare una copia Snapshot per facilitare un revert se necessario in un secondo momento. Per verificare che la configurazione del server sia persistente e perfetta durante i riavvii, attenersi alla seguente procedura:
+
+.Fasi
+. Chiudere tutte le applicazioni aperte.
+. Esaminare i log per verificare la presenza di errori.
+. Verificare che l'host veda tutti i percorsi.
+. Riavviare l'host.
+

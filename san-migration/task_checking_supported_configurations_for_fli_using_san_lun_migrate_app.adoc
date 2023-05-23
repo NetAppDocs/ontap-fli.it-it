@@ -1,0 +1,24 @@
+---
+permalink: san-migration/task_checking_supported_configurations_for_fli_using_san_lun_migrate_app.html 
+sidebar: sidebar 
+keywords: check, supported configurations, fli, using, san lun migrate app 
+summary: 'A partire da ONTAP 9.9.1, è possibile utilizzare l"applicazione DI migrazione LUN SAN per qualificare un array di origine esterno per gli FLI. L"applicazione DI migrazione LUN SAN può essere utilizzata quando l"array esterno desiderato non è elencato in FLI IMT.' 
+---
+= Verifica delle configurazioni supportate per gli FLI mediante L'app SAN LUN Migrate
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.9.1, è possibile utilizzare l'applicazione DI migrazione LUN SAN per qualificare un array di origine esterno per gli FLI. L'applicazione DI migrazione LUN SAN può essere utilizzata quando l'array esterno desiderato non è elencato in FLI IMT.
+
+.Fasi
+. Vai al sito di supporto NetApp.
+. In *Filtra per categoria*, selezionare *migrazione*.
+. In *SAN LUN Migration*, fare clic su *Download App*.
+. Eseguire l'applicazione da un host Linux FC o iSCSI con accesso a blocchi all'array di origine.
++
+Se l'array di origine esterno può essere qualificato, viene visualizzato un segno di spunta verde. Se l'array di origine esterno non può essere qualificato, viene visualizzata una X rossa.
+
+

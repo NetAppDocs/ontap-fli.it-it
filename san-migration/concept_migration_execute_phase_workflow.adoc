@@ -1,0 +1,18 @@
+---
+permalink: san-migration/concept_migration_execute_phase_workflow.html 
+sidebar: sidebar 
+keywords: execute, phase, workflows 
+summary: 'La fase di esecuzione si concentra sulle attività di migrazione LUN per l"esecuzione di una migrazione FLI offline o online.' 
+---
+= Eseguire flussi di lavoro in fase
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di esecuzione si concentra sulle attività di migrazione LUN per l'esecuzione di una migrazione FLI offline o online.
+
+I registri degli eventi dell'host vengono esaminati per individuare e correggere eventuali problemi e ridurre i rischi. Gli host vengono riavviati per assicurarsi che non vi siano problemi di fondo con gli host prima che si verifichi una riconfigurazione importante.
+
+Una volta visibili i LUN di origine nello storage di destinazione, è possibile creare ed eseguire i processi di migrazione. Una volta completate le migrazioni (FLI offline) o stabilita la relazione LUN FLI (FLI online), l'host viene collegato allo storage di destinazione. Vengono mappati nuovi LUN e possono iniziare la risoluzione degli host per driver, software multipath e qualsiasi altro aggiornamento identificato nella fase di analisi.

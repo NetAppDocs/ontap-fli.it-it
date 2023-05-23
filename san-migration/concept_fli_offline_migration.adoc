@@ -1,0 +1,84 @@
+---
+permalink: san-migration/concept_fli_offline_migration.html 
+sidebar: sidebar 
+keywords: offline, migration, workflow 
+summary: 'Il flusso di lavoro di migrazione offline viene eseguito nella fase di esecuzione del processo di migrazione. Il diagramma del flusso di lavoro offline mostra le attività eseguite sull"host, sul fabric, sullo storage di destinazione e sullo storage di origine.' 
+---
+= Workflow di migrazione offline
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il flusso di lavoro di migrazione offline viene eseguito nella fase di esecuzione del processo di migrazione. Il diagramma del flusso di lavoro offline mostra le attività eseguite sull'host, sul fabric, sullo storage di destinazione e sullo storage di origine.
+
+image::../media/offline_migration_1.png[migrazione offline 1]
+
+Le attività del flusso di lavoro offline sono elencate nella seguente tabella.
+
+[cols="2*"]
+|===
+| Componente | Attività 
+
+
+ a| 
+Host
+ a| 
+. Riavviare l'host e verificare che tutti i file system vengano installati, che tutti i percorsi LUN siano disponibili e che i servizi vengano avviati.
+. Preparare e spegnere l'host.
+. Al termine della migrazione, accendere l'host.
+. Configurare l'HBA in modo che utilizzi il nuovo LUN di avvio SAN (solo avvio SAN).
+. Disinstallare MPIO di terze parti.
+. Installare il software host NetApp e configurare il multipathing.
+. Verificare che tutti i percorsi del LUN di avvio SAN siano integri (solo avvio SAN).
+. Aggiorna i file di sistema e la configurazione per riflettere i nuovi dispositivi.
+. Verificare che tutti i percorsi verso tutte le LUN siano integri.
+. Riabilitare tutti i servizi e riavviare l'host (verificare che l'host sia di backup, che tutti i file system siano installati, che tutti i servizi siano avviati).
+. Configurare l'HBA con il secondo percorso per il nuovo LUN di avvio SAN (solo avvio SAN).
+
+
+
+
+ a| 
+Fabric
+ a| 
+. Disfare l'host dallo storage di origine.
+. Creare un'area di storage host-to-destination.
+
+
+
+
+ a| 
+Storage di destinazione
+ a| 
+. Scopri l'array di origine e i nuovi LUN.
+. Contrassegna LUN di origine come esterne.
+. Creare LUN di destinazione utilizzando LUN esterni.
+. Creare igroups iniziatore host e mappare i LUN di destinazione su igroup.Migration Snapshot copy.
+. LUN di destinazione offline.
+. Creare relazioni di importazione e avviare i lavori di importazione.
+. Creazione di processi di verifica (opzionale).
+. Eliminare le relazioni di importazione.
+. Contrassegna attributo LUN esterno su falso.
+. LUN di destinazione online.
+. Creare una copia Snapshot® per attivare il rollback del LUN di destinazione.
+. Limita la connettività a un singolo percorso (solo avvio SAN).
+. Assegnare il LUN di avvio SAN all'host; non assegnare LUN di dati a questo punto (solo avvio SAN).
+. Verificare che tutte le porte host siano state registrate.
+. Creare copie Snapshot periodiche per abilitare il rollback del LUN di avvio SAN di destinazione (solo avvio SAN).
+. Abilitare tutti i percorsi per IL LUN di avvio SAN (solo per l'avvio SAN).
+. Assegnare i LUN dei dati all'host.
+. Creare una copia Snapshot finale.
+
+
+
+
+ a| 
+Storage di origine
+ a| 
+. Assegnare i LUN di origine allo storage di destinazione.
+. Rimuovere i LUN di origine assegnati allo storage di destinazione.
+
+
+|===

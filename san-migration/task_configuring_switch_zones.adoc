@@ -1,0 +1,80 @@
+---
+permalink: san-migration/task_configuring_switch_zones.html 
+sidebar: sidebar 
+keywords: configure, switch, zones 
+summary: È necessario creare zone richieste sugli switch SAN per collegare lo storage di origine allo storage di destinazione. 
+---
+= Configurazione delle zone di commutazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario creare zone richieste sugli switch SAN per collegare lo storage di origine allo storage di destinazione.
+
+.Fasi
+. Eseguire il backup delle zone esistenti su ogni switch nel fabric di produzione e migrazione.
+. Zone storage di origine e storage di destinazione come mostrato di seguito.
++
+image::../media/configure_switch_zones_1.png[Zoning dello storage di origine e destinazione]
+
+. Creare la zona e aggiungerla allo zoneset nel fabric di produzione A.
++
+Di seguito viene riportato un esempio della zona di produzione, fabric di produzione A per zone ZONE ZONE_AMS2100_cDOT_Initiator_faba.
+
++
+|===
+| PN. WWN | Membri di zona 
+
+
+ a| 
+ 50:06:0e:80:10:46:b9:60 a| 
+ AMS2100 Ctrl 0 Port 0a
+
+
+ a| 
+ 50:06:0e:80:10:46:b9:68 a| 
+ AMS2100 Ctrl 1 Port 1a
+
+
+ a| 
+ 50:0a:09:80:00:d3:51:59 a| 
+ ONTAP Node 1 Port 0a
+
+
+ a| 
+ 50:0a:09:80:00:e7:81:04 a| 
+ ONTAP Node 2 Port 0a
+|===
+. Attivare lo zoneset nel fabric A.
+. Creare la zona e aggiungerla allo zoneset nel fabric di produzione B.
++
+Di seguito viene riportato un esempio della zona di produzione, fabric di produzione A per zone ZONE ZONE_AMS2100_cDOT_Initiator_Fabb.
+
++
+|===
+| PN. WWN | Membri di zona 
+
+
+ a| 
+ 50:06:0e:80:10:46:b9:64 a| 
+ AMS2100 Ctrl 0 Port 0e
+
+
+ a| 
+ 50:06:0e:80:10:46:b9:6c a| 
+ AMS2100 Ctrl 1 Port 1e
+
+
+ a| 
+ 50:0a:09:80:00:d3:51:59 a| 
+ ONTAP Node 1 Port 0b
+
+
+ a| 
+ 50:0a:09:80:00:e7:81:04 a| 
+ ONTAP Node 2 Port 0b
+|===
+. Attivare lo zoneset nel fabric di produzione B.
+

@@ -1,0 +1,63 @@
+---
+permalink: san-migration/concept_migration_verify_phase_workflow.html 
+sidebar: sidebar 
+keywords: verify, phase, workflow 
+summary: 'La fase di verifica del processo di migrazione si concentra sulla pulizia post-migrazione e sulla conferma dell"accuratezza dell"esecuzione del piano di migrazione. I record dell"iniziatore sullo storage di origine e la zona tra la zona di origine e quella di destinazione vengono rimossi.' 
+---
+= Verificare il flusso di lavoro della fase
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di verifica del processo di migrazione si concentra sulla pulizia post-migrazione e sulla conferma dell'accuratezza dell'esecuzione del piano di migrazione. I record dell'iniziatore sullo storage di origine e la zona tra la zona di origine e quella di destinazione vengono rimossi.
+
+La figura seguente mostra il flusso di lavoro della fase di verifica.
+
+image::../media/verify_phase_1.png[verificare la fase 1]
+
+Le attività della fase di verifica sono elencate nella seguente tabella.
+
+[cols="2*"]
+|===
+| Componente | Attività 
+
+
+ a| 
+Host
+ a| 
+Il cliente esegue test delle applicazioni.
+
+
+
+ a| 
+Fabric
+ a| 
+. Rimuovere le zone di storage host-to-source dallo zoneset.
+. Rimuovere lo storage di origine nelle zone di destinazione.
+. Eseguire il backup del nuovo set di risorse.
+
+
+
+
+ a| 
+Storage di destinazione
+ a| 
+. Verificare l'allineamento del LUN.
+. Raccogliere i registri di importazione FLI dal registro eventi.
+. Rimuovere le copie Snapshot create manualmente utilizzate durante il processo di migrazione.
+. Rimuovere l'array di origine.
+. Documentare la configurazione finale.
+
+
+
+
+ a| 
+Storage di origine
+ a| 
+. Rimuovere i gruppi di iniziatori dello storage host.
+. Rimuovere i gruppi di iniziatori dello storage di destinazione.
+
+
+|===

@@ -1,0 +1,28 @@
+---
+permalink: san-migration/concept_migration_report.html 
+sidebar: sidebar 
+keywords: migration, report 
+summary: I log di importazione vengono memorizzati nel file di log degli eventi del cluster. Per verificare che la migrazione sia stata eseguita correttamente, esaminare i registri per verificare la presenza di errori. 
+---
+= Report sulla migrazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+I log di importazione vengono memorizzati nel file di log degli eventi del cluster. Per verificare che la migrazione sia stata eseguita correttamente, esaminare i registri per verificare la presenza di errori.
+
+Il report di migrazione dovrebbe essere visualizzato come segue:
+
+[listing]
+----
+DataMig-cmode::*> rows 0; event log show –nodes * –event fli*
+7/7/2014 18:37:21   DataMig-cmode-01 INFORMATIONAL fli.lun.verify.complete: Import verify of foreign LUN 83017542001E of size 42949672960 bytes from array model DF600F belonging to vendor HITACHI  with NetApp LUN QvChd+EUXoiS is successfully completed.
+~~~~~~ Output truncated ~~~~~~~
+----
+[NOTE]
+====
+Le fasi di verifica per confrontare i LUN di origine e di destinazione sono descritte nella fase di esecuzione della migrazione. Le fasi di importazione e verifica del LUN vengono descritte nella fase di esecuzione della migrazione perché sono collegate al lavoro di importazione e al LUN esterno.
+
+====

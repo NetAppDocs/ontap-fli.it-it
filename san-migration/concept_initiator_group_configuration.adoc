@@ -1,0 +1,33 @@
+---
+permalink: san-migration/concept_initiator_group_configuration.html 
+sidebar: sidebar 
+keywords: initiator, group, configuration 
+summary: 'La corretta configurazione del mascheramento del LUN è fondamentale per il corretto funzionamento. Tutte le porte initiator (su entrambi i nodi) nello storage ONTAP devono risiedere nello stesso igroup.' 
+---
+= Configurazione del gruppo iniziatore
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La corretta configurazione del mascheramento del LUN è fondamentale per il corretto funzionamento. Tutte le porte initiator (su entrambi i nodi) nello storage ONTAP devono risiedere nello stesso igroup.
+
+La migrazione FLI richiede l'accesso alle LUN dello storage di origine da parte dello storage NetApp. Per consentire l'accesso oltre allo zoning, è necessario creare gruppi di iniziatori sullo storage di origine utilizzando il nome della porta mondiale (WWPN) delle porte di iniziazione dello storage di destinazione.
+
+
+NOTE: Gli esempi di questa sezione utilizzano un array Hitachi Data Systems (HDS) AMS, pertanto i comandi degli array esterni saranno diversi a seconda dell'array di terze parti da cui si sta eseguendo la migrazione.
+
+Abilitare sempre ALUA (Asymmetric Logical Unit Access) sui gruppi di iniziatori per gli array NetApp.
+
+I gruppi di iniziatori si basano su nomi diversi a seconda del fornitore e del prodotto. Ad esempio:
+
+* Hitachi Data Systems (HDS) utilizza "`host group`".
+* NetApp e-Series utilizza "`host entry`".
+* EMC utilizza "`initiator record`" o "`storage group.`"
+* NetApp utilizza "`igroup.`"
+
+
+Indipendentemente dalla nomenclatura, lo scopo di un gruppo iniziatore è quello di identificare gli iniziatori in base alle WWPN che condividono le stesse mappature LUN.
+
+Per definire i gruppi di iniziatori, consultare la documentazione dell'array per informazioni su come impostare il mascheramento LUN (igroups/host groups/storage group e così via). Puoi anche rivedere https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementazione della virtualizzazione FlexArray per storage di terze parti"] per i requisiti di configurazione dello storage di terze parti.

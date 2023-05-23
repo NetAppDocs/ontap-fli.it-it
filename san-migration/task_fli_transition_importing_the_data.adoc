@@ -1,0 +1,54 @@
+---
+permalink: san-migration/task_fli_transition_importing_the_data.html 
+sidebar: sidebar 
+keywords: import, data, fli 7-mode, ontap 
+summary: Questi passaggi descrivono come importare i dati da un LUN di origine 7-Mode a un LUN di destinazione ONTAP utilizzando gli FLI. 
+---
+= Importazione dei dati da FLI 7-Mode a ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questi passaggi descrivono come importare i dati da un LUN di origine 7-Mode a un LUN di destinazione ONTAP utilizzando gli FLI.
+
+.Fasi
+. Avviare l'importazione della migrazione.
++
+[listing]
+----
+cluster::*> lun import start -vserver fli_72C -path /vol/flivol/72Clun1
+----
+. Visualizza stato FLI.
++
+[listing]
+----
+cluster::*> lun import show -vserver fli_72C -path /vol/flivol/72Clun1
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+fli_72C D0i1E+G8Wg6m   /vol/flivol/72Clun1 import    started
+                                                           completed        100
+----
++
+Per assicurarsi che il LUN di origine rimanga coerente al termine della migrazione, è necessario:
+
++
+** Una volta che il messaggio di importazione indica che è stato completato, arrestare l'host.
+** Eliminare la relazione LUN: `lun import delete -vserver fli_72C -path /vol/flivol/72Clun1`.
++
+[NOTE]
+====
+Tenere presente che, una volta interrotta la relazione LUN, le LUN perderanno rapidamente la sincronizzazione perché le modifiche vengono apportate solo alla nuova LUN. Pertanto, anche se potrebbe essere utile mantenere uno stato coerente nel caso in cui si desideri ripristinare lo stato originale, è probabile che il nuovo LUN presenti modifiche non riflesse nel LUN di origine.
+
+====
++
+[NOTE]
+====
+Una volta interrotta l'importazione, è possibile distruggere la relazione di importazione a meno che non si intenda verificare l'importazione.
+
+====
+
+
+

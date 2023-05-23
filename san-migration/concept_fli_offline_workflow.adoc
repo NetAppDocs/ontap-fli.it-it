@@ -1,0 +1,23 @@
+---
+permalink: san-migration/concept_fli_offline_workflow.html 
+redirect: ontap-fli/san-migration/task_rebooting_the_host_to_validate_system_state.html 
+sidebar: sidebar 
+keywords: fli, offline, workflow 
+summary: In questa sezione viene fornito un esempio del flusso di lavoro offline FLI, uno dei quattro flussi di lavoro FLI. 
+---
+= Workflow offline FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In questa sezione viene fornito un esempio del flusso di lavoro offline FLI, uno dei quattro flussi di lavoro FLI.
+
+Questo flusso di lavoro utilizza un array HDS AMS2100 come array di origine. Il flusso di lavoro offline ha le seguenti attività:
+
+. Preparazione per il cutover
+. Importazione dei dati
+. Verifica dei risultati della migrazione (opzionale)
+. Attività post-migrazione offline FLI
+

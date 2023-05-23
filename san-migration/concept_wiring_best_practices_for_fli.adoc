@@ -1,0 +1,25 @@
+---
+permalink: san-migration/concept_wiring_best_practices_for_fli.html 
+sidebar: sidebar 
+keywords: wire, best practices, fli migration 
+summary: Per configurare lo storage ONTAP per la migrazione FLI, è necessario collegare lo storage di origine al fabric in base alle informazioni di pianificazione e alle Best practice consigliate. 
+---
+= Best practice di cablaggio per la migrazione FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Per configurare lo storage ONTAP per la migrazione FLI, è necessario collegare lo storage di origine al fabric in base alle informazioni di pianificazione e alle Best practice consigliate.
+
+Quando si configura lo storage ONTAP per la migrazione FLI, si consiglia di seguire le seguenti Best practice relative al cablaggio.
+
+* Utilizzare fabric doppi per la ridondanza.
+* Utilizzare almeno due iniziatori e due porte di destinazione da ogni storage di destinazione per la migrazione FLI.
+* Non collegare le porte iniziatore dello storage di destinazione all'host. Le porte initiator di ONTAP vengono utilizzate per l'area con le porte di destinazione dello storage di origine.
+
+
+Di seguito viene riportato un esempio di cablaggio per lo storage di origine e lo storage di destinazione in un fabric di produzione.
+
+image::../media/configure_ontap_storage_for_fli_migration_1.png[Cablaggio per lo storage di origine e destinazione in produzione]

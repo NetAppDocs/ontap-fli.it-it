@@ -1,0 +1,36 @@
+---
+permalink: san-migration/task_removing_source_luns_from_host.html 
+sidebar: sidebar 
+keywords: remove, source, luns, hosts 
+summary: 'La seguente procedura descrive come rimuovere i LUN di origine dall"host al termine della migrazione FLI.' 
+---
+= Rimozione dei LUN di origine dagli host
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La seguente procedura descrive come rimuovere i LUN di origine dall'host al termine della migrazione FLI.
+
+
+NOTE: Questa attività utilizza un array _HDS AMS2100_ negli esempi. Le attività potrebbero essere diverse se si utilizza un array diverso o una versione diversa della GUI dell'array.
+
+Per rimuovere i LUN di origine dall'host, attenersi alla seguente procedura:
+
+.Fasi
+. Accedere a Hitachi Storage Navigator Modular.
+. Selezionare l'host migrato e selezionare *Edit host Group* (Modifica gruppo di host).
++
+image::../media/remove_source_luns_from_host_1.png[rimuovere i lun di origine dall'host 1]
+
+. Selezionare *Ports* (Porte) e *Forced Set* (Imposta forzato) su tutte le porte selezionate.
++
+image::../media/remove_source_luns_from_host_2.png[rimuovere i lun di origine dall'host 2]
+
+. Selezionare i LUN host migrati da LUN logici assegnati. Utilizzare i nomi LUN per ciascun host menzionato nel foglio di lavoro LUN di origine. Selezionare LUN dell'host Windows 2012 e scegliere *Rimuovi*.
++
+image::../media/remove_source_luns_from_host_3.png[rimuovere i lun di origine dall'host 3]
+
+. Ripetere la procedura per gli host Linux e VMware ESX.
+

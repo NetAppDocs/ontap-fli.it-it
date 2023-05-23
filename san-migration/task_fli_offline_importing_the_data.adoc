@@ -1,0 +1,53 @@
+---
+permalink: san-migration/task_fli_offline_importing_the_data.html 
+sidebar: sidebar 
+keywords: fli offline, import data 
+summary: Questa procedura descrive come importare i dati dal LUN di origine al LUN di destinazione. 
+---
+= FLI offline: Importazione dei dati
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questa procedura descrive come importare i dati dal LUN di origine al LUN di destinazione.
+
+.Fasi
+. Avviare l'importazione della migrazione.
++
+[listing]
+----
+DataMig-cmode::*> lun import start –vserver datamig –path /vol/winvol/bootlun
+
+DataMig-cmode::*> lun import start –vserver datamig –path /vol/winvol/fdrive
+
+DataMig-cmode::*> lun import start –vserver datamig –path /vol/winvol/gdrive
+----
+. Monitorare l'avanzamento dell'importazione. Puoi confrontare i progressi che stai osservando con le stime delle performance di migrazione che hai sviluppato dopo aver eseguito le migrazioni di test.
++
+[listing]
+----
+DataMig-cmode::*> lun import show –vserver datamig –fields vserver, foreign-disk, path, admin-state, operational-state, percent-complete, imported-blocks, total-blocks, , estimated-remaining-duration
+vserver foreign-disk path               admin-state operational-state percent-complete imported-blocks total-blocks estimated-remaining-duration
+------- ------------ ------------------ ----------- ----------------- ---------------- --------------- ------------ ----------------------------
+datamig 83017542000E /vol/winvol/fdrive started     completed         100              4194304         4194304      -
+datamig 83017542000F /vol/winvol/gdrive started     completed         100              6291456         6291456      -
+datamig 830175420010 /vol/linuxvol/bootlun
+                                        started     in_progress       83               35107077        41943040     00:00:48
+3 entries were displayed.
+----
+. Verificare che il processo di importazione sia stato completato correttamente.
++
+[listing]
+----
+DataMig-cmode::*> lun import show –vserver datamig –fields vserver, foreign-disk, path, admin-state, operational-state, percent-complete, imported-blocks, total-blocks, , estimated-remaining-duration
+vserver foreign-disk path               admin-state operational-state percent-complete imported-blocks total-blocks estimated-remaining-duration
+------- ------------ ------------------ ----------- ----------------- ---------------- --------------- ------------ ----------------------------
+datamig 83017542000E /vol/winvol/fdrive started     completed         100              4194304         4194304      -
+datamig 83017542000F /vol/winvol/gdrive started     completed         100              6291456         6291456      -
+datamig 830175420010 /vol/linuxvol/bootlun
+                                        started     completed         100
+3 entries were displayed.
+----
+

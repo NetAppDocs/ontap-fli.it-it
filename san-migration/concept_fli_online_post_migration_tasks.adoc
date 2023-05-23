@@ -1,0 +1,18 @@
+---
+permalink: san-migration/concept_fli_online_post_migration_tasks.html 
+sidebar: sidebar 
+keywords: fli, online, post-migration, tasks 
+summary: Eventuali rimedi al server non eseguiti prima della migrazione vengono eseguiti durante la post-migrazione. 
+---
+= Attività di post-migrazione online FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Eventuali rimedi al server non eseguiti prima della migrazione vengono eseguiti durante la post-migrazione.
+
+Eventuali software di terze parti vengono rimossi. Il software NetApp viene installato e configurato. Per esempi di correzione post-migrazione per tipi di host specifici, consultare la sezione relativa al ripristino degli host.
+
+Esaminare i log per verificare la presenza di errori, controllare i percorsi ed eseguire i test delle applicazioni per verificare che la migrazione sia stata completata correttamente.
