@@ -1,0 +1,2981 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head class="at-element-marker">
+  <title>Motivi per eseguire migrazioni di test</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Motivi per eseguire migrazioni di test" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/it-it/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+	<meta property="og:description" content="NetApp consiglia di testare tutte le configurazioni in un ambiente di test del cliente prima della migrazione dei dati di produzione." />
+  <meta property="og:image" content="https://docs.netapp.com/it-it/ontap-fli/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="NetApp consiglia di testare tutte le configurazioni in un ambiente di test del cliente prima della migrazione dei dati di produzione.">
+  <meta name="keywords" content=" reasons, perform, test, migrations"><!-- Icons -->
+  <link rel="icon" href="/it-it/ontap-fli/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/it-it/ontap-fli/css/ie-netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/it-it/ontap-fli/css/ie-landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/it-it/ontap-fli/css/ie-tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel="canonical" href="https://docs.netapp.com/it-it/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="x-default" href="https://docs.netapp.com/us-en/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="it" href="https://docs.netapp.com/it-it/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="en" href="https://docs.netapp.com/us-en/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="ja" href="https://docs.netapp.com/ja-jp/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="ko" href="https://docs.netapp.com/ko-kr/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://docs.netapp.com/zh-cn/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://docs.netapp.com/zh-tw/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="de" href="https://docs.netapp.com/de-de/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="es" href="https://docs.netapp.com/es-es/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <link rel="alternate" hreflang="fr" href="https://docs.netapp.com/fr-fr/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html" />
+  <!-- Top level site integrations -->
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/72570c5c-fe30-465f-b0e0-b77f7fb4ae34/OtAutoBlock.js"></script>
+    <script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-document-language="true" data-domain-script="72570c5c-fe30-465f-b0e0-b77f7fb4ae34"></script>
+    <script type="text/javascript">function OptanonWrapper() { }</script>
+    <script type="text/plain" class="optanon-category-C0002" src="https://assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js"></script>
+    <script class="optanon-category-C0001">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.setAttribute('class','optanon-category-C0001');j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MD73T9M');</script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      const MASTHEAD_OFFSET = 65;
+      const SECTIONS = $("main h2, main h3");
+      // PAGE NAV - Init
+      if (SECTIONS.length == 0) {
+        // remove if there is no elements
+        /*
+        $("#ie-right-navbar").remove();
+        $("#ie-right-navbar-collapse").remove();
+        */
+      } else {
+        $(".page-nav-title").css('display', 'block');
+        for (var i = 0; i < SECTIONS.length; i++) {
+          var sectionId = $(SECTIONS[i]).attr('id');
+          var sectionName = $(SECTIONS[i]).text();
+          var subClass = $(SECTIONS[i]).is("h3") ? ' page-nav__sublink' : '';
+          $("#page-menu").append('<li class="page-nav-item"><a href="#' + sectionId + '" class="page-nav__link' + subClass + '">' + sectionName + '</a></li>');
+        }
+      }
+    });
+  </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/it-it/ontap-fli/js/na-search.js'></script><script src='/it-it/ontap-fli/js/ie-clouddocs.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script>
+    /*
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+      */
+  </script>
+  <script src='/it-it/ontap-fli/js/custom-dropdown.js'></script>
+  <script src='/it-it/ontap-fli/js/FileSaver.min.js'></script>
+  <script src='/it-it/ontap-fli/js/jszip-utils.min.js'></script>
+  <script src='/it-it/ontap-fli/js/jszip.min.js'></script><script src='/it-it/ontap-fli/js/ie-pdf-ux.js'></script></head>
+
+
+  <body class role="document" data-flavor="">
+    <div class="skip-to-main">
+      <a href="#main" >Skip to main content</a>
+    </div><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD73T9M"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="page" class="">
+      <div id="ie-phone-menu" class=""></div>
+      <div id="ie-content-wrap" class="">
+        <nav id="ie-new-header">
+    <ul>
+        <li id="ie-phone-menu-button">
+            <a href="#">
+                <image id="" src="/it-it/ontap-fli/images/hamburger.svg" alt="menu" />
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.netapp.com/it">
+                <image id="ie-header-logo" src="/it-it/ontap-fli/images/netapp_logo.svg" alt="netapp" />
+            </a>
+        </li>
+        <li id="ie-header-docs">
+            <a href="https://www.netapp.com/it/support-and-training/documentation/">Documenti</a>
+        </li>
+
+        <!-- Empty container to push header left with or without lang selector -->
+        <li id="empty-container" style="margin-left: auto">
+        </li>
+        <!-- Start Language Selector --><li id="ie-language-dropdown">
+            <div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+                <div class="custom-dropdown-select custom-dropdown-select-lang">
+                    <img src="/it-it/ontap-fli/images/language_white_24dp.svg" class="n-globe__icon" />
+                    <span class="lang-name">Italiano</span>
+                    <img src="/it-it/ontap-fli/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/it-it/ontap-fli/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu"><li>
+                        <a href="https://docs.netapp.com/it-it/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">Italiano</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/us-en/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">English</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ja-jp/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">日本語</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ko-kr/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">한국어</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-cn/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-tw/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/de-de/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/es-es/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">Español</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/fr-fr/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html"
+                            target="_self"><span translate="no" class="notranslate">Français</span></a>
+                    </li></ul>
+            </div>
+            </li>
+        <!-- End Language Selector -->
+
+
+        <li id="ie-allnetapp">
+            <div id="allnetapp-dropdown" class="custom-dropdown custom-dropdown-allnetapp">
+                <div class="custom-dropdown-select custom-dropdown-select-allnetapp">
+                    <img src="/it-it/ontap-fli/images/apps_white_24dp.svg" alt="" class="allnetapp-icon" />
+                    <span class="allnetapp-name">Tutto NetApp</span>
+                    <img src="/it-it/ontap-fli/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/it-it/ontap-fli/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu allnetapp-dropdown">
+                    <li>
+                        <a href="https://bluexp.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">BlueXP</span></a>
+                    </li>
+                    <li>
+                        <a href="https://mysupport.netapp.com/site/"
+                            target="_self"><span translate="no" class="notranslate">Supporto</span></a>
+                    </li>
+                    <li>
+                        <a href="https://kb.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">Knowledge Base</span></a>
+                    </li>
+                    <li>
+                        <a href="https://www.netapp.com/it/support-and-training/netapp-learning-services/"
+                            target="_self"><span translate="no" class="notranslate">Training</span></a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+
+    </ul>
+</nav>
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+
+<div id="ie-new-sidebar-collapse" style="display: none">
+    <img id="sidebar-expand" class="ie-searchbox-icon" src="/it-it/ontap-fli/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-new-sidebar">
+    <div id="ie-product-identity-lockup">
+        <div id="sidebar-collapse" class="">
+            <img src="/it-it/ontap-fli/images/double_arrow.svg" alt="" />
+        </div>
+        <div id="ie-breadcrumb" class="">
+  <ul class="ie-breadcrumb">
+    <li class="">
+      <a href="https://docs.netapp.com">Tutti i documenti</a>
+    </li>
+    
+    
+
+    
+    <li class="">
+      <a href="https://docs.netapp.com/it-it/ontap-family/">
+        ONTAP
+      </a>
+    </li>
+    
+  </ul>
+  
+  <div class="ie-product-name" >
+    <!--<a href="/it-it/ontap-fli/">-->
+      ONTAP FLI
+    <!--</a>-->
+  </div>
+</div>
+
+            
+
+        
+        
+
+<div id="ie-searchbox" class="ie-searchbox-sidebar ">
+    <img class="ie-searchbox-icon" src="/it-it/ontap-fli/images/loupe.svg" alt=""/>
+    <div id="react-search" 
+        data-search-html="/it-it/ontap-fli/search.html" 
+        data-type="widget"
+        data-placeholder="Esplora la documentazione"
+        data-no-results-found="Nessun risultato per {query}"
+        data-did-you-mean="Cerca {suggestion}."
+        data-no-results-found-did-you-mean="Nessun risultato per {query}. Intendi {suggestion}?"
+        data-results-found="{hitCount} risultati trovati"
+        data-error-message="Si è verificato un errore. Riprova."
+        data-error-reset="Reimposta ricerca"
+        data-sk-es-pf-indexes="" 
+        data-flavor="">
+    </div>
+</div>
+        
+    </div>
+    <div id="ie-new-toc"><script>
+  let sidebarAccordion = true;
+
+  /* specific css rules for Mac */
+  if(navigator.platform.match('Mac') !== null) {
+    document.body.setAttribute('class', 'OSX');
+  }
+
+</script>
+
+<div id="ie-sidebar-container">
+  <ul id="ie-sidebar-list" ><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="ONTAP documenti FLI"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/index.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/it-it/ontap-fli/index.html">
+        ONTAP documenti FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Migrazione SAN con FLI"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Migrazione SAN con FLI</div>-->
+         Migrazione SAN con FLI
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica del programma di migrazione dei dati"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Panoramica del programma di migrazione dei dati</div>-->
+         Panoramica del programma di migrazione dei dati
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_data_migration_program_overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_data_migration_program_overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Pubblico previsto"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_intended_audience.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_intended_audience.html">
+        Pubblico previsto
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Tipi di migrazione supportati da Foreign LUN Import"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_types_supported_by_foreign_lun_import.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_types_supported_by_foreign_lun_import.html">
+        Tipi di migrazione supportati da Foreign LUN Import
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Concetti relativi all'importazione di LUN esterni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_foreign_lun_import_concepts.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_foreign_lun_import_concepts.html">
+        Concetti relativi all'importazione di LUN esterni
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sfide legate alla migrazione dei dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_data_migration_challenges.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_data_migration_challenges.html">
+        Sfide legate alla migrazione dei dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Servizi professionali per soluzioni DI migrazione SAN"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Servizi professionali per soluzioni DI migrazione SAN</div>-->
+         Servizi professionali per soluzioni DI migrazione SAN
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_professional_services_for_san_migration_solutions.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_professional_services_for_san_migration_solutions.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Servizio di migrazione dei dati per ambienti SAN eterogenei"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_data_migration_service_for_heterogenous_san_environments.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_data_migration_service_for_heterogenous_san_environments.html">
+        Servizio di migrazione dei dati per ambienti SAN eterogenei
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Metodologia per la migrazione dei dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_data_migration_methodology.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_data_migration_methodology.html">
+        Metodologia per la migrazione dei dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Opzioni di migrazione dei dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_data_migration_options.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_data_migration_options.html">
+        Opzioni di migrazione dei dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Strumenti consigliati per la migrazione dei dati"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Strumenti consigliati per la migrazione dei dati</div>-->
+         Strumenti consigliati per la migrazione dei dati
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_recommended_tools_for_data_migration.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_recommended_tools_for_data_migration.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Benchmark per la stima della durata della migrazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_benchmarks_for_estimating_migration_durations.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_benchmarks_for_estimating_migration_durations.html">
+        Benchmark per la stima della durata della migrazione
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Importazione LUN esterna"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Importazione LUN esterna</div>-->
+         Importazione LUN esterna
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_foreign_lun_import_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_foreign_lun_import_overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Funzioni di importazione LUN esterne"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_foreign_lun_import_features.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_foreign_lun_import_features.html">
+        Funzioni di importazione LUN esterne
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Vantaggi di una soluzione basata su FLI"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_benefits_of_an_fli_solution.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_benefits_of_an_fli_solution.html">
+        Vantaggi di una soluzione basata su FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Requisiti e limitazioni del LUN"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_lun_requirements_and_limitations.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_lun_requirements_and_limitations.html">
+        Requisiti e limitazioni del LUN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazioni supportate da FLI"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_supported_configurations.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_fli_supported_configurations.html">
+        Configurazioni supportate da FLI
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Nozioni di base sull'implementazione per la migrazione dei dati"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Nozioni di base sull'implementazione per la migrazione dei dati</div>-->
+         Nozioni di base sull'implementazione per la migrazione dei dati
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_implementation_basics_for_data_migration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_implementation_basics_for_data_migration.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Requisiti di cablaggio fisico per FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_physical_wiring_requirements_for_fli.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_physical_wiring_requirements_for_fli.html">
+        Requisiti di cablaggio fisico per FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Zoning delle porte di destinazione e iniziatore"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_target_and_initiator_port_zoning.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_target_and_initiator_port_zoning.html">
+        Zoning delle porte di destinazione e iniziatore
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Requisiti di zoning FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_zoning_requirements.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_zoning_requirements.html">
+        Requisiti di zoning FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione del gruppo iniziatore"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_initiator_group_configuration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_initiator_group_configuration.html">
+        Configurazione del gruppo iniziatore
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Motivi per eseguire migrazioni di test"
+      data-li-level="3#" 
+      class="  ie-sidebar-selected    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html">
+        Motivi per eseguire migrazioni di test
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica del processo di migrazione"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Panoramica del processo di migrazione</div>-->
+         Panoramica del processo di migrazione
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_process_overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_process_overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scopri il flusso di lavoro della fase"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_discover_phase_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_discover_phase_workflow.html">
+        Scopri il flusso di lavoro della fase
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Analizzare il flusso di lavoro della fase"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_analyze_phase_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_analyze_phase_workflow.html">
+        Analizzare il flusso di lavoro della fase
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow della fase di pianificazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_plan_phase_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_plan_phase_workflow.html">
+        Workflow della fase di pianificazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazioni supportate da FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_supported_configurations.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_supported_configurations.html">
+        Configurazioni supportate da FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Eseguire flussi di lavoro in fase"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_execute_phase_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_execute_phase_workflow.html">
+        Eseguire flussi di lavoro in fase
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di migrazione offline"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_offline_migration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_offline_migration.html">
+        Workflow di migrazione offline
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di migrazione online"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_online_migration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_online_migration.html">
+        Workflow di migrazione online
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verificare il flusso di lavoro della fase"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_verify_phase_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_verify_phase_workflow.html">
+        Verificare il flusso di lavoro della fase
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Procedure di raccolta dei dati della fase di rilevamento"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_discover_phase_procedures.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_discover_phase_procedures.html">
+        Procedure di raccolta dei dati della fase di rilevamento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Analizzare le Best practice di Phase IMT"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Analizzare le Best practice di Phase IMT</div>-->
+         Analizzare le Best practice di Phase IMT
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_analyze_phase_procedures.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_analyze_phase_procedures.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Criteri di interoperabilità e supporto FLI"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_interoperability_and_support_criteria.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_fli_interoperability_and_support_criteria.html">
+        Criteri di interoperabilità e supporto FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica delle configurazioni supportate per gli FLI mediante IMT"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_checking_supported_configuration_for_fli_using_imt.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_checking_supported_configuration_for_fli_using_imt.html">
+        Verifica delle configurazioni supportate per gli FLI mediante IMT
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica delle configurazioni supportate per gli FLI mediante L'app SAN LUN Migrate"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_checking_supported_configurations_for_fli_using_san_lun_migrate_app.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_checking_supported_configurations_for_fli_using_san_lun_migrate_app.html">
+        Verifica delle configurazioni supportate per gli FLI mediante L'app SAN LUN Migrate
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Abilitazione per LUN non supportati"
+      data-li-level="4" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-4  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Abilitazione per LUN non supportati</div>-->
+         Abilitazione per LUN non supportati
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Prima di iniziare"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_enablement_for_non_supported_luns_interoperability.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/concept_enablement_for_non_supported_luns_interoperability.html">
+        Prima di iniziare
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Importazione di LUN non FC"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_importing_non_fc_luns.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/task_importing_non_fc_luns.html">
+        Importazione di LUN non FC
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Utilizzo di importazione LUN esterna per importare LUN in AFF"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_using_fli_to_import_luns_into_all_flash.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/concept_using_fli_to_import_luns_into_all_flash.html">
+        Utilizzo di importazione LUN esterna per importare LUN in AFF
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Report di analisi delle lacune"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_gap_analysis_report.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_gap_analysis_report.html">
+        Report di analisi delle lacune
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Pianificare e preparare le procedure della fase"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Pianificare e preparare le procedure della fase</div>-->
+         Pianificare e preparare le procedure della fase
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_plan_phase_procedures.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_plan_phase_procedures.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Best practice di cablaggio per la migrazione FLI"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_wiring_best_practices_for_fli.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_wiring_best_practices_for_fli.html">
+        Best practice di cablaggio per la migrazione FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione delle zone di commutazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_configuring_switch_zones.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_configuring_switch_zones.html">
+        Configurazione delle zone di commutazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Come configurare gli array di origine"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_how_to_configure_source_arrays.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_how_to_configure_source_arrays.html">
+        Come configurare gli array di origine
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Test di migrazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_tests.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_migration_tests.html">
+        Test di migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di migrazione di test con Hitachi AMS2100"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_test_migration_example_using_hitachi_ams2100.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_test_migration_example_using_hitachi_ams2100.html">
+        Esempio di migrazione di test con Hitachi AMS2100
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow offline FLI"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Workflow offline FLI</div>-->
+         Workflow offline FLI
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_offline_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_offline_workflow.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI offline: Preparazione per il cutover"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> FLI offline: Preparazione per il cutover</div>-->
+         FLI offline: Preparazione per il cutover
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_offline_preparation_for_cutover.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_fli_offline_preparation_for_cutover.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Riavviare l'host per convalidare lo stato del sistema"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_rebooting_the_host_to_validate_system_state.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_rebooting_the_host_to_validate_system_state.html">
+        Riavviare l'host per convalidare lo stato del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica del percorso del LUN host e verifica della configurazione del multipath"
+      data-li-level="4" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-4  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Verifica del percorso del LUN host e verifica della configurazione del multipath</div>-->
+         Verifica del percorso del LUN host e verifica della configurazione del multipath
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_verifying_host_lun_path_and_multipath_configuration.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/concept_verifying_host_lun_path_and_multipath_configuration.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica multipath per host Windows"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_multipath_verification_for_windows_hosts.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/task_multipath_verification_for_windows_hosts.html">
+        Verifica multipath per host Windows
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica multipath per host Linux"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_multipath_verification_for_linux_hosts.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/task_multipath_verification_for_linux_hosts.html">
+        Verifica multipath per host Linux
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica multipath per host ESXi"
+      data-li-level="5#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_multipath_verification_for_esxi_hosts.html" 
+    ><a class="ie-sidebar-menuitem-5 " href="/it-it/ontap-fli/san-migration/task_multipath_verification_for_esxi_hosts.html">
+        Verifica multipath per host ESXi
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparare gli host per la migrazione offline FLI"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_prepare_hosts_for_fli_offline_migration.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_prepare_hosts_for_fli_offline_migration.html">
+        Preparare gli host per la migrazione offline FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Presentazione dei LUN di origine allo storage ONTAP durante gli FLI"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_presenting_source_luns_to_ontap_storage_during_offline_fli.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_presenting_source_luns_to_ontap_storage_during_offline_fli.html">
+        Presentazione dei LUN di origine allo storage ONTAP durante gli FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica dei LUN di origine sullo storage di destinazione per gli FLI offline"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_verifying_source_luns_on_destination_storage_for_offline_foreign_lun_import.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_verifying_source_luns_on_destination_storage_for_offline_foreign_lun_import.html">
+        Verifica dei LUN di origine sullo storage di destinazione per gli FLI offline
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dei processi di migrazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_configuring_migration_jobs.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_configuring_migration_jobs.html">
+        Configurazione dei processi di migrazione
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI offline: Importazione dei dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_offline_importing_the_data.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_offline_importing_the_data.html">
+        FLI offline: Importazione dei dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI offline: Verifica dei risultati della migrazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_offline_verifying_migration_results.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_offline_verifying_migration_results.html">
+        FLI offline: Verifica dei risultati della migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Attività post-migrazione offline FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_offline_post_migration_tasks.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_offline_post_migration_tasks.html">
+        Attività post-migrazione offline FLI
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow online FLI"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Workflow online FLI</div>-->
+         Workflow online FLI
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_online_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_online_workflow.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Riavvio degli host"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_rebooting_hosts_f0f8.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_rebooting_hosts_f0f8.html">
+        Riavvio degli host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sistemi operativi host supportati per FLI online"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_supported_host_operating_systems_for_fli_online.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_supported_host_operating_systems_for_fli_online.html">
+        Sistemi operativi host supportati per FLI online
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verificare il percorso del LUN host e la configurazione del multipath"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_verify_host_lun_path_and_multipath_configuration_fa1e.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_verify_host_lun_path_and_multipath_configuration_fa1e.html">
+        Verificare il percorso del LUN host e la configurazione del multipath
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparare gli host per la migrazione online FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_prepare_hosts_for_fli_online_migration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_prepare_hosts_for_fli_online_migration.html">
+        Preparare gli host per la migrazione online FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI online: Preparazione del percorso LUN"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_online_preparing_the_lun_path.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_online_preparing_the_lun_path.html">
+        FLI online: Preparazione del percorso LUN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI online: Esecuzione di un cutover dirompente"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_online_performing_a_disruptive_cutover.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_online_performing_a_disruptive_cutover.html">
+        FLI online: Esecuzione di un cutover dirompente
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI online: Importazione dei dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_online_importing_the_data.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_online_importing_the_data.html">
+        FLI online: Importazione dei dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI online: Verifica dei risultati della migrazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_online_verifying_migration_results.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_online_verifying_migration_results.html">
+        FLI online: Verifica dei risultati della migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Pulizia della migrazione online FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_online_cleanup.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_online_cleanup.html">
+        Pulizia della migrazione online FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Attività di post-migrazione online FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_online_post_migration_tasks.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_online_post_migration_tasks.html">
+        Attività di post-migrazione online FLI
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di transizione da FLI 7-Mode a ONTAP"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Workflow di transizione da FLI 7-Mode a ONTAP</div>-->
+         Workflow di transizione da FLI 7-Mode a ONTAP
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazioni supportate da 7-Mode a ONTAP FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_7_mode_to_ontap_supported_configurations.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_7_mode_to_ontap_supported_configurations.html">
+        Configurazioni supportate da 7-Mode a ONTAP FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Riavvio degli host"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_rebooting_hosts_9207.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_rebooting_hosts_9207.html">
+        Riavvio degli host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verificare il percorso del LUN host e la configurazione del multipath"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_verify_host_lun_path_and_multipath_configuration_81ec.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_verify_host_lun_path_and_multipath_configuration_81ec.html">
+        Verificare il percorso del LUN host e la configurazione del multipath
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparare gli host per la transizione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_prepare_hosts_for_the_transition.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_prepare_hosts_for_the_transition.html">
+        Preparare gli host per la transizione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparazione degli array di origine e di destinazione per la migrazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_transition_preparing_source_and_destination_arrays.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_transition_preparing_source_and_destination_arrays.html">
+        Preparazione degli array di origine e di destinazione per la migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esecuzione di un cutover dirompente di FLI 7-Mode su ONTAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_transition_performing_a_disruptive_cutover.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_transition_performing_a_disruptive_cutover.html">
+        Esecuzione di un cutover dirompente di FLI 7-Mode su ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Importazione dei dati da FLI 7-Mode a ONTAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_transition_importing_the_data.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_transition_importing_the_data.html">
+        Importazione dei dati da FLI 7-Mode a ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verifica dei risultati della migrazione da FLI 7-Mode a ONTAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_fli_transition_verifying_fli_7_mode_to_ontap_migration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_fli_transition_verifying_fli_7_mode_to_ontap_migration.html">
+        Verifica dei risultati della migrazione da FLI 7-Mode a ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Attività post-migrazione del workflow di transizione FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_transition_post_migration_tasks.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_transition_post_migration_tasks.html">
+        Attività post-migrazione del workflow di transizione FLI
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="FLI con automazione del workflow (WFA)"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_using_workflow_automation_wfa.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/ontap-fli/san-migration/concept_fli_using_workflow_automation_wfa.html">
+        FLI con automazione del workflow (WFA)
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Procedure post-migrazione FLI"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Procedure post-migrazione FLI</div>-->
+         Procedure post-migrazione FLI
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_post_migration_procedures_all_workflows.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_post_migration_procedures_all_workflows.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rimozione dei LUN di origine dallo storage ONTAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_removing_source_luns_from_ontap_storage.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_removing_source_luns_from_ontap_storage.html">
+        Rimozione dei LUN di origine dallo storage ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rimozione dei LUN di origine dagli host"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_removing_source_luns_from_host.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_removing_source_luns_from_host.html">
+        Rimozione dei LUN di origine dagli host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rimozione dello storage di origine e della zona host dallo zoneset"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Rimozione dello storage di origine e della zona host dallo zoneset</div>-->
+         Rimozione dello storage di origine e della zona host dallo zoneset
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di fabric Brocade"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_brocade_fabric_example.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_brocade_fabric_example.html">
+        Esempio di fabric Brocade
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di fabric Cisco"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_cisco_fabric_example.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_cisco_fabric_example.html">
+        Esempio di fabric Cisco
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Creazione di copie Snapshot post-migrazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_create_a_post_migration_snapshot_copy.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_create_a_post_migration_snapshot_copy.html">
+        Creazione di copie Snapshot post-migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Fase di pulizia e verifica della migrazione FLI"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_fli_migration_clean_up_and_verify_phase.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_fli_migration_clean_up_and_verify_phase.html">
+        Fase di pulizia e verifica della migrazione FLI
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Report sulla migrazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_migration_report.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_migration_report.html">
+        Report sulla migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Unzoning array di origine e destinazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_unzoning_source_and_destination_array.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_unzoning_source_and_destination_array.html">
+        Unzoning array di origine e destinazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rimozione dell'array di origine da ONTAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_removing_the_source_array_from_ontap.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_removing_the_source_array_from_ontap.html">
+        Rimozione dell'array di origine da ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rimozione della configurazione dell'array di destinazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_removing_destination_array_configuration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_removing_destination_array_configuration.html">
+        Rimozione della configurazione dell'array di destinazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Documentazione dell'ambiente appena migrato"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_document_customer_environment.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/task_document_customer_environment.html">
+        Documentazione dell'ambiente appena migrato
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Performance di importazione LUN esterna"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Performance di importazione LUN esterna</div>-->
+         Performance di importazione LUN esterna
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_performance.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_performance.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Miglioramenti delle performance in ONTAP 8.3.1"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_performance_enhancements_in_clustered_data_ontap_8_3_1.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_performance_enhancements_in_clustered_data_ontap_8_3_1.html">
+        Miglioramenti delle performance in ONTAP 8.3.1
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Variabili che influiscono sulle prestazioni di migrazione delle importazioni di LUN esterne"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_variables_that_affect_foreign_lun_import_migration_performance.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_variables_that_affect_foreign_lun_import_migration_performance.html">
+        Variabili che influiscono sulle prestazioni di migrazione delle importazioni di LUN esterne
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Benchmark per la stima della durata della migrazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_benchmarks_for_estimating_migration_durations.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_benchmarks_for_estimating_migration_durations.html">
+        Benchmark per la stima della durata della migrazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Best practice per la migrazione all'importazione di LUN all'estero"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_best_practices_for_fli_migration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/concept_best_practices_for_fli_migration.html">
+        Best practice per la migrazione all'importazione di LUN all'estero
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Correzione ESXi CAW/ATS"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_esxi_caw_ats_remediation.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_esxi_caw_ats_remediation.html">
+        Correzione ESXi CAW/ATS
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Correzione dell'host"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_host_remediation.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_host_remediation.html">
+        Correzione dell'host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Eliminazione delle prenotazioni persistenti SCSI-3"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_clearing_scsi_3_persistent_reservations.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_clearing_scsi_3_persistent_reservations.html">
+        Eliminazione delle prenotazioni persistenti SCSI-3
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Creazione dell'host nelle zone di destinazione"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Creazione dell'host nelle zone di destinazione</div>-->
+         Creazione dell'host nelle zone di destinazione
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/concept_creating_the_host_to_destination_zones.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/concept_creating_the_host_to_destination_zones.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Brocade Fabric in Production Fabric un esempio"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_brocade_fabric_in_production_fabric_a_example.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_brocade_fabric_in_production_fabric_a_example.html">
+        Brocade Fabric in Production Fabric un esempio
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di Brocade Fabric in Production Fabric B."
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_brocade_fabric_in_production_fabric_b_example.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_brocade_fabric_in_production_fabric_b_example.html">
+        Esempio di Brocade Fabric in Production Fabric B.
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Il fabric Cisco nel fabric di produzione è un esempio"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_cisco_fabric_in_production_fabric_a_example.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_cisco_fabric_in_production_fabric_a_example.html">
+        Il fabric Cisco nel fabric di produzione è un esempio
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di fabric Cisco in Production Fabric B."
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/task_cisco_fabric_in_production_fabric_b_example.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/ontap-fli/san-migration/task_cisco_fabric_in_production_fabric_b_example.html">
+        Esempio di fabric Cisco in Production Fabric B.
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di foglio di lavoro Site Survey and Planning"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/ontap-fli/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/ontap-fli/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Esempio di foglio di lavoro Site Survey and Planning</div>-->
+         Esempio di foglio di lavoro Site Survey and Planning
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_sample_site_survey_and_planning_worksheet.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_sample_site_survey_and_planning_worksheet.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Contatti del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_contacts_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_contacts_tab.html">
+        Scheda Contatti del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda del questionario del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_questionnaire_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_questionnaire_tab.html">
+        Scheda del questionario del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda interruttori del foglio di lavoro Site Survey and Planning (analisi del sito"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_switches_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_switches_tab.html">
+        Scheda interruttori del foglio di lavoro Site Survey and Planning (analisi del sito
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Source Storage Devices (dispositivi di storage di origine) del foglio di lavoro Site Survey and Pl"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html">
+        Scheda Source Storage Devices (dispositivi di storage di origine) del foglio di lavoro Site Survey and Pl
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Foglio di lavoro Site Survey and Planning scheda Destination Storage Devices (dispositivi di storage di"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html">
+        Foglio di lavoro Site Survey and Planning scheda Destination Storage Devices (dispositivi di storage di
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda host del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_hosts_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_hosts_tab.html">
+        Scheda host del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda HBA (Site Survey and Planning) e informazioni zona del foglio di lavoro"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html">
+        Scheda HBA (Site Survey and Planning) e informazioni zona del foglio di lavoro
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda LUN di origine del foglio di lavoro Site Survey and Planning (analisi del sito e pianificazione)"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_source_luns_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_source_luns_tab.html">
+        Scheda LUN di origine del foglio di lavoro Site Survey and Planning (analisi del sito e pianificazione)
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Storage Groups del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_storage_groups_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_storage_groups_tab.html">
+        Scheda Storage Groups del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Dettagli LUN del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_lun_details_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_lun_details_tab.html">
+        Scheda Dettagli LUN del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Foglio di lavoro Site Survey and Planning scheda NetApp LUN Layout"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html">
+        Foglio di lavoro Site Survey and Planning scheda NetApp LUN Layout
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Pianificazione della migrazione del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html">
+        Scheda Pianificazione della migrazione del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Stato aggregato del foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html">
+        Scheda Stato aggregato del foglio di lavoro Site Survey and Planning
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda Configurazione FAS del foglio di lavoro per l'analisi e la pianificazione del sito"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_fas_config_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_fas_config_tab.html">
+        Scheda Configurazione FAS del foglio di lavoro per l'analisi e la pianificazione del sito
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scheda script SDS CLI per il foglio di lavoro Site Survey and Planning"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/san-migration/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/ontap-fli/san-migration/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html">
+        Scheda script SDS CLI per il foglio di lavoro Site Survey and Planning
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Note legali"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/san-migration/concept_reasons_to_perform_test_migrations.html" 
+      dale-entry-url="/reference_legal_notices.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/it-it/ontap-fli/reference_legal_notices.html">
+        Note legali
+      </a></li></ul>
+</div>
+<script>
+
+  $(".ie-sidebar-button").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    expandedLI = $('li.ie-sidebar-expand')
+
+    const li = $(this).closest("li");
+
+    const parentsLI = $(li).parents('li');
+
+    expandedLI.map(element => {
+      if (sidebarAccordion && !li.hasClass('ie-sidebar-expand') && jQuery.inArray(expandedLI[element], parentsLI) == -1) {
+        $(expandedLI[element]).toggleClass('ie-sidebar-expand');
+        $(expandedLI[element]).children("ul").animate({ height: 'toggle' }, 400, function () {
+          $(li).children("ul").toggleClass('ie-sidebar-open');
+
+        })
+      }
+
+    })
+
+    $(li).toggleClass('ie-sidebar-expand');
+    $(li).children("ul").animate({ height: 'toggle' }, 400, function () {
+      $(li).children("ul").toggleClass('ie-sidebar-open');
+    })
+  });
+
+
+  
+    $("li.ie-sidebar-selected").parents('ul').toggleClass("ie-sidebar-open");
+    $("li.ie-sidebar-selected").toggleClass("ie-sidebar-expand")
+    $("ul.ie-sidebar-open").parent().toggleClass("ie-sidebar-expand");
+    $("li.ie-sidebar-selected").children('ul').toggleClass("ie-sidebar-open")
+  
+  
+</script>
+    </div>
+</div>
+<script>
+
+    
+    let sidebarScrollTopPosition = 0;
+    $("#ie-new-toc").on("scroll", function () {
+        if (sidebarScrollTopPosition == 0) {
+            $.cookie("sidebarScroll", $("#ie-new-toc").scrollTop(), {
+                path: "/it-it/ontap-fli"
+            });
+        }
+
+        if ($("#ie-new-toc").scrollTop() > 0) {
+            $('#ie-product-identity-lockup').addClass('ie-addShadow');
+        } else {
+            $('#ie-product-identity-lockup').removeClass('ie-addShadow');
+        }
+    });
+
+    $(function () {
+        if ($.cookie("sidebarScroll")) {
+            $("#ie-new-toc").scrollTop($.cookie("sidebarScroll"));
+        }
+    });
+
+    function setSidebarBottom() {
+        const footerGap = PXinViewport($(".n-footer"));
+        document.getElementById("ie-new-sidebar").style.bottom = Math.max(0, footerGap) + "px";
+    }
+
+    window.onscroll = () => {
+        setSidebarBottom();
+    };
+
+    $("#sidebar-collapse").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        if ($.cookie("sidebarScroll")) {
+            sidebarScrollTopPosition = $.cookie("sidebarScroll");
+        }
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 350, function () {
+            $("#ie-new-sidebar-collapse").show();
+            $("#ie-new-sidebar").removeClass("open")
+            $("#ie-new-sidebar").addClass("close")
+            $("#ie-new-sidebar").removeAttr("style")
+        });
+        $(".ie-content-pane").animate({ width: (width + sidebarWidth), marginLeft: (marginLeft - sidebarWidth) }, 350, function () {
+            resizeContent()
+        })
+
+    });
+    $("#sidebar-expand").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 250, function () {
+            $('#ie-new-sidebar').css('display', 'flex');
+            $("#ie-new-sidebar-collapse").hide();
+            $("#ie-new-sidebar").removeClass("close")
+            $("#ie-new-sidebar").addClass("open")
+            setSidebarBottom();
+
+            if (sidebarScrollTopPosition != 0) {
+                $.cookie("sidebarScroll", sidebarScrollTopPosition, {
+                    path: "/it-it/ontap-fli"
+                })
+                $("#ie-new-toc").scrollTop(sidebarScrollTopPosition);
+                sidebarScrollTopPosition = 0;
+            }
+        });
+        $(".ie-content-pane").animate({ width: (width - sidebarWidth), 'marginLeft': (marginLeft + sidebarWidth) }, 250, function () {
+            resizeContent()
+        })
+    });
+    function resizeContent() {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        const rightNavbarVisible =  $("#ie-right-navbar").css('display') && $("#ie-right-navbar").css('display') != 'none';
+        const sidebarVisible = $("#ie-new-sidebar").css('display') != 'none';
+        const rightNavbarWidth = $("#ie-right-navbar").width();
+        const rightNavbarCollapseWidth = $("#ie-right-navbar-collapse").width();
+        const rightNavbarCollapseVisible = $("#ie-right-navbar-collapse").css('display') && $("#ie-right-navbar-collapse").css('display') != 'none';
+        
+        if (rightNavbarVisible && sidebarVisible) {
+            $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarWidth}px)`)
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+        } else if (sidebarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarCollapseWidth}px)`)
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar").width()}px)`)
+            }
+
+        } else if (rightNavbarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            $(".ie-content-pane").width(`calc(100% - ${rightNavbarWidth}px)`)
+        } else {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${rightNavbarCollapseWidth}px)`);
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar-collapse").width()}px) `);
+            }
+            
+        }
+    }
+    $(window).on("resize load", function () {
+        setSidebarBottom();
+        resizeContent()
+    });
+
+
+</script>
+
+<div class="ie-content-pane ie-component-detail-content ie-component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <!-- include utility.html -->
+      <div class="ie-info-disclaimer">
+    <span>
+      <div class="ie-info-disclaimer-container">
+        <div class="ie-info-disclaimer-icon">
+          <img src="/it-it/ontap-fli/images/notification-icons.svg" class="luci-icon" alt="" />
+        </div>
+        <div class="ie-info-disclaimer-content">
+          <span> La versione in lingua italiana fornita proviene da una traduzione automatica. Per eventuali incoerenze, fare riferimento alla versione in lingua inglese. </span>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </span>
+  </div><div class="ie-component-detail-heading-wrap">
+  <h1 class="ie-component-detail-heading">Motivi per eseguire migrazioni di test</h1>
+</div>
+
+<div id="ie-byline">
+  
+<div class="page-details">
+    
+        
+            <time datetime="2023-05-23 16:58:25 +0000">05/23/2023</time>
+        
+    
+    
+        <span>Collaboratori
+        </span>
+    
+    
+</div>
+<div class="page-controls">
+    <div id="contribute-dropdown" class="custom-dropdown custom-dropdown-contrib" >
+        <div class="custom-dropdown-select custom-dropdown-select-contrib">
+        <span class="contrib-name"><img src="/it-it/ontap-fli/images/discuss-sm.svg" alt="" class="github-icon" />Suggerisci modifiche</span>
+        <img src="/it-it/ontap-fli/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown invisible" />
+        <img src="/it-it/ontap-fli/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup" />
+        </div>
+        <ul class="custom-dropdown-menu suggested-changes-dropdown"><li>
+                <a target="_blank" href="https://github.com/NetAppDocs/ontap-fli.it-it/issues/new?template=new-from-page.yml&page-url=https://docs.netapp.com/it-it/ontap-fli/san-migration/concept_reasons_to_perform_test_migrations.html&page-title=Motivi per eseguire migrazioni di test" class="page-nav-contribute-link" role="button">Richiedi modifiche alla documentazione</a>
+            </li><li> 
+                <a target="_blank" href="https://github.com/NetAppDocs/ontap-fli/blob/main/san-migration/concept_reasons_to_perform_test_migrations.adoc" class="page-nav-contribute-link" role="button">Modifica questa pagina</a>
+            </li><li><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  >Scopri come collaborare</a></li>
+        </ul>
+    </div>
+    <div id="pdf-control-container">
+        <div class="n-pdf-header">
+            <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+                <img class="adobe-icon" src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>PDF<img src="/it-it/ontap-fli/images/dropdown-arrow.svg" class="custom-icon" alt="" />
+            </a>
+        </div>
+        <div class="n-pdf-body-container">
+            <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+                    
+                    
+                    
+                    <a target="_blank" class="pdf-download-link" href="/it-it/ontap-fli/pdfs/fullsite-sidebar/Documentazione_per_l_importazione_dei_LUN_esteri_di_ONTAP.pdf" >
+                    <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>PDF del sito di questa documentazione</a>
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Migrazione_SAN_con_FLI.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Migrazione SAN con FLI
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Panoramica_del_programma_di_migrazione_dei_dati.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Panoramica del programma di migrazione dei dati
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Servizi_professionali_per_soluzioni_DI_migrazione_SAN.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Servizi professionali per soluzioni DI migrazione SAN
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Strumenti_consigliati_per_la_migrazione_dei_dati.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Strumenti consigliati per la migrazione dei dati
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Importazione_LUN_esterna.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Importazione LUN esterna
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Nozioni_di_base_sull_implementazione_per_la_migrazione_dei_dati.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Nozioni di base sull'implementazione per la migrazione dei dati
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Panoramica_del_processo_di_migrazione.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Panoramica del processo di migrazione
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Analizzare_le_Best_practice_di_Phase_IMT.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Analizzare le Best practice di Phase IMT
+          </a>
+          
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Abilitazione_per_LUN_non_supportati.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Abilitazione per LUN non supportati
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Pianificare_e_preparare_le_procedure_della_fase.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Pianificare e preparare le procedure della fase
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Workflow_offline_FLI.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Workflow offline FLI
+          </a>
+          
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/FLI_offline__Preparazione_per_il_cutover.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            FLI offline: Preparazione per il cutover
+          </a>
+          
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Verifica_del_percorso_del_LUN_host_e_verifica_della_configurazione_del_multipath.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Verifica del percorso del LUN host e verifica della configurazione del multipath
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Workflow_online_FLI.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Workflow online FLI
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Workflow_di_transizione_da_FLI_7_Mode_a_ONTAP.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Workflow di transizione da FLI 7-Mode a ONTAP
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Procedure_post_migrazione_FLI.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Procedure post-migrazione FLI
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Rimozione_dello_storage_di_origine_e_della_zona_host_dallo_zoneset.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Rimozione dello storage di origine e della zona host dallo zoneset
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Performance_di_importazione_LUN_esterna.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Performance di importazione LUN esterna
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Creazione_dell_host_nelle_zone_di_destinazione.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Creazione dell'host nelle zone di destinazione
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/ontap-fli/pdfs/sidebar/Esempio_di_foglio_di_lavoro_Site_Survey_and_Planning.pdf" 
+            
+          >
+            <img src="/it-it/ontap-fli/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Esempio di foglio di lavoro Site Survey and Planning
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+</li></ul>
+            <div class="zip-pdf-link-container" style="display: none;">   
+                <a href="#" id="zipPdf">
+                <img src="/it-it/ontap-fli/images/pdf-zip.png" alt="" width="16" height="16"/>
+                <pre>Raccolta di documenti PDF separati<span class="zip-size"></span></pre>
+                </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+        </div>
+    </div>        
+<script>
+$("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+$("#toggleButtonPdf").on('click', function(e){ 
+    e.stopPropagation();
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+});
+
+//hide is by clicking outside pdfcontainer
+$(document).on('click', function (e) {
+    if ($('#toggleContainerPdf').is(':visible') && !$('.n-pdf-body-container').is(e.target) && !$('.n-pdf-body-container').has(e.target).length)  {
+        
+        $("#toggleContainerPdf").toggle('display');
+        $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+        $("#toggleButtonPdf").removeClass("active");
+    }
+});
+</script>
+<script>
+    function getPdfLocation() {
+        const pdfLocation = window.scrollX + document.querySelector('#pdf-control-container').getBoundingClientRect().left
+        if (pdfLocation < 450) {
+            $(".n-pdf-body-container").addClass("block")
+        } else {
+            $(".n-pdf-body-container").removeClass("block")
+        }
+    
+    }
+    $( window ).on( "resize", function() {
+        getPdfLocation()
+} );
+</script>
+<script>
+    const pdfButtonWidth =  $(".n-pdf-header").width();
+    const pdfMenuWidth = $(".n-pdf-body-container").width();
+    $(".n-pdf-body-container").css('margin-left', `calc(${pdfButtonWidth - pdfMenuWidth}px)`);
+</script>
+</div>
+
+    
+
+</div>
+
+
+
+
+<div class="content-to-index">
+<div class="paragraph lead">
+<p>NetApp consiglia di testare tutte le configurazioni in un ambiente di test del cliente prima della migrazione dei dati di produzione.</p>
+</div>
+<div class="paragraph">
+<p>Prima di eseguire la migrazione in produzione, è necessario eseguire una serie di migrazioni di test di dimensioni diverse. L'esecuzione di migrazioni di test prima delle migrazioni in produzione consente di:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificare la corretta configurazione dello storage e del fabric.</p>
+</li>
+<li>
+<p>Stima della durata e delle prestazioni della migrazione.</p>
+<div class="paragraph">
+<p>Utilizzando i risultati della migrazione di test, è possibile stimare il tempo necessario per la migrazione in produzione e il throughput previsto. In caso contrario, il numero di variabili che possono determinare il tempo necessario per le migrazioni renderà difficile una stima accurata.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/ontap-fli/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+<div class="paragraph">
+<p>La migrazione di test deve essere eseguita almeno una settimana prima di iniziare la migrazione dei dati di produzione. In questo modo, sarà possibile risolvere i possibili problemi di accesso, connettività dello storage e licenze.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+
+
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+<div id="ie-right-navbar-collapse" class="close">
+  <img id="navbar-expand" class="ie-searchbox-icon" src="/it-it/ontap-fli/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-right-navbar" class="open">
+  <div id="right-navbar-collapse">
+    <img src="/it-it/ontap-fli/images/double_arrow.svg" alt="" />
+  </div>
+  <div class="page-nav-container">
+    <nav class="page-nav-fixed">
+      <div class="page-nav-title">In questa pagina</div>
+      <div class="page-nav-links">
+        <ul class="page-nav-inner" id="page-menu"></ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+<script>
+  resizeContent();
+  function setRightBarHeight() {
+    var h = 0;
+
+    // header 1
+    h += PXinViewport($('.n-footer'));
+    h += PXinViewport($('#ie-new-header'));
+
+    if ($('#ie-right-navbar').length) {
+      $('#ie-right-navbar').css({ height: `calc(100vh - ${h}px)` });
+    }
+    if ($('.page-nav-links').length) {
+      h += 98;
+      $('.page-nav-links').css({ height: `calc(100vh - ${h}px)` });
+    }
+  }
+
+  $(document).ready(function () {
+    // PAGE NAV - Click
+    const MASTHEAD_OFFSET = 65;
+    const SECTIONS = $("main h2, main h3");
+    let calculateActiveSection = false;
+    setTimeout(() => {
+      calculateActiveSection = true;
+    }, 100)
+
+    $(".page-nav__link").click(function (event) {
+      calculateActiveSection = false;
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      var target = $(event.target);
+      target.addClass('page-nav__link--active');
+      location.hash = event.target.hash;
+      setTimeout(() => {
+        calculateActiveSection = true;
+      }, 100)
+
+    });
+
+    // PAGE NAV - Scroll
+    $(window).on('resize scroll', function () {
+      if (calculateActiveSection) {
+        var activeSection = getActiveSection(SECTIONS, MASTHEAD_OFFSET);
+        if (activeSection) {
+          var activeHref = $(activeSection).attr('id');
+          $(".page-nav__link").removeClass('page-nav__link--active');
+          $("#page-menu a[href=#" + activeHref + "]").addClass('page-nav__link--active');
+          if (location.hash != "#" + activeHref) {
+            if (history.replaceState) {
+              history.replaceState(null, null, "#" + activeHref);
+            }
+          }
+        }
+      }
+    });
+
+    $(".n-pdf-button").click(function () {
+      $(this).toggleClass("active");
+    });
+
+    $.fn.isVisibleAndInViewport = function () {
+      var elementTop = $(this).offset().top;
+      var elementBottom = elementTop + $(this).outerHeight();
+
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+
+      return elementBottom > viewportTop && elementTop < viewportBottom && $(this).is(":visible");
+    };
+
+
+    $(window).on('resize scroll', function () {
+      setRightBarHeight();
+    });
+
+    $(window).trigger('resize');
+
+
+  });
+
+  $("#right-navbar-collapse").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 350, function () {
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+    });
+    $(".ie-content-pane").animate({ width: (width + rightNavbarWidth) }, 350, function () {
+      resizeContent()
+      setSidebarBottom();
+    })
+
+  });
+  $("#navbar-expand").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 250, function () {
+      $("#ie-right-navbar-collapse").removeClass("open")
+      $("#ie-right-navbar-collapse").addClass("close")
+      $("#ie-right-navbar").removeClass("close")
+      $("#ie-right-navbar").addClass("open")
+      setRightBarHeight();
+      setSidebarBottom();
+    });
+    $(".ie-content-pane").animate({ width: (width - rightNavbarWidth) }, 250, function () {
+      resizeContent()
+    })
+  });
+
+  function navbarResize() {
+    const rightNavbarResized = $("#ie-right-navbar-collapse").hasClass('resized');
+    if (window.innerWidth < 1024) {
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+      $("#ie-right-navbar").removeAttr("style")
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar-collapse").addClass("resized")
+    } else {
+      if (rightNavbarResized) {
+        $('#ie-right-navbar').removeClass('close');
+        $('#ie-right-navbar').addClass('open');
+        $("#ie-right-navbar-collapse").removeClass("resized")
+        $("#ie-right-navbar-collapse").removeClass("open")
+        $("#ie-right-navbar-collapse").addClass("close")
+      }
+    }
+    resizeContent()
+  }
+  navbarResize();
+  $(window).on('resize load', function () {
+    navbarResize()
+  });
+
+  function getActiveSection(sections, offset) {
+    var scrollPosition = $(window).scrollTop() + offset + 5;
+    var activeSection;
+    for (var i = 0; i < sections.length; i++) {
+      var el = $(sections[i]);
+      var activePosition = el.offset().top;
+      if (activePosition > scrollPosition) {
+        break;
+      }
+
+      activeSection = sections[i];
+    }
+
+    return activeSection;
+  }
+
+  $("a[href*=#]:not([href=#])").click(function () {
+    setTimeout(() => {
+      $(window).trigger('scroll');
+    }, 105)
+  })
+
+  const hashOnLoad = location.href.split("#")[1];
+  setTimeout(function () {
+    if (hashOnLoad) {
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      $("#page-menu a[href=#" + hashOnLoad + "]").addClass('page-nav__link--active');
+    }
+  }, 100)
+
+</script>
+
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+        <div class="n-footer__left">
+          <li class="n-footer__copyright-link">
+                    <a href="https://www.netapp.com/company/legal/copyright/">© 2023 NetApp, Inc.</a>
+          </li>
+        </div>
+        <div class="n-footer__center">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">Condizioni per l'utilizzo</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">Direttiva sulla privacy</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Direttiva sui cookie</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Impostazioni cookie</a>
+            </li>
+          </ul>
+       </div>
+        <div class="n-footer__right">
+              <li class="n-footer__copyright-link">
+                <a target="_self" href="javascript:netapp_mailto()">Invia feedback su questa pagina</a>
+              </li>
+        </div>
+     </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/it-it/ontap-fli/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/it-it/ontap-fli/js/prism.js'></script>
+      <script type="text/javascript" src='/it-it/ontap-fli/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/it-it/ontap-fli/js/ie-tabbed-blocks.js'></script>
+    <script src='/it-it/ontap-fli/js/ie-sidebar.js'></script>
+  </body>
+
+</html>
