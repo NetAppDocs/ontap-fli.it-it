@@ -423,17 +423,6 @@
   <block id="7cd0a1343bd368fb35ed72c387afdaa5" category="paragraph">Il numero di percorsi previsti dipende dal cablaggio (almeno due percorsi per ciascun controller di origine). È inoltre necessario controllare il registro eventi dopo aver mascherato le LUN dell'array.</block>
   <block id="bc459bf79d66c5b179790918378f3182" category="summary">Nell'ambito del processo Foreign LUN Import (FLI), verificare che il multipath sia configurato e funzioni correttamente sugli host.</block>
   <block id="ee39d65a1817160f3851b1ca24746c37" category="doc">Verifica multipath per host Windows</block>
-  <block id="a4354633cd0119e1314f471d610ea422" category="paragraph">Completare la seguente procedura per gli host Windows.</block>
-  <block id="7ae3521b4795a0df6960b48844b8bede" category="list-text">Aprire Gestione disco.</block>
-  <block id="36a890df783d05afe153f32ada876698" category="list-text">Sul desktop di Windows, fare clic su *Start*.</block>
-  <block id="d0148f5ec81506fa10252eb7af3017af" category="list-text">Nel campo inizia ricerca, digitare<block ref="4e82a7dc10ee59a598844d332d4e8a33" prefix=" " category="inline-code"></block>.</block>
-  <block id="39ddfcd62e9a6f642a082e4825c6ff4f" category="list-text">Nell'elenco programmi, fare clic su<block ref="f8827b586c4fe9767c1a63059b33344b" prefix=" " category="inline-code"></block>.</block>
-  <block id="8b103231da97e357c81333af4cc4b45e" category="list-text">Fare clic con il pulsante destro del mouse su ciascun disco per il quale si desidera verificare i percorsi multipli, quindi fare clic su *Proprietà*.</block>
-  <block id="c0829f1bd784906bc2260964e7df8fcc" category="list-text">Nella scheda MPIO, nell'elenco Select the MPIO policy (Seleziona policy MPIO), fare clic su all the path that are Active (tutti i percorsi attivi).</block>
-  <block id="08531ca1dfb960884b4522ff558a0b0d" category="image-alt">Proprietà di Windows MPIO</block>
-  <block id="ef7d878aad6a3854d597cac990e1eb38" category="paragraph">Per verificare il multipathing utilizzando la riga di comando, attenersi alla seguente procedura:</block>
-  <block id="411ebc979cd3a229976869daa9547a33" category="list-text">Aprire il prompt dei comandi di Windows.</block>
-  <block id="d4680a9ea0a2cb04b104f631e80d8264" category="list-text">Eseguire mpclaim.exe --v c: multipathconfig.txt per acquisire la configurazione multipath.</block>
   <block id="8970c458447db1c2605bb5f15b71b109" category="summary">FLI ha gli stessi requisiti di cablaggio di NetApp FlexArray. Le porte NetApp storage initiator sono collegate al fabric a cui sono collegate le porte di destinazione dello storage di origine. Segui le Best practice di FlexArray durante la connessione dello storage di origine allo storage NetApp.</block>
   <block id="3ce8bd6c1992bd681505fc41c17c030b" category="doc">Requisiti di cablaggio fisico per FLI</block>
   <block id="e23cfe3f5f5db6eba97c79167e9f598f" category="paragraph">Gli array di storage utilizzati durante la migrazione devono avere un percorso primario da ciascun controller (in uso) presente in entrambi i fabric. Ciò significa che l'array di origine e i nodi dell'array di destinazione su cui viene eseguita la migrazione devono trovarsi in una zona comune su entrambi i fabric. Non è necessario aggiungere altri controller nel cluster NetApp, ma solo quelli che effettivamente importano/migrano LUN. Sebbene sia possibile utilizzare percorsi indiretti per la migrazione, la Best practice consiste nell'utilizzare percorsi attivi/ottimizzati tra gli array di origine e di destinazione. La figura seguente mostra lo storage HDS AMS2100 e NetApp ONTAP con un percorso primario (attivo) presente in entrambi i fabric.</block>
@@ -1328,10 +1317,6 @@
   <block id="dbd3f1a817d137c052ec01ef60940131" category="doc">Documentazione per l'importazione dei LUN esteri di ONTAP</block>
   <block id="9273826bb0d876c78b121ff252c71f0e" category="sidebar">ONTAP documenti FLI</block>
   <block id="d648f2a68a54fd1b3329efc3cf24d29c" category="sidebar">Note legali</block>
-  <block id="9a4c1be88c2720ce2a1f8a5fd2b27a5c" category="sidebar">Flussi di lavoro FLI</block>
-  <block id="9661e4f0a38203cee0d0ec82dcba896f" category="sidebar">Workflow offline</block>
-  <block id="afec4ed45e968a4fe6c00ed1c1e83691" category="sidebar">Workflow online</block>
-  <block id="d1b92a4930d50c6ed1038655db0d2684" category="sidebar">Tutta la documentazione del prodotto ONTAP</block>
   <block id="88f3f903d8cfd4ec8cf08ee64f86504b" category="sidebar">Migrazione SAN con FLI</block>
   <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">Panoramica</block>
   <block id="8d98bee06f527b9e9c395ead1ae98be3" category="sidebar">Importazione LUN esterna</block>
@@ -1339,4 +1324,6 @@
   <block id="a4d60e73cb9c1bfe95e0f1e874619b10" category="sidebar">Procedure post-migrazione FLI</block>
   <block id="11bfb49706ab1fb0b0c2c70607371003" category="sidebar">Rimozione dello storage di origine e della zona host dallo zoneset</block>
   <block id="faad5f79401b38fa8970d5b9e778ca6a" category="sidebar">Performance di importazione LUN esterna</block>
+  <block id="29b512fbc4379581cd2fd8694ca529c4" category="inline-link-macro">Utilizzo di Windows Server 2022 con ONTAP</block>
+  <block id="82e292bca3bfc1c57dd6f3dc796412a0" category="paragraph">Le istruzioni dettagliate per gli host Windows sono disponibili nella sezione Multipathing di <block ref="cce832a1ed6f79df8eb06042aeeb6d79" category="inline-link-macro-rx"></block>.</block>
 </blocks>

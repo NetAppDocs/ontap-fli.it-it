@@ -13,24 +13,4 @@ summary: 'Nell"ambito del processo Foreign LUN Import (FLI), verificare che il m
 [role="lead"]
 Nell'ambito del processo Foreign LUN Import (FLI), verificare che il multipath sia configurato e funzioni correttamente sugli host.
 
-Completare la seguente procedura per gli host Windows.
-
-.Fasi
-. Aprire Gestione disco.
-+
-.. Sul desktop di Windows, fare clic su *Start*.
-.. Nel campo inizia ricerca, digitare `diskmgmt.msc`.
-.. Nell'elenco programmi, fare clic su `diskmgmt`.
-
-
-. Fare clic con il pulsante destro del mouse su ciascun disco per il quale si desidera verificare i percorsi multipli, quindi fare clic su *Proprietà*.
-. Nella scheda MPIO, nell'elenco Select the MPIO policy (Seleziona policy MPIO), fare clic su all the path that are Active (tutti i percorsi attivi).
-+
-image::../media/windows_host_1.png[Proprietà di Windows MPIO]
-
-+
-Per verificare il multipathing utilizzando la riga di comando, attenersi alla seguente procedura:
-
-. Aprire il prompt dei comandi di Windows.
-. Eseguire mpclaim.exe --v c: multipathconfig.txt per acquisire la configurazione multipath.
-
+Le istruzioni dettagliate per gli host Windows sono disponibili nella sezione Multipathing di link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#multipathing["Utilizzo di Windows Server 2022 con ONTAP"^].
