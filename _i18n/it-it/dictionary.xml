@@ -1326,4 +1326,7 @@
   <block id="faad5f79401b38fa8970d5b9e778ca6a" category="sidebar">Performance di importazione LUN esterna</block>
   <block id="29b512fbc4379581cd2fd8694ca529c4" category="inline-link-macro">Utilizzo di Windows Server 2022 con ONTAP</block>
   <block id="82e292bca3bfc1c57dd6f3dc796412a0" category="paragraph">Le istruzioni dettagliate per gli host Windows sono disponibili nella sezione Multipathing di <block ref="cce832a1ed6f79df8eb06042aeeb6d79" category="inline-link-macro-rx"></block>.</block>
+  <block id="9a4c1be88c2720ce2a1f8a5fd2b27a5c" category="sidebar">Flussi di lavoro FLI</block>
+  <block id="9661e4f0a38203cee0d0ec82dcba896f" category="sidebar">Workflow offline</block>
+  <block id="afec4ed45e968a4fe6c00ed1c1e83691" category="sidebar">Workflow online</block>
 </blocks>

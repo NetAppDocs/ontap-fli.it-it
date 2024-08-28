@@ -1,0 +1,18 @@
+---
+indexpage:
+  title: Documentazione per l'importazione dei LUN esteri di ONTAP
+  summary: Importazione LUN esterna ONTAP
+  keywords: fli, ontap, array, fli-based, configuration, lun, import, san, migration,
+    foreign
+  lead: Importazione LUN esterna ONTAP
+  tiles:
+  - title: Flussi di lavoro FLI
+    links:
+    - title: Workflow offline
+      url: "/san-migration/concept_fli_offline_workflow.html"
+    - title: Workflow online
+      url: "/san-migration/concept_fli_online_workflow.html"
+    - title: Workflow di transizione da FLI 7-Mode a ONTAP
+      url: "/san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html"
+    - title: FLI con automazione del workflow (WFA)
+      url: "/san-migration/concept_fli_using_workflow_automation_wfa.html"
