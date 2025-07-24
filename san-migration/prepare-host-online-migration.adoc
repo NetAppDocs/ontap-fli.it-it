@@ -1,0 +1,27 @@
+---
+permalink: san-migration/prepare-host-online-migration.html 
+sidebar: sidebar 
+keywords: reboot, hosts, fli, online migration, prepare 
+summary: 'Prima di iniziare una migrazione offline di FLI, è necessario eseguire tutti i passaggi necessari per la correzione dell"host; quindi è necessario riavviare gli host e verificare che il multipathing dell"host sia configurato correttamente.' 
+---
+= Preparare gli host per la migrazione online ONTAP FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di iniziare una migrazione online con importazione di LUN esterne (FLI), è necessario eseguire tutti i passaggi identificati nella fase di analisi necessari per la correzione dell'host, come l'installazione di kit di collegamento host o DSM. Dopo aver eseguito tutti i passaggi di correzione necessari, si consiglia di riavviare gli host.
+
+.Prima di iniziare
+Per precauzione, crea una copia Snapshot dei dati del tuo host per facilitare un ripristino se necessario in seguito.
+
+.Fasi
+. Eseguire tutti i passaggi necessari per la correzione dell'host.
+. Chiudere tutte le applicazioni aperte.
+. Riavviare l'host.
+. Esaminare i log per verificare la presenza di errori.
+
+
+.Cosa succederà ora?
+link:create-lun-import-relationship-online.html["Creare la relazione di importazione LUN"] .

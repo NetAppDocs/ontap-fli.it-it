@@ -25,7 +25,6 @@
   <block id="8431523289b624b6c700307921c31465" category="list-text">Verificare la creazione del job di importazione.</block>
   <block id="0494482584ffb3a3845ebc27d94cf2c6" category="summary">Il flusso di lavoro di migrazione offline viene eseguito nella fase di esecuzione del processo di migrazione. Il diagramma del flusso di lavoro offline mostra le attività eseguite sull'host, sul fabric, sullo storage di destinazione e sullo storage di origine.</block>
   <block id="6696f8ecf38c4df0054e0dc95a616d3d" category="doc">Workflow di migrazione offline</block>
-  <block id="9295fcebcba793fecd195c670dd2da3b" category="image-alt">migrazione offline 1</block>
   <block id="3aa626aa3e52fc795314efbdb381efd0" category="paragraph">Le attività del flusso di lavoro offline sono elencate nella seguente tabella.</block>
   <block id="2cb05e4bb7830be982f0922fed86b4cd" category="cell">Componente</block>
   <block id="ef615563c8e8ea902c7fcac3cd2c4246" category="cell">Attività</block>
@@ -187,15 +186,8 @@
   <block id="f02a202284a71f0c60334d44842c2ae9" category="doc">Rimozione dell'array di origine da ONTAP</block>
   <block id="5beb511c52c08ddc7aa3d7f8e19052f0" category="list-text">Visualizza tutti gli array di origine visibili.</block>
   <block id="6b3a439221d85d6d1956cbac8d709274" category="list-text">Rimuovere l'array di storage di origine.</block>
-  <block id="ae7ab55b954ce2a8356bf4bd743966ef" category="summary">In questa sezione viene fornito un esempio del flusso di lavoro offline FLI, uno dei quattro flussi di lavoro FLI.</block>
-  <block id="bc27398f19f6acf48269b6f7ee4f086c" category="doc">Workflow offline FLI</block>
-  <block id="0ca2698feff5a5fc2d35a0504189c848" category="paragraph">Questo flusso di lavoro utilizza un array HDS AMS2100 come array di origine. Il flusso di lavoro offline ha le seguenti attività:</block>
-  <block id="d1f93c9975320718dcc00c5f80427297" category="list-text">Preparazione per il cutover</block>
   <block id="ca63dcfd0f9848e972e7ac63e9bf3494" category="list-text">Importazione dei dati</block>
-  <block id="ba8f47747c3717527073a5c3d8eacb92" category="list-text">Verifica dei risultati della migrazione (opzionale)</block>
-  <block id="2c9d6f9fe74e21cf8104c62c4ad61ceb" category="list-text">Attività post-migrazione offline FLI</block>
   <block id="85dcd53bfc5f07c4a98d73313b4f570e" category="summary">La migrazione FLI richiede l'accesso alle LUN dello storage di origine da parte dello storage NetApp. Ciò si ottiene tramite lo zoning delle porte di destinazione dello storage di origine con le porte di iniziazione dello storage di destinazione.</block>
-  <block id="2d7aac8e15b885459bdb591f875227ce" category="doc">Zoning delle porte di destinazione e iniziatore</block>
   <block id="0563060901338899c028f626f4134563" category="paragraph">Le zone storage-to-host di origine esistenti non vengono modificate e disattivate dopo la migrazione. Le zone di storage host-to-destination vengono create per consentire l'accesso delle LUN migrate dallo storage di destinazione da parte dell'host.</block>
   <block id="0d746ac95713ef6642cc8474a8d4baf1" category="paragraph">Uno scenario di migrazione standard con FLI richiede quattro zone distinte:</block>
   <block id="90b71c66184e127a11eaca1e2a141dac" category="list-text">Zona 1: Dallo storage di origine allo storage di destinazione (fabric di produzione A)</block>
@@ -378,7 +370,6 @@
   <block id="fa8dc6899d89e51526213a2a8ab9aa76" category="summary">La fase di verifica del processo di migrazione si concentra sulla pulizia post-migrazione e sulla conferma dell'accuratezza dell'esecuzione del piano di migrazione. I record dell'iniziatore sullo storage di origine e la zona tra la zona di origine e quella di destinazione vengono rimossi.</block>
   <block id="fdb87b07dc517f2422992acdcbaba2ce" category="doc">Verificare il flusso di lavoro della fase</block>
   <block id="c95e22746ae7f51fc92fdffd42f07397" category="paragraph">La figura seguente mostra il flusso di lavoro della fase di verifica.</block>
-  <block id="95c41a387e815b4edb965c3074645f2e" category="image-alt">verificare la fase 1</block>
   <block id="37e5739527f14abd34423792a642951a" category="paragraph">Le attività della fase di verifica sono elencate nella seguente tabella.</block>
   <block id="f988327a3c5a7e8c3d4cfc29a4a8d770" category="paragraph">Il cliente esegue test delle applicazioni.</block>
   <block id="b3f821f9020a8f4c34451218062e4928" category="list-text">Rimuovere le zone di storage host-to-source dallo zoneset.</block>
@@ -427,10 +418,7 @@
   <block id="3ce8bd6c1992bd681505fc41c17c030b" category="doc">Requisiti di cablaggio fisico per FLI</block>
   <block id="e23cfe3f5f5db6eba97c79167e9f598f" category="paragraph">Gli array di storage utilizzati durante la migrazione devono avere un percorso primario da ciascun controller (in uso) presente in entrambi i fabric. Ciò significa che l'array di origine e i nodi dell'array di destinazione su cui viene eseguita la migrazione devono trovarsi in una zona comune su entrambi i fabric. Non è necessario aggiungere altri controller nel cluster NetApp, ma solo quelli che effettivamente importano/migrano LUN. Sebbene sia possibile utilizzare percorsi indiretti per la migrazione, la Best practice consiste nell'utilizzare percorsi attivi/ottimizzati tra gli array di origine e di destinazione. La figura seguente mostra lo storage HDS AMS2100 e NetApp ONTAP con un percorso primario (attivo) presente in entrambi i fabric.</block>
   <block id="b86568f0ab2436e9a4ea2cfd9d49fcd5" category="paragraph">Questa figura è un esempio di cablaggio dello storage per fabric doppi.</block>
-  <block id="e0bf412f811af5d2ff097a082cf5c13d" category="image-alt">cablaggio fisico 1</block>
   <block id="3798557e78dc0ab485623d8d2387bacb" category="paragraph">Seguire queste Best practice per il cablaggio:</block>
-  <block id="70894d5c0a41692947485c0d0a19e60a" category="inline-link">Requisiti e riferimenti per l'installazione della virtualizzazione FlexArray</block>
-  <block id="d65237d15ed3f23354581867591cc773" category="list-text">Utilizzare le Best practice di NetApp FlexArray per il cablaggio dello storage di origine e destinazione, come descritto in<block ref="66f8c243fef55cbf3f49d4ec76027b8d" category="inline-link-rx"></block>.</block>
   <block id="363d30e9a00e0b43fea3e9ac48cdf525" category="list-text">Lo storage ONTAP richiede porte initiator gratuite per la connessione al fabric. Configurare le porte initiator se non esistono porte libere.</block>
   <block id="88342d3bc522d34c0d7d4b696af5ecbe" category="summary">Le funzionalità FLI consentono di migrare i dati dallo storage SAN di terze parti ai sistemi ONTAP. Le funzionalità di migrazione FLI supportano una vasta gamma di processi e sistemi.</block>
   <block id="4a3f341a06b2f81b12a06ac327ed46ae" category="doc">Funzioni di importazione LUN esterne</block>
@@ -583,14 +571,12 @@
   <block id="587d7ded98be7df0f5f867261e578e9e" category="paragraph">Inoltre, la procedura di transizione da 7-Mode a ONTAP è in grado di convertire da aggregati a 32 bit a 64 bit, risolvere problemi di allineamento e migrare LE LUN come singola operazione.</block>
   <block id="e54685159c7474efa74aedc4b8c29106" category="inline-xref-macro">Requisiti e limitazioni del LUN</block>
   <block id="4c905b9a5d9837a1d1309ec0bbc65581" category="paragraph">FLI consente allo storage NetApp di rilevare le LUN da importare per la migrazione dei dati. Le LUN esterne vengono visualizzate come dischi sullo storage NetApp e non hanno alcuna proprietà assegnata automaticamente in modo che i dati dell'utente non vengano sovrascritti per errore. I dischi che contengono LUN di array esterni devono essere contrassegnati come estranei. Per utilizzare FLI per lo storage NetApp, è necessario rispettare rigorosamente le regole per la configurazione dei LUN degli array esterni. Vedere l'argomento, <block ref="0c1805ddb0e0c88224858f6489806cc7" category="inline-xref-macro-rx"></block>.</block>
-  <block id="e0a83b8c461db09706d982eeea30d1df" category="paragraph">FLI richiede almeno una porta FC fisica su ciascun controller e la migrazione dei LUN direttamente in modalità Initiator. Sono preferite due porte, una per ciascun fabric, ma è possibile utilizzare una singola porta. Queste porte vengono utilizzate per il collegamento all'array di origine e devono essere zonate e mascherate per poter vedere e montare i LUN di origine. Se è necessario modificare una porta da destinazione a iniziatore, vedere<block ref="66f8c243fef55cbf3f49d4ec76027b8d" category="inline-link-rx"></block> Per un'analisi del processo di conversione di una porta FC da destinazione a iniziatore.</block>
   <block id="eab5ce4cf7af1499d92d1389fefa2f66" category="paragraph">Le migrazioni FLI possono essere eseguite offline, che interrompe le operazioni per tutta la durata dell'importazione, o online, il che è principalmente senza interruzioni.</block>
   <block id="b0b8376daf73a10ceae233832249516f" category="paragraph">Questa figura mostra una migrazione dei dati offline FLI, in cui l'host viene portato offline per la migrazione. L'array NetApp copia i dati direttamente dall'array di terze parti.</block>
   <block id="3b1a98b47b97af6d96e1b57d86c0ef45" category="image-alt">Panoramica sulla migrazione dei dati FLI</block>
   <block id="4ab82376627d3c92c29ab3d0e5562860" category="paragraph">Questa figura mostra una migrazione dei dati online FLI. L'host è connesso al controller NetApp in cui è ospitata la nuova LUN. L'operazione host può quindi riprendere e continuare durante l'importazione.</block>
   <block id="bce9fade38befeda7e50ae556c80a80a" category="summary">Il workflow di migrazione online viene eseguito nella fase di esecuzione del processo di migrazione. Il diagramma del flusso di lavoro online mostra le attività eseguite sull'host, sul fabric, sullo storage di destinazione e sullo storage di origine.</block>
   <block id="2fb3498de44b62c20b8ce57d8d187b14" category="doc">Workflow di migrazione online</block>
-  <block id="22c6c33d6054ef7fe383f8db81dd5c8d" category="image-alt">migrazione online 1</block>
   <block id="9f6801036d4e8f2676721826ab34c70e" category="paragraph">Le attività del flusso di lavoro online sono elencate nella seguente tabella.</block>
   <block id="31798a9391676be4271bb9ab303fc563" category="list-text">Verificare che tutti i file system siano montati e che tutti i percorsi e le applicazioni LUN siano disponibili.</block>
   <block id="16596591fc43c3ec50554eab5f344abb" category="list-text">*Opzionale:* se i LUN da importare sono per ESX, leggere e seguire le istruzioni nell'Appendice A: ESX CAW/ATS Remediation.</block>
@@ -613,7 +599,6 @@
   <block id="55f9a6545253be753da13bfa19ed39bb" category="list-text">Selezionare *Ports* (Porte) e *Forced Set* (Imposta forzato) su tutte le porte selezionate.</block>
   <block id="d1d7ad384c51ea55bb59ff5d43a8d68d" category="image-alt">Modificare i gruppi di host</block>
   <block id="65dff2da7c6b1d550ddea5c786a3c66b" category="list-text">Selezionare i LUN host migrati da LUN logici assegnati. Utilizzare i nomi LUN per ciascun host menzionato nel foglio di lavoro LUN di origine. Selezionare LUN degli host Windows 2012, RHEL 5.10 e ESXi 5.5 e selezionare *Rimuovi*.</block>
-  <block id="018e6717cb26bb683acaeb00a2666e18" category="image-alt">rimuovere i lun di origine dallo storage ONTAP 3</block>
   <block id="d6bd93468ec139fb3210b412a692cf3c" category="summary">I log di importazione vengono memorizzati nel file di log degli eventi del cluster. Per verificare che la migrazione sia stata eseguita correttamente, esaminare i registri per verificare la presenza di errori.</block>
   <block id="35c0629618c7002c8c170854c5ac05ed" category="doc">Report sulla migrazione</block>
   <block id="8b95ee4c026e6f2fce7d0e1d1f6a629d" category="paragraph">Il report di migrazione dovrebbe essere visualizzato come segue:</block>
@@ -669,7 +654,6 @@
   <block id="fdecad17e386bdc5ab1eca5d53907be3" category="summary">La fase di rilevamento del processo di migrazione si concentra sulla raccolta delle informazioni utilizzate per la risoluzione degli host e sulla creazione di piani di migrazione nelle fasi successive. La raccolta della maggior parte delle informazioni viene automatizzata utilizzando uno strumento di raccolta dati, ad esempio OneCollect.</block>
   <block id="338c47dc58565ebf90b38f82b1a78ab1" category="doc">Scopri il flusso di lavoro della fase</block>
   <block id="36bf5858463397b1ff924ea03c5822fc" category="paragraph">La figura seguente mostra il flusso di lavoro della fase di rilevamento.</block>
-  <block id="46bc9d3fb968b4c71e1c07b8dee740c3" category="image-alt">scopri la fase 1</block>
   <block id="9f9080f3b976922f4cfc4db2052e5599" category="paragraph">Le attività della fase di rilevamento sono elencate nella tabella seguente.</block>
   <block id="04320a61909653cc31562fa2760af192" category="list-text">Identificare le WWPN HBA (utilizzate per la creazione di zone).</block>
   <block id="5b9b6c7213c2067325eb7bd3d7ff0615" category="list-text">Identificare le informazioni del LUN (dimensioni, numeri di serie, layout delle partizioni e offset).</block>
@@ -686,7 +670,6 @@
   <block id="9d394fd64d52277e34b6478f3116be34" category="paragraph">Le modifiche richieste in genere non vengono effettuate fino all'evento di migrazione effettivo, a causa della necessità abituale di pianificare le finestre di manutenzione. In genere, qualsiasi modifica apportata alla configurazione MPIO prima della migrazione influirà anche sul supporto dello storage corrente.</block>
   <block id="3980e7fb5116c733aeb5a4fc02fad438" category="paragraph">La sezione NetApp Recommended (consigliata NetApp) completata nella sezione host del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito) fungerà da report di analisi delle lacune. L'analisi delle lacune deve essere completata per ogni host incluso nel progetto di migrazione. Il report di analisi delle lacune completato deve essere rivisto con il cliente.</block>
   <block id="9c778c3c375b04ff9f5870bdd4a07e73" category="paragraph">Di seguito viene riportato un esempio di report di analisi Gap.</block>
-  <block id="313a854fd8839de2bdf22552f3bc8fb2" category="image-alt">creare il report di analisi delle lacune 1</block>
   <block id="045bb7f394081f70ce3add288d7e644b" category="summary">Esistono diverse variabili che influiscono sulla velocità di completamento di una determinata migrazione.</block>
   <block id="505cf96304054bdc1c6da4b5668b14ff" category="doc">Variabili che influiscono sulle prestazioni di migrazione delle importazioni di LUN esterne</block>
   <block id="fd39293f93d0491f286d43a27cdaac04" category="paragraph">Queste variabili includono:</block>
@@ -699,23 +682,11 @@
   <block id="b870d2cb22e176000a29b6b235963311" category="list-text">Tipo, larghezza di banda e fan-in/fan-out sui fabric front-end</block>
   <block id="58fac9965070c2993e0dc99716fe7471" category="paragraph">Per ottenere prestazioni ottimali, non utilizzare più di 16 migrazioni FLI simultanee per nodo.</block>
   <block id="97c38c351fb7d370354c3c32a08f8a79" category="paragraph">Dato il numero di variabili che influiscono sulle prestazioni della migrazione, si consiglia di eseguire una serie di migrazioni di test. In genere, maggiore è il campione di test, migliore sarà la caratterizzazione. Pertanto, si consiglia di eseguire una serie di migrazioni di test di dimensioni diverse per ottenere un campionamento accurato delle performance di throughput. I dati sulle performance di questi test possono quindi essere utilizzati per estrapolare tempistiche e durate delle migrazioni di produzione pianificate.</block>
-  <block id="430bb9de60ed37ded761bc53823e00d8" category="summary">Di seguito sono riportati i passaggi per importare i dati dal LUN di origine al LUN di destinazione.</block>
-  <block id="8a3d18b4a87fce9fd30e1b06c8c97dd1" category="doc">FLI online: Importazione dei dati</block>
   <block id="671cd4b2e80816faac52efc2dd60f3c0" category="list-text">Avviare l'importazione della migrazione.</block>
   <block id="fcd58d8ff11fa75a65432bee980f3a36" category="list-text">Visualizza stato FLI.</block>
   <block id="53a51b7dcda82a62f1a85a24f43b7788" category="summary">Un lavoro di verifica è facoltativo, ma consigliato. Si tratta di un confronto blocco per blocco delle LUN di origine e di destinazione. Verificare che i processi richiedano quasi lo stesso tempo o un tempo leggermente superiore rispetto al tempo di migrazione.</block>
-  <block id="ce91b6039e58611f253af932de050269" category="doc">FLI offline: Verifica dei risultati della migrazione</block>
-  <block id="47d2204501856353838ee78e45555084" category="list-text">Avviare il processo di verifica per confrontare il LUN di origine e di destinazione. Monitorare l'avanzamento della verifica.</block>
-  <block id="046d51f7e741a0f96a8de41d5947020b" category="list-text">Monitorare lo stato del processo di verifica.</block>
-  <block id="69514061677672d46f94e4140574dd55" category="list-text">Verificare che i lavori di verifica siano stati completati.</block>
-  <block id="4094df43285495c7722dddff7afa8de1" category="list-text">Interrompere il processo di verifica al termine della verifica.</block>
-  <block id="1c855787e352fecbe853364612560c5a" category="list-text">Eliminare la relazione di importazione per rimuovere il processo di migrazione.</block>
-  <block id="1f7d9093a87f1223652de0690e80f57c" category="list-text">Verificare che i lavori di importazione siano stati eliminati.</block>
   <block id="e57e82538b681c873e1cfb334a6f3601" category="list-text">Contrassegnare l'attributo LUN esterno su<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>.</block>
-  <block id="d9d9448417571874dd3a7adfce11eee6" category="list-text">Verificare che i LUN esterni siano contrassegnati come<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> dopo l'importazione.</block>
-  <block id="8e7d752a0fa07e965902dd236a3c89b4" category="list-text">Portare online i LUN di destinazione utilizzando il comando LUN online.</block>
   <block id="63e1b9537e12694060f7e57218806fa8" category="list-text">Verificare che i LUN siano in linea.</block>
-  <block id="b76188f3e00e84a81eb898fcfa30419f" category="paragraph">I log di importazione vengono memorizzati nel file di registro eventi del cluster.</block>
   <block id="d5fe299d7d92cd0254874c8e18bd6667" category="summary">Nell'ambito del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), è necessario disporre di una scheda contenente informazioni sulla pianificazione della migrazione.</block>
   <block id="9ae6059c986f115d805804d9750f95c8" category="doc">Scheda Pianificazione della migrazione del foglio di lavoro Site Survey and Planning</block>
   <block id="d658998d22d4a15ffcb56abb26b97f6c" category="paragraph">Di seguito viene riportato un esempio di come impostare la scheda Pianificazione della migrazione.</block>
@@ -815,7 +786,6 @@
   <block id="aff363cb3b8ffb0d5a7f74faf9bf2325" category="paragraph">Completare i seguenti passaggi per gli host Linux.</block>
   <block id="fc4bfef573d1b61d7320da239869e523" category="list-text">Per verificare che il multipath DM-MP sia configurato e funzioni correttamente su un host Linux, eseguire i seguenti comandi:<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix="" category="inline-code"></block></block>
   <block id="0815db692d92e6b68693c7dc13e0e8e1" category="summary">Eventuali rimedi al server non eseguiti prima della migrazione vengono eseguiti durante la post-migrazione.</block>
-  <block id="6793732288bb5f2142753d1aacd2e36d" category="doc">Attività di post-migrazione online FLI</block>
   <block id="a39f5c618e0d64c8fd6478de7c699877" category="paragraph">Eventuali software di terze parti vengono rimossi. Il software NetApp viene installato e configurato. Per esempi di correzione post-migrazione per tipi di host specifici, consultare la sezione relativa al ripristino degli host.</block>
   <block id="ec59a082cedf4b26b971396986bb5fed" category="summary">Consultare la documentazione dell'array di origine per aggiungere una voce host per le porte iniziatore (mascheramento LUN, igroup in NetApp Parlance). Queste informazioni possono essere recuperate dalla sezione Storage Groups del foglio di lavoro Site Survey and Planning.</block>
   <block id="5ee8ee2a99ffe423b13a541e47bc95ab" category="doc">Come configurare gli array di origine</block>
@@ -970,7 +940,6 @@
   <block id="eac3a1a74e25173545de3b7efc1d8b80" category="doc">Workflow della fase di pianificazione</block>
   <block id="0264e1e7f4ae9cc5f9ba5ebe373f57f4" category="paragraph">La fase di pianificazione prevede lo sviluppo di un piano di correzione utilizzando le informazioni di analisi delle lacune dell'host raccolte nella fase di analisi. Utilizzare le informazioni di correzione dell'host durante la pianificazione. Una volta verificata la connettività end-to-end, viene eseguita una migrazione di test per assicurarsi che tutto sia configurato correttamente prima di iniziare la migrazione in produzione.</block>
   <block id="9795dd3baed0cc837e1b9cf32a4ccc4a" category="paragraph">La figura seguente mostra il flusso di lavoro del piano.</block>
-  <block id="1946a9dc1ec2894c2234c5ba4d6a5c54" category="image-alt">pianificare e preparare la fase 1</block>
   <block id="612160c830618272ed4c07bdf0279fd3" category="list-text">Eseguire il backup delle zone esistenti.</block>
   <block id="be13c48aabcbfa550f5272ec96d5ee4b" category="list-text">Mettere in zona lo storage di origine allo storage di destinazione.</block>
   <block id="f91fe921e2cb5678f810267ad4821614" category="list-text">Collegare le porte dell'iniziatore al fabric.</block>
@@ -1024,15 +993,10 @@
   <block id="b42e7e9f43276548d600d26ad21cd252" category="cell">Nome del nodo</block>
   <block id="22bb75b17c257e3403e89aa51a170ac3" category="cell">WWN</block>
   <block id="ce9f3448f4c39e84f8694df961238e2d" category="cell">Nodo Homer</block>
-  <block id="2bc364a426afaf286122a406602b2f3f" category="doc">FLI online: Verifica dei risultati della migrazione</block>
-  <block id="592acd1bddde2107e08b7fab9870ec8f" category="paragraph">Avviare il processo di verifica per confrontare i LUN di origine e di destinazione. Monitorare l'avanzamento della verifica. I LUN sottoposti a verifica devono essere offline per tutta la durata della sessione di verifica. La sessione di verifica potrebbe essere lunga perché si tratta di un confronto blocco per blocco tra LUN di origine e LUN di destinazione. Anche se non è richiesta la verifica, è consigliabile verificare un sottoinsieme delle LUN importate/migrate per sentirsi a proprio agio nel processo di importazione. Queste verifiche si aggiungono a quelle eseguite durante le migrazioni di test/pilota.</block>
-  <block id="4e7b785e4493cbe0b79242ce203ac879" category="paragraph">Questo processo è disgregativo.</block>
   <block id="372699135a2ba75e0a9de39820284f6a" category="paragraph">La verifica dell'importazione del LUN deve essere esplicitamente interrotta prima di riportare il LUN in linea. In caso contrario, il LUN online non riesce. Vedere il seguente output CLI.</block>
-  <block id="e1fac940622e70910db7d52852f57a10" category="list-text">Offline i LUN da verificare. &lt;The disruption window begins here&gt;</block>
   <block id="a84256d94c5d7dc207681d16b3b74f9c" category="list-text">Avviare la verifica del LUN.</block>
   <block id="8a06e7cadf858c88a55293291b1df731" category="list-text">Visualizzare lo stato di verifica del LUN.</block>
   <block id="4430041a866393962bf0ca6a22b8c82f" category="list-text">Interrompere la verifica del LUN. Questo passaggio deve essere eseguito manualmente anche se lo stato indica che la verifica è completa.</block>
-  <block id="2817949546193391fe4e33ff2547300a" category="list-text">Online il LUN al termine della verifica. &lt;The disruption window ends here&gt;</block>
   <block id="22e769e6dfe56bc3b7fec8d36e575f71" category="summary">La fase di esecuzione offline di FLI include la preparazione degli host di migrazione.</block>
   <block id="540aa6d6b05b87237a5035773dc7ce09" category="doc">Preparare gli host per la migrazione offline FLI</block>
   <block id="5f51d20e71b9fee9d17896df728cf25f" category="paragraph">In molti casi potrebbe essere possibile aver eseguito questa correzione prima di questa fase. In caso contrario, è qui che si esegue qualsiasi correzione dell'host, ad esempio l'installazione di kit di collegamento host o DSM. Dalla fase di analisi, è disponibile un elenco di elementi GAP che devono essere eseguiti su ciascun host per consentire a tale host di essere in una configurazione supportata utilizzando ONTAP. A seconda del tipo di migrazione eseguita, l'host viene riparato e riavviato (FLI online/7-Mode a FLI ONTAP) oppure viene riparato e quindi arrestato in attesa del completamento del processo di migrazione (FLI offline).</block>
@@ -1041,13 +1005,6 @@
   <block id="c1ebcdb183b1743929cb921388200c85" category="paragraph">Le seguenti sezioni forniscono informazioni su questi casi di utilizzo:</block>
   <block id="2216ac365c3bdd99255956b013dc3086" category="list-text">Importazione di LUN iSCSI come LUN FC</block>
   <block id="8349303e4fef0ed2c9e1a14542704659" category="list-text">Spostamento delle LUN migrate sulle piattaforme AFF</block>
-  <block id="0d1ab32d2e734165cc6fa60ad4e92f19" category="summary">Questo è il secondo dei quattro esempi di workflow FLI, che riguarda la migrazione online FLI.</block>
-  <block id="d0d7a8d464c5eb9f10cf2c7f522fdff3" category="doc">Workflow online FLI</block>
-  <block id="7a6d059da8a56b5bb032ab555e452fb8" category="paragraph">Questo è il secondo dei quattro esempi di workflow FLI, che riguarda la migrazione online FLI. L'array di origine in questo esempio è un EMC VNX5500.</block>
-  <block id="b107b92b08e1507c6d61c65a86b28086" category="paragraph">il flusso di lavoro online ha le seguenti attività:</block>
-  <block id="207c99dbe101d7af2533d861e39077d9" category="list-text">Preparazione del percorso del LUN</block>
-  <block id="3892b30160c9653f481e358d32fbc22f" category="list-text">Importazione dei dati LUN di origine</block>
-  <block id="e467310a29ce4a08b3fb35835aa67bea" category="paragraph">Se la destinazione del controller NetApp è un MetroCluster, NON utilizzare il workflow online. Se si verifica un failover del sito durante un'importazione online attiva, i pass-through di scrittura nell'array di origine potrebbero non riuscire, causando un errore di verifica e una potenziale perdita di dati. Se la destinazione è MetroCluster, utilizzare il processo FLI offline.</block>
   <block id="8770610db40a53a03c108175b271b913" category="summary">Di seguito viene riportato un esempio di fabric Cisco in Production Fabric A.</block>
   <block id="a8fed5a2ca2d65761448f6ed9aa9205f" category="doc">Il fabric Cisco nel fabric di produzione è un esempio</block>
   <block id="0ac8eac04778079c6ad594b174769481" category="summary">Nella fase di cleanup, raccogliete i log di migrazione FLI, rimuovete la configurazione dello storage di origine dallo storage NetApp e rimuovete il gruppo host dello storage NetApp dallo storage di origine. Inoltre, eliminare le zone di origine a destinazione. La verifica è il punto in cui viene determinata la precisione dell'esecuzione del piano di migrazione.</block>
@@ -1127,10 +1084,6 @@
   <block id="c632a2963796cd48a9b8a626c8123e1c" category="summary">Durante la pre-migrazione delle importazioni di LUN esterne, convalidare e verificare gli host e i percorsi dei LUN di origine. Dopo il riavvio, l'host viene arrestato in preparazione della migrazione.</block>
   <block id="e0392900ac00a70004ae9fcb4493a9f8" category="doc">FLI offline: Preparazione per il cutover</block>
   <block id="a95f1872da1f9f11940ae232dedf1d12" category="paragraph">Una volta completata la migrazione e la correzione, gli host possono essere collegati al nuovo storage di destinazione e le applicazioni possono essere verificate dagli utenti finali.</block>
-  <block id="80cf7b1e2f3a6eb700df545f53fc35ce" category="summary">Questa procedura descrive come importare i dati dal LUN di origine al LUN di destinazione.</block>
-  <block id="90f958290599dbd7bf414b64e5451345" category="doc">FLI offline: Importazione dei dati</block>
-  <block id="a065c5e22748be69f76070b1617df200" category="list-text">Monitorare l'avanzamento dell'importazione. Puoi confrontare i progressi che stai osservando con le stime delle performance di migrazione che hai sviluppato dopo aver eseguito le migrazioni di test.</block>
-  <block id="6fb459e749d9fd185556292952260212" category="list-text">Verificare che il processo di importazione sia stato completato correttamente.</block>
   <block id="f5462af8558e5af6c13d019a04719a8a" category="summary">FLI supporta quattro tipi principali di flussi di lavoro di migrazione: Online, offline, di transizione e automatizzato. La scelta del flusso di lavoro da utilizzare dipende dalla configurazione e da altri fattori.</block>
   <block id="3474ed6ca7314741c6cb3f8b13513427" category="doc">Tipi di migrazione supportati da Foreign LUN Import</block>
   <block id="b768b2ec7c2e8900de4a9fffb717a780" category="list-text">In una migrazione online, FLI da array di terze parti consente al sistema client di rimanere online durante la migrazione (richiede un sistema operativo host Windows, Linux o ESXi).</block>
@@ -1140,7 +1093,6 @@
   <block id="ed84643b976a61e35dab90c06a1328ad" category="paragraph">Dal punto di vista dell'architettura, le tre migrazioni e il flusso di lavoro di transizione sono abbastanza simili. Tutti e quattro si affidano alla tecnologia FlexArray di NetApp per consentire al controller ONTAP di agire come iniziatore davanti a un array di origine e di utilizzare tale posizione per copiare il blocco LUN per blocco dall'origine a un LUN sull'array ONTAP di destinazione.</block>
   <block id="4d01f8ae44780dd783a9a1352d13eb15" category="paragraph">Le differenze tra i flussi di lavoro hanno a che fare con quando si verificano tagli, la lunghezza della finestra di interruzione, l'utilizzo dell'automazione o se l'array di origine è un array NetApp che esegue ONTAP 7-Mode o un array di terze parti.</block>
   <block id="86fa04f5a596e6f9f13f9033ee5fc85e" category="summary">Uno scenario di migrazione standard con FLI richiede quattro zone distinte. È necessario includere porte specifiche in ciascuna zona.</block>
-  <block id="1c277dacf0a919a6930125acd1208bce" category="doc">Requisiti di zoning FLI</block>
   <block id="29f1f61f2d914a97b194e33d1c2ff993" category="paragraph">La zona 1 deve contenere tutti gli iniziatori dello storage di destinazione su tutti i nodi e tutte le porte di destinazione dello storage di origine nel fabric A. I membri della zona includono:</block>
   <block id="9bf4b910f4f253458069b57912f24a35" category="list-text">ONTAP -- Node1 -- 0a</block>
   <block id="387ba8367f6e416fe34b8a3f5d78d3f2" category="list-text">ONTAP -- Node2 -- 0a</block>
@@ -1163,19 +1115,14 @@
   <block id="9a2c19262a187bcd4df293aeb52e1f4c" category="doc">Rimozione dei LUN di origine dagli host</block>
   <block id="c6e498e8376efcb4f757c84c3a3e8c6c" category="paragraph">Per rimuovere i LUN di origine dall'host, attenersi alla seguente procedura:</block>
   <block id="86478cc867d8e2aa1f61370fd34f1954" category="list-text">Selezionare l'host migrato e selezionare *Edit host Group* (Modifica gruppo di host).</block>
-  <block id="6eece95105089574d413e5558218d874" category="image-alt">rimuovere i lun di origine dall'host 1</block>
-  <block id="6346b96a2b0626379f6debc6634e2ac3" category="image-alt">rimuovere i lun di origine dall'host 2</block>
   <block id="e4bd4ad1c3c660ca40f9bcf83893ee4c" category="list-text">Selezionare i LUN host migrati da LUN logici assegnati. Utilizzare i nomi LUN per ciascun host menzionato nel foglio di lavoro LUN di origine. Selezionare LUN dell'host Windows 2012 e scegliere *Rimuovi*.</block>
-  <block id="d80c56eff54b89020c751b58c97ed631" category="image-alt">rimuovere i lun di origine dall'host 3</block>
   <block id="6e0070e0532e1c48bfd6eca0a07a0120" category="list-text">Ripetere la procedura per gli host Linux e VMware ESX.</block>
   <block id="1e9a8e71031d88390d2ab79f264cd54d" category="summary">I seguenti passaggi mostrano come rimuovere la configurazione dell'array di destinazione dall'array di origine dopo il completamento della migrazione FLI.</block>
   <block id="de451726fc2979608badc0c9c1b24b8c" category="doc">Rimozione della configurazione dell'array di destinazione</block>
   <block id="d9c43eb41a966c4cd2f474b639c1448e" category="list-text">Selezionare *AMS 2100* array e fare clic su *Show* (Mostra) e *Configure Array* (Configura array).</block>
   <block id="9ca93b79ed4c53368139920e666bfb9b" category="list-text">Espandere gruppi e selezionare *gruppi di host*.</block>
   <block id="7a09bce6ca5ac1274dc9d0706d56d250" category="list-text">Selezionare il gruppo di host *cDOT_FLI* e fare clic su *Delete host Group* (Elimina gruppo di host).</block>
-  <block id="3f66bfc9699b3a9f210f8ace9839c3ec" category="image-alt">rimuovere la configurazione dell'array di destinazione dall'array di origine 1</block>
   <block id="37ae0e3bb3bfe5e18a101b7fabd0ddf8" category="list-text">Confermare l'eliminazione del gruppo host.</block>
-  <block id="9ed256c05bdd47ac51dac0478f5b5ee8" category="image-alt">rimuovere la configurazione dell'array di destinazione dall'array di origine 2</block>
   <block id="ee3c3a8b2f3a842e463f69562d71d6e7" category="summary">Il processo di migrazione FLI è una metodologia in cinque fasi che si applica a qualsiasi migrazione dei dati: Rilevamento, analisi, pianificazione, esecuzione e verifica.</block>
   <block id="295b519ef048bff2edb8931d30976e63" category="doc">Panoramica del processo di migrazione</block>
   <block id="862890f7840385152b7e001fc849d3ea" category="image-alt">Metodologia di migrazione in cinque fasi</block>
@@ -1276,8 +1223,6 @@
   <block id="a240b24dd20a7186ef47310e58829086" category="list-text">EMC utilizza "`initiator record`" o "`storage group.`"</block>
   <block id="62cc656c82973e8ebe8c1a1926a6d435" category="list-text">NetApp utilizza "`igroup.`"</block>
   <block id="425d84ebe29c9da22fd1d2621c3dc21e" category="paragraph">Indipendentemente dalla nomenclatura, lo scopo di un gruppo iniziatore è quello di identificare gli iniziatori in base alle WWPN che condividono le stesse mappature LUN.</block>
-  <block id="2e97596bf006ab4a63eb1ab1532e9166" category="inline-link">Implementazione della virtualizzazione FlexArray per storage di terze parti</block>
-  <block id="6c98897f95672b5dde701dffbd4b05a0" category="paragraph">Per definire i gruppi di iniziatori, consultare la documentazione dell'array per informazioni su come impostare il mascheramento LUN (igroups/host groups/storage group e così via). Puoi anche rivedere<block ref="737823659babb212ffbc8948b616644f" category="inline-link-rx"></block> per i requisiti di configurazione dello storage di terze parti.</block>
   <block id="3e93c4ba8debcbb0556af1cd7ab1b741" category="summary">I LUN devono soddisfare i seguenti requisiti prima di iniziare una migrazione FLI.</block>
   <block id="e80e48acabbfbfabe9d26f77e6893f2e" category="list-text">FLI richiede almeno una porta FC su ciascun controller e la migrazione DEI LUN direttamente in modalità Initiator.</block>
   <block id="1aa4f2a052fd81ec3e8e4d05af38fa3d" category="list-text">Il LUN esterno deve essere contrassegnato come estraneo nell'array di destinazione per impedire le assegnazioni da ONTAP.</block>
@@ -1316,7 +1261,6 @@
   <block id="3be720072e03679f7ed0f85258130b70" category="summary">Importazione LUN esterna ONTAP</block>
   <block id="dbd3f1a817d137c052ec01ef60940131" category="doc">Documentazione per l'importazione dei LUN esteri di ONTAP</block>
   <block id="9273826bb0d876c78b121ff252c71f0e" category="sidebar">ONTAP documenti FLI</block>
-  <block id="d648f2a68a54fd1b3329efc3cf24d29c" category="sidebar">Note legali</block>
   <block id="88f3f903d8cfd4ec8cf08ee64f86504b" category="sidebar">Migrazione SAN con FLI</block>
   <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">Panoramica</block>
   <block id="8d98bee06f527b9e9c395ead1ae98be3" category="sidebar">Importazione LUN esterna</block>
@@ -1329,4 +1273,321 @@
   <block id="9a4c1be88c2720ce2a1f8a5fd2b27a5c" category="sidebar">Flussi di lavoro FLI</block>
   <block id="9661e4f0a38203cee0d0ec82dcba896f" category="sidebar">Workflow offline</block>
   <block id="afec4ed45e968a4fe6c00ed1c1e83691" category="sidebar">Workflow online</block>
+  <block id="69caf30083972d4411923d4f0737e140" category="summary">Scopri le nuove funzionalità disponibili in ONTAP 9.17.1 per la migrazione dei dati SAN.</block>
+  <block id="418b3d5ad8d61d136fef3a5c58c5591e" category="doc">Novità di ONTAP 9.17.1 per la migrazione dei dati SAN</block>
+  <block id="ed49a36c4fd547e5e2ace11bef4f21cf" category="section-title">Piattaforme</block>
+  <block id="06933067aafd48425d67bcb01bba5cb6" category="cell">Aggiornamento</block>
+  <block id="654a340048b4ef9f891ad3ff86cfe359" category="paragraph">I sistemi ASA R2 sono supportati per la migrazione FLI.</block>
+  <block id="76d4d65ac11114e948cdba5790db04c7" category="inline-link-macro">Sistemi ASA R2</block>
+  <block id="78f511731820f6cf51be2ac1a22bdfae" category="paragraph">Scopri di più su <block ref="bf5d9e0b88ffc589ea0cce1a42d0e835" category="inline-link-macro-rx"></block> .</block>
+  <block id="b10bb6cf89b8f23a9ddd660af44ae8d8" category="image-alt">Flusso di lavoro di migrazione offline FLI</block>
+  <block id="5866e37daa3cb1932cdb507e8fa5cd40" category="doc">Eseguire attività post-migrazione offline ONTAP FLI</block>
+  <block id="9610434e034671f835e2edf9b1e58f70" category="summary">In una migrazione offline FLI, il sistema client viene portato offline durante la migrazione dei dati dall'array di storage esterno di terze parti al sistema di storage NetApp</block>
+  <block id="9c0286b39853f4a114f1ab22b894283f" category="doc">Riepilogo del flusso di lavoro della migrazione offline FLI ONTAP</block>
+  <block id="c26e000f4cd991c1262e70807109159f" category="paragraph">La migrazione dei dati tramite Foreign LUN Import (FLI) è un processo che prevede diversi passaggi chiave per garantire il corretto trasferimento dei dati da array di storage di terze parti ai sistemi di storage NetApp . FLI supporta migrazioni offline e online. In una migrazione offline FLI, il sistema client viene portato offline durante la migrazione dei dati dall'array di storage esterno di terze parti al sistema di storage NetApp .</block>
+  <block id="54818b05d116eadc7f67517a3a6e4b33" category="inline-link-macro">scoperta</block>
+  <block id="3b671c883959a8ef434b85a104c293d4" category="inline-link-macro">analisi</block>
+  <block id="98ded198ba3a0a30e7cc64e4a6a93f45" category="inline-link-macro">pianificazione</block>
+  <block id="608f90a01cc04eb7e823b5dd58873d33" category="list-text">Dovresti completare il <block ref="34dcf91ed1b0b2a1e956c6d2b97e30f0" category="inline-link-macro-rx"></block> , <block ref="8ddf3347fad2997787e8ebeb2f578201" category="inline-link-macro-rx"></block> , E <block ref="f5e8772ec545f4f5d2ef8d4846b1cdfe" category="inline-link-macro-rx"></block> fasi del processo di migrazione.</block>
+  <block id="77b2ee5638aee1e17fca8cd59d7f4e4b" category="inline-link-macro">configura i tuoi adattatori FC per la modalità iniziatore</block>
+  <block id="b8205a959f555ff4c2a9ca48a982bbf1" category="list-text">Dovresti <block ref="c1c02f74e5d9a17ee1f5b57e5f3ec730" category="inline-link-macro-rx"></block> .</block>
+  <block id="97afe5236aff41dd01bf56ea2bd44453" category="inline-link-macro">suddividi in zone le porte di destinazione dell'array esterno con le porte di avvio dell'archiviazione ONTAP</block>
+  <block id="0fc8efe60b015f28206045e0571687d6" category="list-text">Dovresti <block ref="d888c5965d3cd5d3a05533e7ea9c1d1a" category="inline-link-macro-rx"></block> .</block>
+  <block id="ba69f61f8c9c029f08261b300cc0ab9c" category="paragraph">Il flusso di lavoro offline FLI include la preparazione degli host e dei LUN esterni per l'importazione, la creazione della relazione di importazione LUN e l'importazione dei dati.</block>
+  <block id="06c2cea18679d64399783748fa367bdd" category="inline-image-macro">Uno</block>
+  <block id="13a76fe9b7d552adb9f4cdf81438420f" category="inline-link-macro">Prepara il tuo host</block>
+  <block id="6f294cdf1ab8f18af24d2ed304537263" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block><block ref="6f04fd97aa80a6fe6a0cf0da9c7db310" category="inline-link-macro-rx"></block> .</block>
+  <block id="ffbb113e7eb1214f9ebb70241b28ee4c" category="paragraph">Prima di eseguire una migrazione offline FLI, è necessario riavviare gli host e verificare la configurazione multipathing dell'host.</block>
+  <block id="aada29daee1d64ed0fe907043855cb7e" category="inline-image-macro">Due</block>
+  <block id="9709153c662d8a0e7505160cdf64dec4" category="inline-link-macro">Prepara i tuoi LUN esteri</block>
+  <block id="23641a8e210877028b08c81d592cd5f8" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block><block ref="3b461bb262d2dd49075c54d2ba250c23" category="inline-link-macro-rx"></block> .</block>
+  <block id="bd10403fdb2296ee97561f175acbb900" category="paragraph">Nel processo di migrazione offline FLI, è necessario eseguire passaggi manuali dall'array esterno per presentare la LUN di origine esterna al sistema di archiviazione ONTAP ; è quindi necessario eseguire ulteriori passaggi manuali per rilevare la LUN di origine esterna sul sistema di archiviazione ONTAP .</block>
+  <block id="ca8a2087e5557e317599344687a57391" category="inline-image-macro">Tre</block>
+  <block id="3777850e00dc4533cbceb3347567625d" category="inline-link-macro">Creare la relazione di importazione LUN</block>
+  <block id="eb9b5392db80859b24d073a538046db8" category="paragraph-title"><block ref="05b2444faffd66d76e88602ea7dd353f" category="inline-image-macro-rx" type="image"></block><block ref="085523e47206d9a02652665cf6da23c9" category="inline-link-macro-rx"></block> .</block>
+  <block id="a8c56527f99fd0b764ab4d9bd29f51c3" category="paragraph">La creazione della relazione di importazione LUN per le migrazioni offline FLI include l'identificazione delle LUN dell'array di origine come esterne in ONTAP, la creazione e la configurazione del volume di destinazione per contenere le LUN esterne, la creazione delle LUN di destinazione e, infine, la definizione della relazione di importazione.</block>
+  <block id="981b8fcee42e1e726a67a2b9a98ea6e9" category="inline-image-macro">Quattro</block>
+  <block id="6f5dfd939ff1e715aafd15d7c67cdaa8" category="inline-link-macro">Importare i dati LUN dall'array esterno</block>
+  <block id="696a9f47c6eb365cc9625d8bb1b11238" category="paragraph-title"><block ref="beadfa85a2fdca06b91edc1131c603e6" category="inline-image-macro-rx" type="image"></block><block ref="684c2730f8add2837dc37cde4281853f" category="inline-link-macro-rx"></block> .</block>
+  <block id="13968a94131f8a1f1196ac8f7290cfc6" category="paragraph">Utilizzare FLI per importare i dati LUN dall'array esterno.</block>
+  <block id="e5d9de39f7ca1ba2637e5640af3ae8aa" category="inline-image-macro">Cinque</block>
+  <block id="436493873ac3e18567676ceb509a4136" category="inline-link-macro">Verificare i risultati della migrazione</block>
+  <block id="289f99c44eb64ac1057ce3fac3a466b2" category="paragraph-title"><block ref="99e8b2f00e172bfcff96afdce69907bc" category="inline-image-macro-rx" type="image"></block><block ref="9a95fb8d643ab3762f2b004297129094" category="inline-link-macro-rx"></block> .</block>
+  <block id="ae4ab2ed3617bed9f4ee92980343f10f" category="paragraph">Eseguire un confronto blocco per blocco delle LUN di origine e di destinazione per verificare che la migrazione sia completa e accurata.</block>
+  <block id="e6fbc0b9673f8c86726688d7607fc8f5" category="inline-image-macro">Sei</block>
+  <block id="f33c4ea3fc8d363090b878f7b42872ba" category="inline-link-macro">Rimuovere la relazione di importazione LUN</block>
+  <block id="84481f5710ea3bb896c1b5a5be5baea1" category="paragraph-title"><block ref="ef78558f80439832e0f51cc22cee8b8c" category="inline-image-macro-rx" type="image"></block><block ref="094b2fb8c85dfc2075f7ff71db128426" category="inline-link-macro-rx"></block> .</block>
+  <block id="e9ee17725602e73372292c273067dd0b" category="paragraph">Una volta completata la migrazione offline di FLI, la relazione di importazione LUN può essere rimossa in modo sicuro.</block>
+  <block id="12e67aac3e7f9227cc35f8f047d7dc74" category="inline-image-macro">Sette</block>
+  <block id="34dd00e8cc88cd555bb734d368252f5f" category="inline-link-macro">Eseguire attività post-migrazione</block>
+  <block id="5f81996acb9c5b3474850dffe7a0250c" category="paragraph-title"><block ref="36915574c413876eaa75cbd48f69fd00" category="inline-image-macro-rx" type="image"></block><block ref="c2a517eff6648e50bb89057cecc1d521" category="inline-link-macro-rx"></block> .</block>
+  <block id="1f01e9ecdff4b18a10d73ab961408b46" category="paragraph">Esaminare i registri per individuare eventuali errori, verificare la configurazione multipathing dell'host ed eseguire test applicativi per verificare che la migrazione sia stata completata correttamente.</block>
+  <block id="e19a9363f80859e1ae191e0af47fbf72" category="image-alt">Flusso di lavoro di migrazione online FlI</block>
+  <block id="13bafdcce7ae052bb5696f95ac4a0bf8" category="doc">Eseguire attività post-migrazione online ONTAP FLI</block>
+  <block id="f07198e877db552b0cef3bad39379ae5" category="summary">In una migrazione online FLI, il sistema client rimane online durante la migrazione dei dati dall'array di storage esterno di terze parti al sistema di storage NetApp .</block>
+  <block id="0ddf66a5f23405989da519f1f8617ec7" category="doc">Riepilogo del flusso di lavoro della migrazione online FLI ONTAP</block>
+  <block id="0210f6c570de9671236e087dae59f995" category="paragraph">La migrazione dei dati tramite Foreign LUN Import (FLI) è un processo che prevede diversi passaggi chiave per garantire la corretta migrazione dei dati da array di storage di terze parti ai sistemi di storage NetApp . FLI supporta migrazioni offline e online. In una migrazione online tramite Foreign LUN Import (FLI), il sistema client rimane online durante la migrazione dei dati dall'array di storage esterno di terze parti al sistema di storage NetApp .</block>
+  <block id="b4a0cb24fc1c2a28e5b0fd5fa8308158" category="list-title">Prima di iniziare:</block>
+  <block id="6aa2f49f4c3c442a88387a0c3c9f03a6" category="list-text">È necessario verificare che la migrazione online sia supportata per il tipo di host in uso e per la configurazione dell'array di archiviazione di destinazione NetApp .</block>
+  <block id="783cadcf237c5696bde27f81ced2d660" category="inline-link-macro">Processo di migrazione offline FLI</block>
+  <block id="15025f0a32222966dc2446bcb29aad96" category="paragraph">Le migrazioni online non sono supportate dalle configurazioni MetroCluster . Se si verifica un failover del sito durante un'importazione online attiva, i passaggi di scrittura sull'array di origine potrebbero non funzionare, causando un errore di verifica e una potenziale perdita di dati. Se il controller di destinazione NetApp si trova in una configurazione MetroCluster , è necessario utilizzare <block ref="d176a2f0f4344e0c8a054d60fd3ab34d" category="inline-link-macro-rx"></block> .</block>
+  <block id="496e6d6cb799156ce5cff696eb331b5d" category="paragraph">Le migrazioni online sono supportate dalle seguenti versioni del sistema operativo host Windows, Linux o ESXi. Per altri sistemi operativi host, è necessario utilizzare <block ref="d176a2f0f4344e0c8a054d60fd3ab34d" category="inline-link-macro-rx"></block> .</block>
+  <block id="4c133ef444dafacc5b24672b2d262950" category="list-text">Windows Server 2008 R2 e versioni successive (include il cluster di failover di Windows Server)</block>
+  <block id="40f6c03c0f62659da0b5fba05b53ca29" category="list-text">Microsoft Hyper-V Server 2008 e versioni successive</block>
+  <block id="ef7a532056bb92714a07ba2e7ffd3b19" category="list-text">VMware ESXi 5.x e versioni successive</block>
+  <block id="46d8ed61a841b87f91d1ce1637f44bcd" category="list-text">Red Had Enterprise Linux (RHEL) 5.x e versioni successive</block>
+  <block id="e658345103e09303f314be1c3c5101fa" category="list-text">È necessario verificare che il multipathing dell'host sia configurato correttamente e funzioni correttamente. Tutti i percorsi disponibili verso le LUN devono essere attivi.</block>
+  <block id="bbe48fb854ea022537208eeeff822f91" category="paragraph-title">Informazioni su questo compito</block>
+  <block id="f4166df408c509e1e8efa977941daff4" category="paragraph">Per eseguire una migrazione online FLI, è necessario preparare l'host, creare una relazione di importazione LUN, mappare la LUN esterna al sistema di archiviazione ONTAP , importare i dati dalla LUN esterna, verificare i risultati della migrazione, rimuovere la relazione di importazione LUN e infine eseguire le attività post-migrazione.</block>
+  <block id="41a6a6827683b284843f6abc8c9ef518" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block><block ref="dc5e42fdb9ab00895fe68d70d6b73201" category="inline-link-macro-rx"></block> .</block>
+  <block id="10e81a87f846dcfee701de20f6e03019" category="paragraph">Eseguire tutti i passaggi necessari per la correzione dell'host e riavviare gli host.</block>
+  <block id="08dbc584e4d9b7e09a68ad019973d050" category="inline-link-macro">Creare una relazione di importazione LUN</block>
+  <block id="314cc8dafdb90bb39e2e659556d0ff94" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block><block ref="b53b3864f3b78e0a6e52b739dcc6a099" category="inline-link-macro-rx"></block> .</block>
+  <block id="097684e53e0b7448f41031d47643872e" category="paragraph">La creazione della relazione di importazione LUN include l'identificazione della LUN esterna da importare dall'array di origine, la creazione di un volume di destinazione contenente la LUN esterna, la creazione della LUN di destinazione sul sistema di archiviazione ONTAP e, infine, la definizione della relazione di importazione.</block>
+  <block id="ec18602c63588db79c1617cfda3270ad" category="inline-link-macro">Mappare le LUN esterne sul sistema di archiviazione ONTAP</block>
+  <block id="8be2a457edc04b06e98d6f8d47898db9" category="paragraph-title"><block ref="05b2444faffd66d76e88602ea7dd353f" category="inline-image-macro-rx" type="image"></block><block ref="69d058b332a54a7d8efb366c8c969b6a" category="inline-link-macro-rx"></block> .</block>
+  <block id="57c86deac97332d795acb8efd15880e8" category="paragraph">Sull'array esterno, demappare la LUN da migrare e rimapparla sul sistema di storage ONTAP . Questo processo è dirompente.</block>
+  <block id="a01d08dabfd421c3693e94a7299a73d3" category="inline-link-macro">Importa dati dai tuoi LUN esteri</block>
+  <block id="121422d6f45b8aad004595b11bd04f47" category="paragraph-title"><block ref="beadfa85a2fdca06b91edc1131c603e6" category="inline-image-macro-rx" type="image"></block><block ref="ef0a436e5bafac20f418c7e95188cc23" category="inline-link-macro-rx"></block> .</block>
+  <block id="bf610c145d514582fce8663f0a3abeb9" category="paragraph">Importare i dati dalla LUN di origine dell'array esterno alla LUN di destinazione ONTAP .</block>
+  <block id="ca92fe332631fe5b3fa7cc2a1980aacb" category="paragraph-title"><block ref="99e8b2f00e172bfcff96afdce69907bc" category="inline-image-macro-rx" type="image"></block><block ref="df3b9bb7d0424d2237d4ae96281a9704" category="inline-link-macro-rx"></block> .</block>
+  <block id="6879236135ab94bcfafe3da5bba84c42" category="paragraph">Utilizzare FLI per eseguire un confronto blocco per blocco delle LUN di origine e di destinazione per verificare che la migrazione sia completa e accurata</block>
+  <block id="094d3bb193018a648a1565d27930dd5c" category="paragraph-title"><block ref="ef78558f80439832e0f51cc22cee8b8c" category="inline-image-macro-rx" type="image"></block><block ref="8ecb395a80e6a0bd1ed4f0239a31a16f" category="inline-link-macro-rx"></block> .</block>
+  <block id="b68b47dcf2bc42b36d209f945728578e" category="paragraph">Una volta completata la migrazione online FLI, la relazione di importazione LUN può essere rimossa in modo sicuro.</block>
+  <block id="915a2a4d9003f641b338302a11aa0740" category="paragraph-title"><block ref="36915574c413876eaa75cbd48f69fd00" category="inline-image-macro-rx" type="image"></block><block ref="bd936607b12e91c9b550a8906167c3af" category="inline-link-macro-rx"></block> .</block>
+  <block id="7cc4420d1efa96e0e8b743296e556571" category="paragraph">Esaminare i registri per individuare eventuali errori, verificare la configurazione multipathing dell'host ed eseguire test applicativi per verificare che la migrazione sia stata completata correttamente.</block>
+  <block id="e04779adc83d025c50de61d79a8d8ff0" category="inline-link-macro">Configurare gli adattatori FC</block>
+  <block id="cebb291af9c80cc73cb406d1a61141eb" category="paragraph">FLI richiede almeno una porta FC fisica su ciascun controller e la migrazione diretta delle LUN in modalità Initiator. Sono preferibili due porte, una per ciascun fabric, ma è possibile utilizzarne anche una singola. Queste porte vengono utilizzate per connettersi all'array sorgente e devono essere suddivise in zone e mascherate per poter visualizzare e montare le LUN sorgente. Se è necessario modificare una porta da target a initiator, consultare <block ref="1d735329ceaa48f044777bd789c7018d" category="inline-link-macro-rx"></block> .</block>
+  <block id="6d41b719f583940a087db3a759bdb881" category="image-alt">esempio di un report di analisi dei gap</block>
+  <block id="9b0510f7bb03e8656bf4b84e8ff146ab" category="paragraph">Per definire i gruppi di iniziatori, consultare la documentazione dell'array per informazioni su come impostare il mascheramento LUN (igroup/gruppi host/gruppi di archiviazione e così via).</block>
+  <block id="e3146253f94c3d4bd12e45c3666bb43e" category="image-alt">flusso di lavoro della fase di scoperta</block>
+  <block id="93894c4cde9e82e4ffd7ad717e28d079" category="image-alt">flusso di lavoro del piano di migrazione</block>
+  <block id="60f87743c6fb04cdeedc8d826c8f1c89" category="image-alt">flusso di lavoro della fase di verifica della migrazione</block>
+  <block id="2519e2e812174bdf590292dc06494ebc" category="image-alt">esempio di cablaggio di archiviazione per tessuti doppi</block>
+  <block id="b8a8f26517c2d8c506624ec5e4d949c3" category="doc">Zonizzazione delle porte di destinazione e di avvio per le migrazioni ONTAP FLI</block>
+  <block id="a27d0bcd9af0ccb81f8ee2143b9c588d" category="paragraph">La migrazione FLI richiede che le LUN di origine dell'array esterno siano accessibili dallo storage NetApp . Questo si ottiene suddividendo le porte di destinazione dello storage di origine in porte di avvio dello storage di destinazione NetApp .</block>
+  <block id="104f8e29a3d4ecc1dceb152b63aa6c64" category="summary">La modalità Initiator viene utilizzata per connettere le porte a unità nastro, librerie nastro o dispositivi di archiviazione di terze parti con Foreign LUN Import (FLI).</block>
+  <block id="916e3c08f20c4c0cb79c17a38d912c36" category="doc">Configurare gli adattatori FC per la modalità iniziatore</block>
+  <block id="4f45538ab686c37b2e7a6708b7c011c7" category="paragraph">La modalità iniziatore viene utilizzata per connettere le porte a unità nastro, librerie nastro o sistemi di archiviazione di terze parti con importazione di LUN esterne (FLI). È necessario convertire l'adattatore di destinazione FC in modalità iniziatore per utilizzarlo per FLI.</block>
+  <block id="b6a53fe2332e603aa14dfb70ca7aeb19" category="list-text">I LIF sull'adattatore devono essere rimossi da tutti i set di porte di cui fanno parte.</block>
+  <block id="4d4eef948ecf1b54568d077e1fb7b713" category="list-text">Tutti i LIF di ogni macchina virtuale di archiviazione (SVM) che utilizza la porta fisica da modificare devono essere migrati o distrutti prima di modificare la personalità della porta fisica da destinazione a iniziatore.</block>
+  <block id="297ed1cd6470874c602e7a7c1f7a1fd7" category="list-text">Rimuovere tutti i LIF dall'adattatore:</block>
+  <block id="d6dcd079ff1ce9b6d59726f3cc7aacb5" category="list-text">Togli l'adattatore offline:</block>
+  <block id="af98ea07946dba68c17d3d2a96785140" category="paragraph">Se l'adattatore non si disconnette, è anche possibile rimuovere il cavo dalla porta dell'adattatore appropriata sul sistema.</block>
+  <block id="ea1cc3310ef4ae9c09dfc3606e95d261" category="list-text">Cambiare l'adattatore da target a initiator:</block>
+  <block id="82ae8f32c970f7e7ea866a96bbe2060f" category="list-text">Riavviare il nodo che ospita l'adattatore modificato.</block>
+  <block id="670faa803b23e148bec7a424a670dfbd" category="list-text">Verificare che le porte FC siano configurate nello stato corretto per la configurazione:</block>
+  <block id="1acbe818af6cbc53e83ce8e0fecb89ac" category="list-text">Riportare l'adattatore online:</block>
+  <block id="58eaebf972358f1cf03d386a4ade1a0f" category="paragraph-title">Cosa succederà ora?</block>
+  <block id="152358ebcbde61490a8b7d4c91ef5c99" category="paragraph">Suddividere in zone le porte di destinazione dell'array esterno con le porte di avvio del proprio storage ONTAP .</block>
+  <block id="0bc6f00e2a04cb51ed2eea70745b9311" category="summary">Prima di poter migrare una LUN da un array esterno a un archivio ONTAP , è necessario creare una relazione di importazione LUN. Una relazione di importazione LUN è un'associazione persistente tra l'archivio di origine e quello di destinazione ai fini dell'importazione dei dati.</block>
+  <block id="2ab27027defc7b0dfcde70aabaea0c69" category="doc">Creare la relazione di importazione LUN per una migrazione offline FLI ONTAP</block>
+  <block id="7fa7f3e981d416a0f266e35f99d8fae6" category="paragraph">Prima di poter migrare una LUN da un array esterno a un sistema di storage ONTAP , è necessario creare una relazione di importazione LUN. Una relazione di importazione LUN è un'associazione persistente tra lo storage di origine e quello di destinazione ai fini dell'importazione dei dati. Gli endpoint di origine e di destinazione sono LUN.</block>
+  <block id="7b168256a5d513247e39ef8196e8b9cb" category="paragraph">La creazione della relazione di importazione LUN per le migrazioni offline FLI (Foreign LUN Import) include l'identificazione delle LUN dell'array di origine come esterne in ONTAP, la creazione e la configurazione del volume di destinazione per contenere le LUN esterne, la creazione delle LUN di destinazione e, infine, la definizione della relazione di importazione.</block>
+  <block id="95a3c451b1e56006687cf9ead77d64e5" category="inline-link-macro">preparare i LUN esteri per la migrazione offline FLI</block>
+  <block id="0e81f8cb7e5870b796941d92225e3199" category="paragraph">Dovresti aver completato i passaggi per <block ref="f2a74c30324df3a78f13d3ca5fdc9d35" category="inline-link-macro-rx"></block> .</block>
+  <block id="c8abf36d0ce400142a3e666a626b7db5" category="section-title">Passaggio 1: identificare i LUN dell'array sorgente come esterni in ONTAP</block>
+  <block id="413dd330c6ee4b53d453bf66ed50acb3" category="paragraph">Prima di iniziare la migrazione offline di FLI, sarà necessario identificare le LUN dell'array di origine come LUN esterne in ONTAP .</block>
+  <block id="536bd22e118b1a4f94d4e76576131b9b" category="list-text">Elencare i LUN di origine mappati dall'array esterno; quindi verificare le proprietà e i percorsi del disco.</block>
+  <block id="b0d8593710b3e8a8d14336ce4b824cc3" category="paragraph">L'esempio seguente mostra le LUN di origine dell'array Hitachi DF600F.</block>
+  <block id="c288c9fdd8643a1c3e10173e33ed037c" category="list-text">Utilizzare il numero di serie per contrassegnare la LUN di origine come esterna in ONTAP:</block>
+  <block id="fe0f3d74556ccae03c2b7acce83e1d49" category="paragraph">L'esempio seguente contrassegna le LUN di origine dell'array Hitachi DF600F come esterne.</block>
+  <block id="60b745c31344b3bc5f73cc194cd5ad22" category="paragraph">L'esempio seguente mostra le LUN di origine dell'array Hitachi DF600F contrassegnate come esterne.</block>
+  <block id="14b0dfddfc5b8030f51c6fffb617c3c7" category="section-title">Passaggio 2: creare e configurare un volume di destinazione</block>
+  <block id="5aa9a661345c8cee3ed7264ef3e93155" category="paragraph">Prima di creare la relazione di importazione LUN per una migrazione offline FLI, è necessario creare un volume sul sistema di archiviazione ONTAP che contenga le LUN che verranno importate dall'array esterno.</block>
+  <block id="2cd577459cad6744e7019c9292b33538" category="paragraph">A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite migrazione offline FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Pertanto, non è necessario creare un volume prima di creare la relazione di importazione LUN. È possibile saltare questo passaggio se si utilizza un sistema ASA r2.</block>
+  <block id="fde1abb5537b55c34521d414267b3f70" category="inline-link-macro">Sistemi ASA r2</block>
+  <block id="b533834da0f9efb9e0a6ac490f2c2ac8" category="paragraph">Scopri di più su <block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> .</block>
+  <block id="98e9dcffbe0bf95deaf2fceec7e865ab" category="paragraph">L'esempio seguente crea un volume denominato <block ref="71b98aecfb0a3fc6df73567e458c82a4" prefix=" " category="inline-code"></block> sul <block ref="70d2c7701d2837552c0a38c02a326592" prefix=" " category="inline-code"></block> aggregato con una dimensione di 100 GB.</block>
+  <block id="90081ca28fa94c52e01e5b2df4745abd" category="list-text">Disabilitare il criterio Snapshot predefinito su ciascun volume.</block>
+  <block id="c94e6dbcfb901c08b9a584d3cb004395" category="paragraph">Se sono presenti copie Snapshot predefinite prima della migrazione FLI, il volume necessita di spazio aggiuntivo per archiviare i dati modificati.</block>
+  <block id="fc7e99306143cc031bb23815595cc387" category="paragraph">L'esempio seguente disabilita il criterio Snapshot predefinito su <block ref="71b98aecfb0a3fc6df73567e458c82a4" prefix=" " category="inline-code"></block> volume.</block>
+  <block id="b9dbbe5562a20a0b18bcd4fbf264ec88" category="paragraph">L'esempio seguente imposta il <block ref="c1acac5c4332e37ec1f281fcbaf0765a" prefix=" " category="inline-code"></block> opzione per <block ref="cfcd208495d565ef66e7dff9f98764da" prefix=" " category="inline-code"></block> e la politica Snapshot per <block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block> per tutti i volumi nella SVM datamig.</block>
+  <block id="fc0204a96f768d35cc5dc6d47b397700" category="list-text">Verifica le impostazioni del volume.</block>
+  <block id="3c5c596fcda7ebb99aa301535f95903a" category="paragraph">Le impostazioni della politica di riserva fazionale e di snapshot dovrebbero essere <block ref="cfcd208495d565ef66e7dff9f98764da" prefix=" " category="inline-code"></block> E <block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block> , rispettivamente.</block>
+  <block id="e163e8edc9ab8a2da1aeadf6a5c94d4c" category="section-title">Passaggio 3: creare i LUN di destinazione e la relazione di importazione LUN</block>
+  <block id="e1910275934a603646595f4d66452d75" category="paragraph">Per la migrazione offline di FLI, le LUN di destinazione sul sistema di archiviazione ONTAP devono essere create e mappate a un igroup; quindi devono essere messe offline prima di creare la relazione di importazione LUN.</block>
+  <block id="bfd8356e78c5079e98d68c26379236e5" category="paragraph">A partire da ONTAP 9.17.1, la migrazione dei dati di LUN estranee utilizzando la migrazione offline FLI è supportata da <block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. ASA creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Ogni volume contiene una sola unità di archiviazione. Pertanto, per i sistemi ASA r2, non è necessario includere il nome del volume nel file <block ref="8853f93d631cadbd0584fb9e36789dfb" prefix=" " category="inline-code"></block> opzione durante la creazione del LUN; dovresti invece includere il percorso dell'unità di archiviazione.</block>
+  <block id="d54c0b4f31d7153b6365b774317d5c75" category="list-text">Creare LUN di destinazione.</block>
+  <block id="bfd884a0a24ea817ebfe231bcbc3804b" category="paragraph">L'esempio seguente crea LUN su <block ref="1b523fdae68699bfe92c5f6bfc8a0a7d" prefix=" " category="inline-code"></block> SVM con i percorsi specificati e i numeri di serie dei dischi esterni . <block ref="73721187d72b88e53c3fdf1986c5ab0c" prefix=" " category="inline-code"></block> L'opzione specifica il tipo di sistema operativo della LUN.</block>
+  <block id="9b4ce7fc8a752604ed12608b03cb5b4d" category="paragraph">IL <block ref="7c192459e62b85875b59970db3d2b9ee" prefix=" " category="inline-code"></block> Il comando rileva la dimensione e l'allineamento della LUN in base all'offset della partizione e crea la LUN di conseguenza con l'opzione foreign-disk. Alcuni I/O appariranno sempre come scritture parziali e quindi disallineati. Esempi di questo tipo di operazioni sono i log del database.</block>
+  <block id="6bc46e127accf24effb7b1774abc43c4" category="list-text">Verificare le dimensioni e la LUN di origine delle LUN appena create.</block>
+  <block id="b47ca04c9474b41e542da84d1d694d7d" category="paragraph">L'esempio seguente mostra i LUN creati in <block ref="1b523fdae68699bfe92c5f6bfc8a0a7d" prefix=" " category="inline-code"></block> SVM con i relativi percorsi, stati, stato mappato, tipi e dimensioni.</block>
+  <block id="4dd187170896203bf16c8afddc9da512" category="list-text">Se si esegue ONTAP 9.15.1 o versione successiva, disabilitare l'allocazione dello spazio per i LUN appena creati.</block>
+  <block id="da18d08f349676220a4b6d32af77937a" category="paragraph">L'allocazione dello spazio è abilitata per impostazione predefinita per i LUN appena creati in ONTAP 9.15.1 e versioni successive.</block>
+  <block id="27d000a09f018cfc6dd5e169e5ca46a9" category="list-text">Verificare che l'allocazione dello spazio sia disabilitata.</block>
+  <block id="8c4e72e795cee4a490c2d6eff560b519" category="list-text">Creare un igroup host del protocollo FCP e aggiungere gli iniziatori host.</block>
+  <block id="491e13dcfa7ac9b8491f19cbd3426cb9" category="paragraph">Trova gli WWPN iniziatori nella sezione gruppi di stoccaggio del foglio di lavoro di pianificazione del sopralluogo del sito.</block>
+  <block id="fe667bb315e44383058f056f9c5fbe8f" category="paragraph">L'esempio seguente crea igroup per i LUN di destinazione con i tipi di sistema operativo e gli iniziatori specificati.</block>
+  <block id="b2ef1a3f9ce9d1f74f1acf2e6d265fa7" category="list-text">Mappare i LUN di destinazione su un igroup.</block>
+  <block id="aaa0e1237b8b0dc6ecc6e1d233aaea8b" category="paragraph">Nell'esempio seguente i LUN di destinazione vengono mappati ai rispettivi igroup con i percorsi e gli ID LUN specificati.</block>
+  <block id="f106121dd8a70e33471a2e671d5c9ba4" category="paragraph">L'esempio seguente mette offline i LUN di destinazione in <block ref="1b523fdae68699bfe92c5f6bfc8a0a7d" prefix=" " category="inline-code"></block> SVM.</block>
+  <block id="06810cc852981796e48ee46c1a7fa51a" category="list-text">Creare la relazione di importazione LUN tra i LUN di destinazione e di origine.</block>
+  <block id="6424b245ec682cd35fd35d1f48f69794" category="paragraph">L'esempio seguente crea la relazione di importazione LUN per i LUN di destinazione in <block ref="1b523fdae68699bfe92c5f6bfc8a0a7d" prefix=" " category="inline-code"></block> SVM con i rispettivi percorsi e numeri di serie dei dischi esterni.</block>
+  <block id="9c8ae6d98d6bedb33c34563e7c2e9e65" category="list-text">Verificare che la relazione di importazione LUN sia stata creata.</block>
+  <block id="6e2708659ab6e635be9ac7cc70d49e31" category="paragraph">L'esempio seguente mostra la relazione di importazione LUN creata per i LUN di destinazione in <block ref="1b523fdae68699bfe92c5f6bfc8a0a7d" prefix=" " category="inline-code"></block> SVM con i rispettivi dischi e percorsi esterni.</block>
+  <block id="16aa8cf24ba6f4464e35887d7f0f6b38" category="inline-link-macro">Importare i dati dalle LUN esterne alle LUN ONTAP</block>
+  <block id="54e565bb91cb71fb43c1049dbf76f128" category="paragraph"><block ref="56591cf7192e5388b325b8e69e757839" category="inline-link-macro-rx"></block> .</block>
+  <block id="30f60d67f457bb040dffde52197a54da" category="list-title">Informazioni correlate</block>
+  <block id="a2e697ac04dd555be360501670fbf18f" category="inline-link">Scopri di più sull'I/O non allineato</block>
+  <block id="cb61fe942806068c6d1b2482a8beba99" category="list-text"><block ref="65ea43fe57d37a9a3d85fe1ef14c0129" category="inline-link-rx"></block> .</block>
+  <block id="96b33f4b16ea10a16e30c8fae2848b4d" category="inline-link">Scopri di più sull'abilitazione dell'allocazione dello spazio per i protocolli SAN</block>
+  <block id="666f892489ccf6b0a630b5055d3be185" category="list-text"><block ref="dfda4fa3e44e7655dde5e2004e107921" category="inline-link-rx"></block> .</block>
+  <block id="0993dc2e0670c46c255b72cff1255320" category="doc">Creare la relazione di importazione LUN per una migrazione online FLI ONTAP</block>
+  <block id="cc46bd2023eb0c869b9d3a53a1728b8c" category="paragraph">Prima di poter migrare una LUN da un array esterno allo storage ONTAP , è necessario creare una relazione di importazione LUN. Una relazione di importazione LUN è un'associazione persistente tra lo storage di origine e quello di destinazione ai fini dell'importazione dei dati. Gli endpoint di origine e di destinazione sono LUN.</block>
+  <block id="d86a62d2b262ea261b5bdde368754550" category="paragraph">La creazione della relazione di importazione LUN per le migrazioni online FLI (Foreign LUN Import) include l'identificazione della LUN esterna da importare dall'array di origine, la creazione e la configurazione di un volume di destinazione che contenga la LUN esterna, la creazione della LUN di destinazione e infine la definizione della relazione di importazione.</block>
+  <block id="9b556f6bb631ec84a9c87cff6dd8561c" category="section-title">Passaggio 1: identificare la LUN dell'array sorgente come LUN esterna in ONTAP</block>
+  <block id="da60a9afd8ccd52abfacb568c8cace72" category="paragraph">Prima di iniziare la migrazione online di FLI, sarà necessario identificare la LUN dell'array di origine come LUN esterna.</block>
+  <block id="350a6577777c90fdd007168fc3c4c31c" category="list-text">In ONTAP, modificare il livello di privilegio in avanzato.</block>
+  <block id="037d7cc099f6ccde12147eb7747bdcff" category="paragraph">L'esempio seguente mostra la scoperta di un array DGC LUNZ.</block>
+  <block id="c075eeec6d2e43d2141c55863e51f785" category="paragraph">L'esempio seguente mostra i dettagli dell'array DGC LUNZ.</block>
+  <block id="676aaf2c86a3d82172164be62356a489" category="paragraph">L'esempio seguente mostra l'array DGC LUNZ rilevato tramite tutte le porte di avvio.</block>
+  <block id="d1b2f56df437dae495346e5734819489" category="list-text">Elencare le LUN mappate dall'archiviazione di origine; quindi verificare le proprietà e i percorsi del disco.</block>
+  <block id="7ea792c1a5f9af2eee4a44a334cc9ae2" category="paragraph">L'esempio seguente mostra le LUN mappate dall'archiviazione di origine.</block>
+  <block id="2205dafb991f3eba976b6203133120f8" category="paragraph">L'esempio seguente mostra la LUN di origine.</block>
+  <block id="e59b34538f8f24958ddcc93460f80f5d" category="paragraph">L'esempio seguente mostra il comando per contrassegnare la LUN di origine come esterna.</block>
+  <block id="f6a5473331f2daf7831d6672068d5574" category="paragraph">L'esempio seguente mostra la LUN di origine contrassegnata come esterna.</block>
+  <block id="00ad52ebf93c65dc61f71015722c9c3c" category="list-text">Elencare tutti i LUN esteri e i relativi numeri di serie.</block>
+  <block id="faa638e01a027f3e33ce873fec967f8a" category="paragraph">I numeri di serie vengono utilizzati nei comandi di importazione FLI LUN.</block>
+  <block id="6f6829770b4585c77f91df7632cfa37b" category="paragraph">L'esempio seguente mostra la LUN esterna e il suo numero di serie.</block>
+  <block id="501a07ad7efd92d4ab6857db010311d9" category="paragraph">Prima di creare la relazione di importazione LUN per una migrazione online FLI, è necessario creare un volume sul sistema di archiviazione ONTAP che contenga la LUN che verrà importata dall'array esterno.</block>
+  <block id="e206a420950b325cd731e287640847e1" category="paragraph">A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite migrazione offline FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Pertanto, non è necessario creare un volume prima di creare la relazione di importazione LUN. È possibile saltare questo passaggio se si utilizza un sistema ASA r2.</block>
+  <block id="36c24dd9dc232796178e694a76c5bb02" category="paragraph">Scopri di più su <block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> .</block>
+  <block id="a08233060f61816c66576ecb8a6b108d" category="list-text">Verificare che il volume sia stato creato.</block>
+  <block id="c9d18f8008099eef7df9f27c2445e7e7" category="paragraph">L'esempio seguente mostra il volume *fli_vol* creato nella SVM *fli*.</block>
+  <block id="04203f877ce7e592d9d5de814d92d02b" category="list-text">Verificare le impostazioni del volume.</block>
+  <block id="83235d0637914f9f18c5842d764fa93f" category="paragraph">L'esempio seguente mostra l'impostazione *riserva frazionaria* su <block ref="cfcd208495d565ef66e7dff9f98764da" prefix=" " category="inline-code"></block> e *snapshot-policy* impostato su <block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block> per il volume *fli_vol* nella SVM *fli*.</block>
+  <block id="b1b47e0b1faf8a580e60044eb5c19a29" category="section-title">Passaggio 3: creare la LUN di destinazione e la relazione di importazione LUN</block>
+  <block id="54f6c1b9a33d71b4f7863d2d6fb2425a" category="paragraph">Per preparare l'importazione della LUN esterna, creare la LUN di destinazione e l'igroup, mappare la LUN all'igroup e creare la relazione di importazione della LUN.</block>
+  <block id="896af4cf8b9d5ecd09e5f1f65b5b49ce" category="list-text">Creare la LUN di destinazione.</block>
+  <block id="bfc4036582fc51b5c3fe84c2dc41c306" category="list-text">Verificare che sia stato creato il nuovo LUN.</block>
+  <block id="cf820e2d4daf580dfea32ae3f8c032d4" category="paragraph">L'esempio seguente mostra il nuovo LUN creato nella SVM *fli*.</block>
+  <block id="cae85a053d2f99dde39bc59d3d6a205d" category="list-text">Verificare che l'host possa accedere a tutti i percorsi verso il nuovo igroup.</block>
+  <block id="d10396b24bb2a32abfeebff582c6a802" category="paragraph">L'esempio seguente mostra l'igroup *FLI* nella SVM *fli* con due iniziatori connessi.</block>
+  <block id="ea04ea060e8f7761372e7b388f173d86" category="paragraph">L'esempio seguente mostra il comando per portare offline il nuovo LUN nella SVM *fli*.</block>
+  <block id="12e4fd35797788596367a36dba6ef090" category="inline-link-macro">Mappare la LUN di origine sulla LUN di destinazione ONTAP</block>
+  <block id="a251eaafbb6c9a70aedbcf74de4a8d81" category="paragraph"><block ref="173f29ecc4b03cb8030c18dead71d0a4" category="inline-link-macro-rx"></block> .</block>
+  <block id="858e81d76fddbf61df78b439ed943049" category="paragraph"><block ref="0d8d7b10bd9cb415e98f35f02d872ed4" category="inline-link-rx"></block> .</block>
+  <block id="d64519e4b3b646c46a8661566318cb5b" category="doc">Mappare la LUN di origine sull'array ONTAP per una migrazione online FLI</block>
+  <block id="c4a6c5388c3f1307dd474cee06ecc459" category="paragraph">Per importare dati da una LUN di un array esterno, è necessario prima rimuovere la mappatura della LUN sull'array esterno e riassegnarla al sistema di storage ONTAP . I comandi per rimuovere la mappatura di una LUN su un array esterno variano a seconda del fornitore dell'array. È necessario seguire i passaggi forniti per la procedura generale e consultare la documentazione dell'array esterno per i comandi specifici.</block>
+  <block id="7411225492e02d1310145a81baacd0db" category="paragraph">La rimozione dell'host (iniziatore) da un igroup influisce su tutte le LUN mappate a quell'igroup. Per evitare interruzioni ad altre LUN sull'array esterno, la LUN che si sta migrando deve essere l'unica LUN mappata al suo igroup. Se sono presenti altre LUN che condividono l'igroup, è necessario rimapparle a un igroup diverso oppure creare un nuovo igroup specifico per la LUN da migrare. Consultare la documentazione del fornitore per i comandi appropriati.</block>
+  <block id="483dadf6fd428be4ea01ab3990920f46" category="list-text">Se i LUN che vengono importati sono per un host ESXi, rivedere e seguire le istruzioni per <block ref="3fde5969682824a0abc875456e73e44e" category="inline-link-macro-rx"></block> .</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">Risultato</block>
+  <block id="35ff7f552b871d7fdd49c2088cd168e9" category="paragraph">La parte dirompente di questa migrazione è completa, a meno che non vi siano attività di ripristino dell'host in sospeso (identificate durante le fasi di analisi e pianificazione) che risultano dirompenti.</block>
+  <block id="6b61dfebc11beae78522278812965ed5" category="paragraph"><block ref="ef0a436e5bafac20f418c7e95188cc23" category="inline-link-macro-rx"></block> .</block>
+  <block id="05f59eb71c4906f53fe4417635febda8" category="summary">Nel processo di migrazione offline FLI, è necessario presentare la LUN di origine esterna allo storage ONTAP ; quindi è necessario rilevare la LUN di origine esterna sullo storage ONTAP .</block>
+  <block id="6932408615b180800a977f0e7ed71cc9" category="doc">Preparare le LUN dell'array di archiviazione esterno per una migrazione offline di ONTAP FLI</block>
+  <block id="0a702a543864c95b2dbb65d51b70226c" category="paragraph">In una migrazione offline di importazione FLI (Foreign LUN Import), è necessario eseguire manualmente i passaggi dal proprio array di storage esterno per presentare il LUN di origine esterno al sistema di storage ONTAP ; quindi è necessario eseguire i passaggi dal sistema di storage ONTAP per rilevare il LUN esterno.</block>
+  <block id="c665016d57be0cb6517e327edb51bc67" category="section-title">Fase 1: presentare le LUN di origine dell'array esterno allo storage ONTAP</block>
+  <block id="693b1583274a67ba3016480d7129fc78" category="paragraph">Prima di poter iniziare a importare dati da una LUN di un array di storage esterno utilizzando una migrazione offline FLI, è necessario presentare le LUN di origine sull'array di storage esterno al sistema di storage ONTAP .</block>
+  <block id="e76a45ef34369b3d90f44effd201579d" category="list-text">Selezionare le LUN host che devono essere migrate dalle LUN logiche disponibili.</block>
+  <block id="e5393f69964892429b64d3d1d338347a" category="inline-link-macro">Foglio di lavoro per il rilievo e la pianificazione del sito</block>
+  <block id="afde35e0cdbd3ed3f8dd11c937027ac3" category="paragraph">Utilizzare i nomi LUN per ciascun host menzionato nella sezione LUN di origine del <block ref="3e7b13f8c27a4162db7405113e1fdabe" category="inline-link-macro-rx"></block> .</block>
+  <block id="df7cbb7e90f5eb4d44a41ded75580613" category="section-title">Passaggio 2: rilevare le LUN di origine dell'array esterno in ONTAP</block>
+  <block id="bbc96ca171c7321a2f2faf0d3f35482d" category="paragraph">Dopo aver presentato i LUN sorgente dell'array esterno al sistema di archiviazione ONTAP , è necessario che i LUN siano rilevati in ONTAP prima di poter creare la relazione di importazione LUN.</block>
+  <block id="dcde9eb8b72b611c50de8e3dc7d0f354" category="list-text">Verificare i LUN di origine e il mapping dall'archiviazione di origine a quella di destinazione.</block>
+  <block id="e22d9b1d726a7b2f893bebfff179f60e" category="list-text">Accedere al sistema di archiviazione ONTAP tramite SSH utilizzando l'utente amministratore.</block>
+  <block id="9dc86985308af04bd4fd794bac96a024" category="list-text">Cambia la modalità in avanzata.</block>
+  <block id="92c935fd4460054f7fccdffcff362cde" category="list-text">Rileva l'array sorgente su ONTAP. Attendi qualche minuto e riprova a rilevare l'array sorgente.</block>
+  <block id="8ec426fc914e0461f797a5ade56e8bd9" category="paragraph">L'esempio seguente mostra la scoperta di un array Hitachi DF600F.</block>
+  <block id="ea20aa46ab24a8afc2c299588cd3f4a2" category="paragraph">L'esempio seguente mostra l'array Hitachi DF600F rilevato tramite tutte le porte di avvio.</block>
+  <block id="e9e3e5712df1354645ca953ad8d504bf" category="paragraph"><block ref="085523e47206d9a02652665cf6da23c9" category="inline-link-macro-rx"></block> .</block>
+  <block id="3e8a07db53d0039425b8fba1d0fc7677" category="summary">Prima di iniziare una migrazione offline di FLI, è necessario eseguire tutti i passaggi necessari per la correzione dell'host; quindi è necessario riavviare gli host e verificare che il multipathing dell'host sia configurato correttamente.</block>
+  <block id="f601f077ada758b95a2de5e9c7a27aa8" category="doc">Preparare gli host per la migrazione offline ONTAP FLI</block>
+  <block id="1a9fd97a2ad3345e26b86580e12f42b9" category="paragraph">Prima di iniziare una migrazione offline con importazione di LUN esterne (FLI), è necessario eseguire tutti i passaggi identificati nella fase di analisi come necessari per la correzione dell'host, come l'installazione di kit di collegamento host o DSM. È inoltre necessario riavviare gli host e verificare che il multipathing host sia configurato correttamente.</block>
+  <block id="87e8b4365203203b34365d1c28e8a376" category="inline-link-macro">fase di analisi</block>
+  <block id="41fbaaf264004e2dd6fac98856fd1f0c" category="list-text">Eseguire tutti i passaggi di ripristino dell'host necessari identificati nel <block ref="c8c34cd4825b0b32fe4f592845e72579" category="inline-link-macro-rx"></block> .</block>
+  <block id="3b96b8ba9a983b530f8ec2452b440c7b" category="list-text">Verificare la configurazione multipathing dell'host.</block>
+  <block id="d6c1c7f323728d4ee7b2a28be79bbbd1" category="list-text">Per gli host Windows: vedere <block ref="84ab7508f8719b602a5cd998757efe8e" category="inline-link-macro-rx"></block> per i passaggi necessari a verificare la configurazione multipath.</block>
+  <block id="228d92d2642970adddef6e21f9965bfa" category="list-text">Per gli host Linux: eseguire il comando <block ref="69ceccb1aea0d97021dd55c8b13a4b8e" prefix=" " category="inline-code"></block> comando e controlla l'output. Tutti i percorsi dovrebbero essere visualizzati come attivi e pronti.</block>
+  <block id="dc9a05616f70f63d9b65ed6a5f4e1125" category="example-title">Esempio di output del comando multipath-ll</block>
+  <block id="3a01a2d4f1e0fa7d5e5096185a40ba2b" category="paragraph">mpath2 (360060e801046b96004f2bf4600000012) dm-6 HITACHI,DF600F</block>
+  <block id="47db0160be743755ac2f712e8ed93752" category="paragraph">\_ round-robin 0 [prio=1][attivo] \_ 0:0:1:2 sdg 8:96 [attivo][pronto] \_ 1:0:1:2 sdo 8:224 [attivo][pronto] \_ round-robin 0 [prio=0][abilitato] \_ 0:0:0:2 sdc 8:32 [attivo][pronto] \_ 1:0:0:2 sdk 8:160 [attivo][pronto] mpath1 (360060e801046b96004f2bf4600000011) dm-5 HITACHI,DF600F</block>
+  <block id="d7138b7494b82daad9751996b1d23d1e" category="paragraph">\_ round-robin 0 [prio=1][attivo] \_ 0:0:0:1 sdb 8:16 [attivo][pronto] \_ 1:0:0:1 sdj 8:144 [attivo][pronto] \_ round-robin 0 [prio=0][abilitato] \_ 0:0:1:1 sdf 8:80 [attivo][pronto] \_ 1:0:1:1 sdn 8:208 [attivo][pronto] mpath0 (360060e801046b96004f2bf4600000010) dm-0 HITACHI,DF600F</block>
+  <block id="ea824d2777de7815b95812c467efb75b" category="paragraph">\_ round-robin 0 [prio=1][attivo] \_ 0:0:1:0 sde 8:64 [attivo][pronto] \_ 1:0:1:0 sdm 8:192 [attivo][pronto] \_ round-robin 0 [prio=0][abilitato] \_ 0:0:0:0 sda 8:0 [attivo][pronto] \_ 1:0:0:0 sdi 8:128 [attivo][pronto] mpath3 (360060e801046b96004f2bf4600000013) dm-7 HITACHI,DF600F</block>
+  <block id="dc50ff3641076d5104f9fe3a211a2bad" category="paragraph">\_ round-robin 0 [prio=1][attivo] \_ 0:0:0:3 sdd 8:48 [attivo][pronto] \_ 1:0:0:3 sdl 8:176 [attivo][pronto] \_ round-robin 0 [prio=0][abilitato] \_ 0:0:1:3 sdh 8:112 [attivo][pronto] \_ 1:0:1:3 sdp 8:240 [attivo][pronto] [root@dm-rx200s6-22 ~]#</block>
+  <block id="bde069c55679c6dcc0ab67d5d7eebeb9" category="paragraph">Come parte del processo di importazione FLI (Foreign LUN Import), è necessario verificare che multipath sia configurato e funzioni correttamente sugli host ESXi.</block>
+  <block id="fdf8464478d8fe236aac5b2d594eefe2" category="list-text">Correre <block ref="981ec21879e0a01e3fc45af085cc6888" prefix=" " category="inline-code"></block> per ottenere informazioni multipath.</block>
+  <block id="05bbfdeeb62f8dc4ff8cac1c6478a0e9" category="inline-link-macro">Preparare le LUN dell'array di archiviazione esterno per la migrazione offline FLI</block>
+  <block id="9dba2f25b5c94d718bf9b3f9b0320d0b" category="paragraph"><block ref="448644ceb01e25e66d67a4d7051c8f46" category="inline-link-macro-rx"></block> .</block>
+  <block id="5838bddb42f739ca21db68e9121b4e6e" category="doc">Preparare gli host per la migrazione online ONTAP FLI</block>
+  <block id="8976e93062b210e5c0fdc8d648b32cf0" category="paragraph">Prima di iniziare una migrazione online con importazione di LUN esterne (FLI), è necessario eseguire tutti i passaggi identificati nella fase di analisi necessari per la correzione dell'host, come l'installazione di kit di collegamento host o DSM. Dopo aver eseguito tutti i passaggi di correzione necessari, si consiglia di riavviare gli host.</block>
+  <block id="b0d0d0ea34d9f46098d7924b60fc0508" category="paragraph">Per precauzione, crea una copia Snapshot dei dati del tuo host per facilitare un ripristino se necessario in seguito.</block>
+  <block id="7f7deee22f95d78e578cd84f2142131c" category="list-text">Eseguire tutti i passaggi necessari per la correzione dell'host.</block>
+  <block id="b5730439fbe6b3324ebeced00b7adc62" category="paragraph"><block ref="619ce8c63d8c128306d2ae05da685736" category="inline-link-macro-rx"></block> .</block>
+  <block id="af3182c87d2be8d3150cbb4afff88df4" category="doc">Rimuovere la relazione di importazione LUN dopo una migrazione offline FLI ONTAP</block>
+  <block id="e6aeb3b626481a3da289ef691041a3aa" category="paragraph">Una volta completata la migrazione offline dell'importazione della LUN esterna (FLI), la relazione di importazione della LUN può essere rimossa in sicurezza. L'host ora accede al nuovo array NetApp per tutti gli I/O sulla nuova LUN ONTAP e la LUN di origine non è più in uso, quindi la relazione di importazione non è più necessaria.</block>
+  <block id="5fe94d73b75a6def3a9ecf131093a7be" category="paragraph">A partire da ONTAP 9.17.1, la migrazione dei dati di LUN estranee utilizzando la migrazione offline FLI è supportata da <block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. ASA creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Ogni volume contiene una sola unità di archiviazione. Pertanto, per i sistemi ASA r2, non è necessario includere il nome del volume nel file <block ref="8853f93d631cadbd0584fb9e36789dfb" prefix=" " category="inline-code"></block> opzione durante la creazione del LUN; dovresti invece includere il percorso dell'unità di archiviazione.</block>
+  <block id="d5e1d2a965089d86d6fdbcb3f74b4b58" category="list-text">Eliminare la relazione di importazione per rimuovere i processi di importazione dei dati.</block>
+  <block id="58a740e848242dc28dbca9bf2265503b" category="paragraph">Questo esempio mostra il comando per eliminare la relazione di importazione per i LUN denominati *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.</block>
+  <block id="1b8764772a7a092889b740c6d73bb313" category="list-text">Verificare che i processi di importazione siano stati eliminati.</block>
+  <block id="d1339460594d8a94000b89c6e72dd8df" category="paragraph">Questo esempio mostra il comando per verificare che i processi di importazione siano stati eliminati per l'SVM *datamig*.</block>
+  <block id="b9fb178590cedb5c9f204f1017680845" category="paragraph">Questo esempio mostra il comando per contrassegnare l'attributo LUN esterno su <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> per le LUN denominate *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.</block>
+  <block id="a857f0def0a0d9279c1e8e7e76f6c1f3" category="list-text">Verificare che i LUN esterni siano contrassegnati come <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> .</block>
+  <block id="aacf30d1c86841937f16c9629d88cba1" category="paragraph">Questo esempio mostra il comando per verificare che i LUN esterni siano contrassegnati come <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> sulla matrice *HITACHI_DF600F_1*.</block>
+  <block id="68b0e92edd5030cf416742d31db299ee" category="list-text">Portare online i LUN di destinazione.</block>
+  <block id="2c77327e9581d3f916e0941a225948ce" category="paragraph">Questo esempio mostra il comando per portare online le LUN di destinazione per le LUN denominate *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.</block>
+  <block id="19d2e3e4f659da7521518b8656602c04" category="paragraph">Questo esempio mostra il comando per verificare che i LUN siano online per l'SVM *datamig*.</block>
+  <block id="c1c010aa8582429982f54d1b514e094e" category="list-text">Facoltativamente, visualizza il registro eventi per verificare i risultati della migrazione.</block>
+  <block id="2a6960ae1aeee52871e99047dca18f7d" category="paragraph">Questo esempio mostra un output di esempio del comando per visualizzare il registro eventi per i risultati della migrazione FLI.</block>
+  <block id="86b69aec947723c0eee53909a3ae8f74" category="inline-link-macro">Eseguire attività post-migrazione per una migrazione offline FLI</block>
+  <block id="462a2772545b3175e31df8335d823a7e" category="paragraph"><block ref="0de1a1c6c42e5bfcde604527eed8f220" category="inline-link-macro-rx"></block> .</block>
+  <block id="baa8ecf38b7008f9bd8c9d83ea20b469" category="doc">Rimuovere la relazione di importazione LUN dopo una migrazione online FLI ONTAP</block>
+  <block id="51aa26d78f36a3c88206273ff696cec7" category="paragraph">Una volta completata la migrazione online dell'importazione FLI (Foreign LUN Import), la relazione di importazione LUN può essere rimossa in modo sicuro. L'host ora accede al nuovo array NetApp per tutti gli I/O sulla nuova LUN ONTAP e la LUN di origine non è più in uso.</block>
+  <block id="ed8fe490521d1e63a454325d2348367a" category="list-text">Verificare che la relazione di importazione sia stata eliminata.</block>
+  <block id="77b896bc5c5e5f619047baf8dd400ca6" category="paragraph"><block ref="bd936607b12e91c9b550a8906167c3af" category="inline-link-macro-rx"></block> .</block>
+  <block id="355451298fb1bc66489346ee2ba20743" category="summary">Dopo aver creato la relazione di importazione LUN tra i LUN di origine e di destinazione per una migrazione offline FLI, è possibile importare i dati dall'array esterno al sistema di archiviazione ONTAP .</block>
+  <block id="1875eb1e1a6ce70c6182a071873eb54b" category="doc">Importa dati da un array esterno utilizzando la migrazione offline ONTAP FLI</block>
+  <block id="1ce201eaf0b169f6aab8b96c54a0d340" category="paragraph">A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite migrazione offline FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Ogni volume contiene una sola unità di archiviazione. Pertanto, per i sistemi ASA r2, non è necessario includere il nome del volume nel file <block ref="8853f93d631cadbd0584fb9e36789dfb" prefix=" " category="inline-code"></block> opzione durante la creazione del LUN; dovresti invece includere il percorso dell'unità di archiviazione.</block>
+  <block id="e08023cdb4d8501417d384ce42bdb526" category="list-text">Avviare l'importazione dei dati dai LUN esterni ai LUN ONTAP .</block>
+  <block id="0d8cae7f9f61374730de794a5aac773f" category="paragraph">Questo esempio mostra il comando per avviare l'importazione dei dati per le LUN denominate *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.</block>
+  <block id="0421281ad3630a6f68f9fa132620f1dc" category="list-text">Monitorare l'avanzamento dell'importazione.</block>
+  <block id="5f744f6c099cb0a050bdc4eae49bd2b5" category="paragraph">Puoi confrontare i progressi che stai osservando qui con le stime delle prestazioni di migrazione che hai elaborato dopo aver eseguito le migrazioni di prova.</block>
+  <block id="9efd63dca0abef55515667c250d2b0f7" category="paragraph">Questo esempio mostra il comando per monitorare l'avanzamento dell'importazione per l'SVM *datamig*.</block>
+  <block id="46b3c36842a76fc19d10f9443193ff40" category="list-text">Verificare che l'importazione dei dati sia stata completata correttamente.</block>
+  <block id="2bfedca5474e7309ea23c83006221f6b" category="paragraph">Questo esempio mostra il comando per verificare lo stato dell'importazione per l'SVM *datamig*.</block>
+  <block id="7159a1b3101b0959db2bf47bfa73f5f3" category="paragraph">Lo *stato operativo* viene visualizzato come *completato* quando il processo di importazione viene completato con successo.</block>
+  <block id="7bc6cf1d5ea27d01c2dba21727c2a677" category="paragraph"><block ref="9a95fb8d643ab3762f2b004297129094" category="inline-link-macro-rx"></block> .</block>
+  <block id="7bd91c22127e38a6b6f74402036b0fc6" category="doc">Verifica i risultati della migrazione offline ONTAP FLI</block>
+  <block id="bdb5c28ad9c2c228128a0f910bb10d26" category="paragraph">Dopo la migrazione di una LUN dall'array esterno al sistema di storage ONTAP , FLI può eseguire un confronto blocco per blocco delle LUN di origine e di destinazione per verificare che la migrazione sia completa e accurata. La verifica della migrazione richiede all'incirca lo stesso tempo (o leggermente superiore) della migrazione stessa.</block>
+  <block id="b4036baa8b9b8834ee76f41af0be269a" category="paragraph">La verifica della migrazione non è obbligatoria, ma è altamente consigliata.</block>
+  <block id="1dd92a161b6bbe48e6f377be66ae30a7" category="list-text">Avviare la verifica della migrazione LUN.</block>
+  <block id="67a72eaf64c08198d8c103d87ca29779" category="paragraph">Questo esempio mostra il comando per avviare la verifica della migrazione LUN per le LUN denominate *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.</block>
+  <block id="f3de152b8212891eed3d9bb772c2bf6e" category="list-text">Monitorare lo stato della verifica.</block>
+  <block id="54b8104ac6da0e24b865fd41e8d424f1" category="paragraph">Questo esempio mostra il comando per monitorare lo stato di verifica per l'SVM *datamig*.</block>
+  <block id="94b95e66c875d883d9a1711392229338" category="paragraph">È possibile eseguire lo stesso comando per monitorare l'avanzamento della verifica. *operational-state* visualizza lo stato *completed* quando il processo di verifica è stato completato con successo.</block>
+  <block id="0d83832e320e8fd7d068ef7aad825279" category="list-text">Interrompere la verifica LUN.</block>
+  <block id="fd6d6a5c9fa3e3d20b8818dc1226bb8a" category="paragraph">Questo esempio mostra il comando per interrompere la verifica LUN per l'SVM *datamig*.</block>
+  <block id="4e353e77e87cbe4ec7472e6d01e6ba81" category="paragraph">La verifica dell'importazione LUN deve essere interrotta esplicitamente prima di riportare online la LUN. In caso contrario, <block ref="23225408559d8aff3667f7cc3ca34adc" prefix=" " category="inline-code"></block> Il comando fallisce. Questo passaggio deve essere eseguito manualmente anche se lo stato indica che la verifica è completata.</block>
+  <block id="f04db8b0b6c9a9a3c79ed9e753fd520e" category="paragraph"><block ref="094b2fb8c85dfc2075f7ff71db128426" category="inline-link-macro-rx"></block> .</block>
+  <block id="5492530e08eb7114998b59bf9818524a" category="summary">Dopo aver stabilito la relazione di importazione LUN e aver trasferito l'host dall'array esterno all'array ONTAP , è possibile importare i dati dal LUN di origine esterno al LUN di destinazione ONTAP .</block>
+  <block id="0eec82420f4378e3f6fd41c5e3e9e21e" category="doc">Importare dati da un array esterno utilizzando la migrazione online ONTAP FLI</block>
+  <block id="7d8bee5c182a62cf83c4c01f51c5e7b3" category="paragraph">Dopo aver stabilito la relazione di importazione LUN e aver spostato la connessione host dall'array esterno all'array ONTAP , è possibile importare i dati dal LUN di origine esterno al LUN di destinazione ONTAP .</block>
+  <block id="3c84f1de018751821bb0b4202f14bf0a" category="list-text">Imposta il livello di privilegio su avanzato.</block>
+  <block id="ac0d826e0cacb0cd87b5171a4243c7ef" category="paragraph"><block ref="df3b9bb7d0424d2237d4ae96281a9704" category="inline-link-macro-rx"></block> .</block>
+  <block id="2570d363eb16d22db684c584ca6ae66d" category="doc">Verifica i risultati della migrazione online ONTAP FLI</block>
+  <block id="c926b1ec88f5052eee3ffc5ebcb7b331" category="paragraph">Dopo la migrazione della LUN dall'array esterno all'array ONTAP , Foreign LUN Import (FLI) può eseguire un confronto blocco per blocco delle LUN di origine e di destinazione per verificare che la migrazione sia completa e accurata. La verifica della migrazione richiede all'incirca lo stesso tempo (o leggermente superiore) della migrazione stessa.</block>
+  <block id="dbd4f77b57c98448b0555d77dfe2f5cb" category="list-text">La verifica della migrazione è discontinua. Le LUN in fase di verifica devono essere offline per tutta la durata della verifica.</block>
+  <block id="851a57e88a94f05dc56e58b2ba2ca6c9" category="paragraph">Questo esempio mostra il comando per mettere offline la LUN denominata *72Clun1* nel volume *flivol* e nella SVM *fli_72C*.</block>
+  <block id="05dbd8feb6f11d79a6cf0a0b8d4c55f0" category="paragraph">Questo esempio mostra il comando per monitorare lo stato di verifica per la LUN denominata *72Clun1* nel volume *flivol* e nella SVM *fli_72C*.</block>
+  <block id="1d0e718d7ca4f6d8b4f4ebbf1f525efd" category="paragraph">La verifica dell'importazione della LUN deve essere interrotta esplicitamente prima di riattivare la LUN. In caso contrario, la LUN non sarà online. Questo passaggio deve essere eseguito manualmente anche se lo stato indica che la verifica è completa.</block>
+  <block id="2b62aed05af8d76bbe5a621528fb47db" category="list-text">LUN online.</block>
+  <block id="dfc1fa86f6e642b28835e1c6ce85936c" category="paragraph"><block ref="8ecb395a80e6a0bd1ed4f0239a31a16f" category="inline-link-macro-rx"></block> .</block>
+  <block id="cc515cb1595dbb780d680639beb7c7dd" category="image-alt">rimozione della configurazione dell'array di destinazione dall'array di origine</block>
+  <block id="5feb9f16c10156907544e9d578b1fde3" category="image-alt">schermata di modifica del gruppo host</block>
+  <block id="24926d4f5951c7ea0cced64e9937014c" category="image-alt">modifica schermata porta gruppo host</block>
+  <block id="8fbad98986850af5f847919b98de76c1" category="image-alt">rimuovi schermata unità logiche</block>
+  <block id="a947dfd4aa9cdebbdbd3e5d9b2f52f2a" category="image-alt">Rimuovere LUN</block>
+  <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">Note di rilascio</block>
+  <block id="db63e5e7d34efa3840098020c2d030bc" category="sidebar">Novità di ONTAP 9.17.1</block>
+  <block id="b845b04a02808188548cb279dc1b7efa" category="sidebar">Zonizzazione delle porte target e inizializzatrici per FLI</block>
+  <block id="5c85b34ddc611aad4c1c95da5183b039" category="sidebar">Migrazione offline FLI</block>
+  <block id="24f47cdbe9ddba774a7cc53e51d9032e" category="sidebar">Flusso di lavoro</block>
+  <block id="8658404b30e07f845a21a01256528b26" category="sidebar">Preparare l'host per la migrazione</block>
+  <block id="d3210f7679f24b8c20933ddb6d77d566" category="sidebar">Preparare le LUN straniere per la migrazione</block>
+  <block id="c8cfbbbe4253e14390b2b14d7e60d9c8" category="sidebar">Importa dati</block>
+  <block id="cd8953245a7b632e7c40bdd158cf53f5" category="sidebar">Verifica i risultati della migrazione</block>
+  <block id="f93ebe1eaf4c78ebab1a110b95f655d8" category="sidebar">Migrazione online FLI</block>
+  <block id="a9fa02c73b0556989b39e0a09dc2fb37" category="sidebar">Preparare gli host per la migrazione</block>
+  <block id="9cc66e684b29dae71b3873021ab5f900" category="sidebar">Mappare i LUN di origine sull'array di destinazione</block>
 </blocks>

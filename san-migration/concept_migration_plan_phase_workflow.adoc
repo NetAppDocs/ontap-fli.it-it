@@ -17,7 +17,7 @@ La fase di pianificazione prevede lo sviluppo di un piano di correzione utilizza
 
 La figura seguente mostra il flusso di lavoro del piano.
 
-image::../media/plan_and_prepare_phase_1.png[pianificare e preparare la fase 1]
+image::../media/plan_and_prepare_phase_1.png[flusso di lavoro del piano di migrazione]
 
 Le attività della fase di pianificazione sono elencate nella seguente tabella.
 

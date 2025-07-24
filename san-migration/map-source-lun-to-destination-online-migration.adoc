@@ -1,0 +1,61 @@
+---
+permalink: san-migration/map-source-lun-to-destination-online-migration.html 
+sidebar: sidebar 
+keywords: fli online, perform, disruptive, cutover 
+summary: In questo esempio vengono fornite le procedure generali per eseguire un cutover disruptivo per il processo di migrazione online di FLI. 
+---
+= Mappare la LUN di origine sull'array ONTAP per una migrazione online FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Per importare dati da una LUN di un array esterno, è necessario prima rimuovere la mappatura della LUN sull'array esterno e riassegnarla al sistema di storage ONTAP . I comandi per rimuovere la mappatura di una LUN su un array esterno variano a seconda del fornitore dell'array. È necessario seguire i passaggi forniti per la procedura generale e consultare la documentazione dell'array esterno per i comandi specifici.
+
+.Prima di iniziare
+La rimozione dell'host (iniziatore) da un igroup influisce su tutte le LUN mappate a quell'igroup. Per evitare interruzioni ad altre LUN sull'array esterno, la LUN che si sta migrando deve essere l'unica LUN mappata al suo igroup. Se sono presenti altre LUN che condividono l'igroup, è necessario rimapparle a un igroup diverso oppure creare un nuovo igroup specifico per la LUN da migrare. Consultare la documentazione del fornitore per i comandi appropriati.
+
+.Fasi
+. Nell'array esterno, visualizzare il gruppo di storage a cui è mappato il LUN di origine.
++
+Consultare la documentazione del vendor per i comandi appropriati.
+
+. Se i LUN che vengono importati sono per un host ESXi, rivedere e seguire le istruzioni per link:reference_esxi_caw_ats_remediation.html["Correzione ESXi CAW/ATS"] .
+. Dismappare il LUN di origine dagli host.
++
+[NOTE]
+====
+L'interruzione inizia immediatamente dopo `unmap` il comando viene eseguito. Generalmente, la finestra di interruzione può essere misurata in pochi minuti. La finestra di interruzione è il tempo necessario per reindirizzare l'host al nuovo target NetApp e per eseguire la scansione dei LUN.
+
+====
+. Verificare che gli iniziatori host non siano più presenti.
+. Sul cluster ONTAP, portare il LUN di destinazione online e verificare che sia mappato.
++
+[source, cli]
+----
+lun online -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
+. Verificare che il LUN sia in linea.
++
+[source, cli]
+----
+lun show -vserver <SVM_name>
+----
+. Eseguire nuovamente la scansione dei dischi sull'host, individuare il LUN sulla destinazione ONTAP, quindi verificare che il DSM abbia richiesto il LUN.
++
+[NOTE]
+====
+La finestra di interruzione termina qui.
+
+====
+. Verificare che tutti i percorsi previsti siano visibili e controllare i registri eventi per verificare che non siano presenti errori.
+
+
+.Risultato
+La parte dirompente di questa migrazione è completa, a meno che non vi siano attività di ripristino dell'host in sospeso (identificate durante le fasi di analisi e pianificazione) che risultano dirompenti.
+
+I LUN sono online e mappati e gli host stanno montando il nuovo LUN ospitato da ONTAP. Le letture vengono passate attraverso l'array ONTAP al LUN di origine e le scritture vengono scritte sia sul nuovo LUN ospitato da ONTAP che sul LUN di origine. Il LUN di origine e il LUN di destinazione resteranno sincronizzati fino al completamento della migrazione e alla rottura della relazione LUN.
+
+.Cosa succederà ora?
+link:task_fli_online_importing_the_data.html["Importa dati dai tuoi LUN esteri"] .

@@ -20,10 +20,10 @@ I seguenti passaggi mostrano come rimuovere la configurazione dell'array di dest
 . Espandere gruppi e selezionare *gruppi di host*.
 . Selezionare il gruppo di host *cDOT_FLI* e fare clic su *Delete host Group* (Elimina gruppo di host).
 +
-image::../media/remove_destination_array_configuration_from_source_array_1.png[rimuovere la configurazione dell'array di destinazione dall'array di origine 1]
+image::../media/remove_destination_array_configuration_from_source_array_1.png[rimozione della configurazione dell'array di destinazione dall'array di origine]
 
 . Confermare l'eliminazione del gruppo host.
 +
-image::../media/remove_destination_array_configuration_from_source_array_2.png[rimuovere la configurazione dell'array di destinazione dall'array di origine 2]
+image::../media/remove_destination_array_configuration_from_source_array_2.png[rimozione della configurazione dell'array di destinazione dall'array di origine]
 
 

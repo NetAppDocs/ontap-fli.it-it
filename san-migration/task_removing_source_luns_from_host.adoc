@@ -22,15 +22,15 @@ Per rimuovere i LUN di origine dall'host, attenersi alla seguente procedura:
 . Accedere a Hitachi Storage Navigator Modular.
 . Selezionare l'host migrato e selezionare *Edit host Group* (Modifica gruppo di host).
 +
-image::../media/remove_source_luns_from_host_1.png[rimuovere i lun di origine dall'host 1]
+image::../media/remove_source_luns_from_host_1.png[schermata di modifica del gruppo host]
 
 . Selezionare *Ports* (Porte) e *Forced Set* (Imposta forzato) su tutte le porte selezionate.
 +
-image::../media/remove_source_luns_from_host_2.png[rimuovere i lun di origine dall'host 2]
+image::../media/remove_source_luns_from_host_2.png[modifica schermata porta gruppo host]
 
 . Selezionare i LUN host migrati da LUN logici assegnati. Utilizzare i nomi LUN per ciascun host menzionato nel foglio di lavoro LUN di origine. Selezionare LUN dell'host Windows 2012 e scegliere *Rimuovi*.
 +
-image::../media/remove_source_luns_from_host_3.png[rimuovere i lun di origine dall'host 3]
+image::../media/remove_source_luns_from_host_3.png[rimuovi schermata unità logiche]
 
 . Ripetere la procedura per gli host Linux e VMware ESX.
 

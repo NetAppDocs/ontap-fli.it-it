@@ -13,7 +13,7 @@ summary: 'Il workflow di migrazione online viene eseguito nella fase di esecuzio
 [role="lead"]
 Il workflow di migrazione online viene eseguito nella fase di esecuzione del processo di migrazione. Il diagramma del flusso di lavoro online mostra le attività eseguite sull'host, sul fabric, sullo storage di destinazione e sullo storage di origine.
 
-image::../media/online_migration_1.png[migrazione online 1]
+image::../media/online_migration_1.png[Flusso di lavoro di migrazione online FlI]
 
 Le attività del flusso di lavoro online sono elencate nella seguente tabella.
 

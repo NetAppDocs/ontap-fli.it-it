@@ -30,4 +30,4 @@ I gruppi di iniziatori si basano su nomi diversi a seconda del fornitore e del p
 
 Indipendentemente dalla nomenclatura, lo scopo di un gruppo iniziatore è quello di identificare gli iniziatori in base alle WWPN che condividono le stesse mappature LUN.
 
-Per definire i gruppi di iniziatori, consultare la documentazione dell'array per informazioni su come impostare il mascheramento LUN (igroups/host groups/storage group e così via). Puoi anche rivedere https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementazione della virtualizzazione FlexArray per storage di terze parti"] per i requisiti di configurazione dello storage di terze parti.
+Per definire i gruppi di iniziatori, consultare la documentazione dell'array per informazioni su come impostare il mascheramento LUN (igroup/gruppi host/gruppi di archiviazione e così via).

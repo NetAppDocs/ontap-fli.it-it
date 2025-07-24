@@ -1,0 +1,59 @@
+---
+permalink: san-migration/configure-fc-adapter-initiator.html 
+sidebar: sidebar 
+keywords: online, migration, workflow 
+summary: 'La modalità Initiator viene utilizzata per connettere le porte a unità nastro, librerie nastro o dispositivi di archiviazione di terze parti con Foreign LUN Import (FLI).' 
+---
+= Configurare gli adattatori FC per la modalità iniziatore
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La modalità iniziatore viene utilizzata per connettere le porte a unità nastro, librerie nastro o sistemi di archiviazione di terze parti con importazione di LUN esterne (FLI). È necessario convertire l'adattatore di destinazione FC in modalità iniziatore per utilizzarlo per FLI.
+
+.Prima di iniziare
+* I LIF sull'adattatore devono essere rimossi da tutti i set di porte di cui fanno parte.
+* Tutti i LIF di ogni macchina virtuale di archiviazione (SVM) che utilizza la porta fisica da modificare devono essere migrati o distrutti prima di modificare la personalità della porta fisica da destinazione a iniziatore.
+
+
+.Fasi
+. Rimuovere tutti i LIF dall'adattatore:
++
+[source, cli]
+----
+network interface delete -vserver <SVM_name> -lif <lif_name>,<lif_name>
+----
+. Togli l'adattatore offline:
++
+[source, cli]
+----
+network fcp adapter modify -node <node_name> -adapter <adapter_port> -status-admin down
+----
++
+Se l'adattatore non si disconnette, è anche possibile rimuovere il cavo dalla porta dell'adattatore appropriata sul sistema.
+
+. Cambiare l'adattatore da target a initiator:
++
+[source, cli]
+----
+system hardware unified-connect modify -t initiator <adapter_port>
+----
+. Riavviare il nodo che ospita l'adattatore modificato.
+. Verificare che le porte FC siano configurate nello stato corretto per la configurazione:
++
+[source, cli]
+----
+system hardware unified-connect show
+----
+. Riportare l'adattatore online:
++
+[source, cli]
+----
+node run -node _node_name_ storage enable adapter <adapter_port>
+----
+
+
+.Cosa succederà ora?
+Suddividere in zone le porte di destinazione dell'array esterno con le porte di avvio del proprio storage ONTAP .

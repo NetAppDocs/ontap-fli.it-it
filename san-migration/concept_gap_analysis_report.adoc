@@ -21,4 +21,4 @@ La sezione NetApp Recommended (consigliata NetApp) completata nella sezione host
 
 Di seguito viene riportato un esempio di report di analisi Gap.
 
-image::../media/create_the_gap_analysis_report_1.png[creare il report di analisi delle lacune 1]
+image::../media/create_the_gap_analysis_report_1.png[esempio di un report di analisi dei gap]

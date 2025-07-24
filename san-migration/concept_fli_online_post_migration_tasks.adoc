@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: fli, online, post-migration, tasks 
 summary: Eventuali rimedi al server non eseguiti prima della migrazione vengono eseguiti durante la post-migrazione. 
 ---
-= Attività di post-migrazione online FLI
+= Eseguire attività post-migrazione online ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

@@ -17,10 +17,9 @@ Gli array di storage utilizzati durante la migrazione devono avere un percorso p
 
 Questa figura è un esempio di cablaggio dello storage per fabric doppi.
 
-image::../media/physical_wiring_1.png[cablaggio fisico 1]
+image::../media/physical_wiring_1.png[esempio di cablaggio di archiviazione per tessuti doppi]
 
 Seguire queste Best practice per il cablaggio:
 
-* Utilizzare le Best practice di NetApp FlexArray per il cablaggio dello storage di origine e destinazione, come descritto in https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Requisiti e riferimenti per l'installazione della virtualizzazione FlexArray"].
 * Lo storage ONTAP richiede porte initiator gratuite per la connessione al fabric. Configurare le porte initiator se non esistono porte libere.
 

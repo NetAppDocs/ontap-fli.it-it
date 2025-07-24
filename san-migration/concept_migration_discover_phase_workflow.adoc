@@ -15,7 +15,7 @@ La fase di rilevamento del processo di migrazione si concentra sulla raccolta de
 
 La figura seguente mostra il flusso di lavoro della fase di rilevamento.
 
-image::../media/discover_phase_1.png[scopri la fase 1]
+image::../media/discover_phase_1.png[flusso di lavoro della fase di scoperta]
 
 Le attività della fase di rilevamento sono elencate nella tabella seguente.
 

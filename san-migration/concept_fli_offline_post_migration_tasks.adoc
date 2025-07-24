@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: fli, offline, post-migration, tasks 
 summary: Eventuali rimedi dei server in sospeso non eseguiti in precedenza vengono eseguiti durante la post-migrazione. 
 ---
-= Attività post-migrazione offline FLI
+= Eseguire attività post-migrazione offline ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

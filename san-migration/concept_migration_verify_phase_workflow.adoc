@@ -15,7 +15,7 @@ La fase di verifica del processo di migrazione si concentra sulla pulizia post-m
 
 La figura seguente mostra il flusso di lavoro della fase di verifica.
 
-image::../media/verify_phase_1.png[verificare la fase 1]
+image::../media/verify_phase_1.png[flusso di lavoro della fase di verifica della migrazione]
 
 Le attività della fase di verifica sono elencate nella seguente tabella.
 

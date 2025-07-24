@@ -1,0 +1,367 @@
+---
+permalink: san-migration/create-lun-import-relationship-offline.html 
+sidebar: sidebar 
+keywords: ceate, lun import relationship, fli, offline migration 
+summary: 'Prima di poter migrare una LUN da un array esterno a un archivio ONTAP , è necessario creare una relazione di importazione LUN. Una relazione di importazione LUN è un"associazione persistente tra l"archivio di origine e quello di destinazione ai fini dell"importazione dei dati.' 
+---
+= Creare la relazione di importazione LUN per una migrazione offline FLI ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di poter migrare una LUN da un array esterno a un sistema di storage ONTAP , è necessario creare una relazione di importazione LUN. Una relazione di importazione LUN è un'associazione persistente tra lo storage di origine e quello di destinazione ai fini dell'importazione dei dati. Gli endpoint di origine e di destinazione sono LUN.
+
+La creazione della relazione di importazione LUN per le migrazioni offline FLI (Foreign LUN Import) include l'identificazione delle LUN dell'array di origine come esterne in ONTAP, la creazione e la configurazione del volume di destinazione per contenere le LUN esterne, la creazione delle LUN di destinazione e, infine, la definizione della relazione di importazione.
+
+.Prima di iniziare
+Dovresti aver completato i passaggi per link:prepare-foreign-lun-offline.html["preparare i LUN esteri per la migrazione offline FLI"] .
+
+
+
+== Passaggio 1: identificare i LUN dell'array sorgente come esterni in ONTAP
+
+Prima di iniziare la migrazione offline di FLI, sarà necessario identificare le LUN dell'array di origine come LUN esterne in ONTAP .
+
+.Fasi
+. Elencare i LUN di origine mappati dall'array esterno; quindi verificare le proprietà e i percorsi del disco.
++
+[source, cli]
+----
+storage disk show -array-name <array_name> -fields disk, serial-number, container-type, owner, path-lun-in-use-count, import-in-progress, is-foreign
+----
++
+Il numero di percorsi previsti dipende dal cablaggio (almeno due percorsi per ciascun controller di origine). È inoltre necessario controllare il registro eventi dopo aver mascherato le LUN dell'array.
+
++
+L'esempio seguente mostra le LUN di origine dell'array Hitachi DF600F.
+
++
+[listing]
+----
+DataMig-ontap::*> storage disk show -array-name HITACHI_DF600F_1 -fields disk, serial-number, container-type, owner, path-lun-in-use-count, import-in-progress, is-foreign
+
+disk     owner is-foreign container-type import-in-progress path-lun-in-use-count serial-number
+-------- ----- ---------- -------------- ------------------ --------------------- -------------
+HIT-1.2  -     false      unassigned     false        0,0,0,0,0,0,0,0       83017542001E
+HIT-1.3  -     false      unassigned     false        0,0,0,0,0,0,0,0       83017542000E
+HIT-1.14 -     false      unassigned     false        0,0,0,0,0,0,0,0       830175420019
+3 entries were displayed.
+
+----
+. Utilizzare il numero di serie per contrassegnare la LUN di origine come esterna in ONTAP:
++
+[source, cli]
+----
+storage disk set-foreign-lun -serial-number <lun_serial_number> -is-foreign true
+----
++
+L'esempio seguente contrassegna le LUN di origine dell'array Hitachi DF600F come esterne.
+
++
+[listing]
+----
+DataMig-ontap::*> storage disk set-foreign-lun { -serial-number 83017542001E }
+                   -is-foreign true
+DataMig-ontap::*> storage disk set-foreign-lun { -serial-number 83017542000E }
+                   -is-foreign true
+DataMig-ontap::*> storage disk set-foreign-lun { -serial-number 83017542000F }
+                   -is-foreign true
+----
+. Verificare che il LUN di origine sia contrassegnato come estraneo.
++
+[source, cli]
+----
+storage disk show -array-name <array_name> -fields disk, serial-number, container-type, owner,import-in-progress, is-foreign
+----
++
+L'esempio seguente mostra le LUN di origine dell'array Hitachi DF600F contrassegnate come esterne.
+
++
+[listing]
+----
+DataMig-ontap::*> storage disk show -array-name HITACHI_DF600F_1 -fields disk, serial-number, container-type, owner,import-in-progress, is-foreign
+
+disk     owner is-foreign container-type import-in-progress serial-number
+-------- ----- ---------- -------------- ------------------ -------------
+HIT-1.2  -     true       foreign        false              83017542001E
+HIT-1.3  -     true       foreign        false              83017542000E
+HIT-1.4  -     true       foreign        false              83017542000F
+3 entries were displayed.
+----
+
+
+
+
+== Passaggio 2: creare e configurare un volume di destinazione
+
+Prima di creare la relazione di importazione LUN per una migrazione offline FLI, è necessario creare un volume sul sistema di archiviazione ONTAP che contenga le LUN che verranno importate dall'array esterno.
+
+.Informazioni su questo compito
+A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite migrazione offline FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Pertanto, non è necessario creare un volume prima di creare la relazione di importazione LUN. È possibile saltare questo passaggio se si utilizza un sistema ASA r2.
+
+Scopri di più su link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemi ASA r2"^] .
+
+.Fasi
+. Creare un volume di destinazione.
++
+[source, cli]
+----
+volume create -vserver <SVM_name> -volume <volume_name> -aggregate <aggregate> -size <volume_size> -snapshot-policy default
+----
++
+L'esempio seguente crea un volume denominato  `winvol` sul  `aggr1` aggregato con una dimensione di 100 GB.
+
++
+[listing]
+----
+DataMig-ontap::*> vol create -vserver datamig winvol aggr1 -size 100g
+----
+. Disabilitare il criterio Snapshot predefinito su ciascun volume.
++
+[source, cli]
+----
+volume modify -vserver <SVM_name> -volume <volume_name> -snapshot-policy none
+----
++
+Se sono presenti copie Snapshot predefinite prima della migrazione FLI, il volume necessita di spazio aggiuntivo per archiviare i dati modificati.
+
++
+L'esempio seguente disabilita il criterio Snapshot predefinito su  `winvol` volume.
+
++
+[listing]
+----
+DataMig-ontap::> volume modify -vserver datamig -volume winvol -snapshot-policy none
+
+Warning: You are changing the Snapshot policy on volume winvol to none.  Any Snapshot copies on this volume from the previous policy will not be deleted by
+         this new Snapshot policy.
+Do you want to continue? {y|n}: y
+Volume modify successful on volume winvol of Vserver datamig.
+----
+. Impostare `fraction_reserveoption` per ogni volume a. `0` E impostare il criterio Snapshot su `none`.
++
+[source, cli]
+----
+vol modify -vserver <SVM_name> -volume * -fractional-reserve 0 –snapshot-policy none
+----
++
+L'esempio seguente imposta il  `fractional-reserve` opzione per  `0` e la politica Snapshot per  `none` per tutti i volumi nella SVM datamig.
+
++
+[listing]
+----
+DataMig-ontap::> vol modify -vserver datamig -volume * -fractional-reserve 0 –snapshot-policy none
+Volume modify successful on volume winvol of Vserver datamig.
+----
+. Verifica le impostazioni del volume.
++
+[source, cli]
+----
+volume show -vserver <SVM_name> -volume * -fields fractional-reserve,snapshot-policy
+----
++
+Le impostazioni della politica di riserva fazionale e di snapshot dovrebbero essere  `0` E  `none` , rispettivamente.
+
+. Eliminare eventuali copie Snapshot esistenti.
++
+[source, cli]
+----
+set advanced; snap delete –vserver <SVM_name> –volume <volume_name> –snapshot * -force true
+----
++
+[NOTE]
+====
+La migrazione FLI modifica ogni blocco del LUN di destinazione. Se su un volume sono presenti copie Snapshot predefinite o di altro tipo prima della migrazione FLI, il volume viene riempito. Modifica del criterio e rimozione di eventuali copie Snapshot esistenti prima della migrazione FLI. È possibile impostare nuovamente la policy di Snapshot dopo la migrazione.
+
+====
+
+
+
+
+== Passaggio 3: creare i LUN di destinazione e la relazione di importazione LUN
+
+Per la migrazione offline di FLI, le LUN di destinazione sul sistema di archiviazione ONTAP devono essere create e mappate a un igroup; quindi devono essere messe offline prima di creare la relazione di importazione LUN.
+
+.Informazioni su questo compito
+A partire da ONTAP 9.17.1, la migrazione dei dati di LUN estranee utilizzando la migrazione offline FLI è supportata da link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemi ASA r2"^]. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. ASA creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Ogni volume contiene una sola unità di archiviazione. Pertanto, per i sistemi ASA r2, non è necessario includere il nome del volume nel file  `-path` opzione durante la creazione del LUN; dovresti invece includere il percorso dell'unità di archiviazione.
+
+.Fasi
+. Creare LUN di destinazione.
++
+[source, cli]
+----
+lun create -vserver <SVM_name> -path <volume_path|storage_unit_path> -ostype <os_type> -foreign-disk <serial_number>
+----
++
+L'esempio seguente crea LUN su  `datamig` SVM con i percorsi specificati e i numeri di serie dei dischi esterni .  `-ostype` L'opzione specifica il tipo di sistema operativo della LUN.
+
++
+[listing]
+----
+DataMig-ontap::*> lun create -vserver datamig -path /vol/winvol/bootlun -ostype windows_2008 -foreign-disk 83017542001E
+
+Created a LUN of size 40g (42949672960)
+
+Created a LUN of size 20g (21474836480)
+DataMig-ontap::*> lun create -vserver datamig -path /vol/linuxvol/lvmlun1 -ostype linux -foreign-disk 830175420011
+
+Created a LUN of size 2g (2147483648)
+DataMig-ontap::*> lun create -vserver datamig -path /vol/esxvol/bootlun -ostype vmware -foreign-disk 830175420014
+
+Created a LUN of size 20g (21474836480)
+----
++
+[NOTE]
+====
+IL  `lun create` Il comando rileva la dimensione e l'allineamento della LUN in base all'offset della partizione e crea la LUN di conseguenza con l'opzione foreign-disk. Alcuni I/O appariranno sempre come scritture parziali e quindi disallineati. Esempi di questo tipo di operazioni sono i log del database.
+
+====
+. Verificare le dimensioni e la LUN di origine delle LUN appena create.
++
+[source, cli]
+----
+lun show -vserver <SVM_name> -fields vserver, path, state, mapped, type, size
+----
++
+L'esempio seguente mostra i LUN creati in  `datamig` SVM con i relativi percorsi, stati, stato mappato, tipi e dimensioni.
+
++
+[listing]
+----
+DataMig-ontap::*> lun show -vserver datamig
+
+Vserver   Path                            State   Mapped   Type        Size
+--------- ------------------------------- ------- -------- -------- --------
+datamig   /vol/esxvol/bootlun             online  unmapped vmware       20GB
+datamig   /vol/esxvol/linuxrdmvlun        online  unmapped linux         2GB
+datamig   /vol/esxvol/solrdmplun          online  unmapped solaris       2GB
+datamig   /vol/winvol/gdrive              online  unmapped windows_2008  3GB
+4 entries were displayed.
+----
+. Se si esegue ONTAP 9.15.1 o versione successiva, disabilitare l'allocazione dello spazio per i LUN appena creati.
++
+L'allocazione dello spazio è abilitata per impostazione predefinita per i LUN appena creati in ONTAP 9.15.1 e versioni successive.
+
++
+[source, cli]
+----
+lun modify -vserver <vserver_name> -volume <volume_name> -lun <lun_name> -space-allocation disabled
+----
+. Verificare che l'allocazione dello spazio sia disabilitata.
++
+[source, cli]
+----
+lun show -vserver <vserver_name> -volume <volume_name> -lun <lun_name> -fields space-allocation
+----
+. Creare un igroup host del protocollo FCP e aggiungere gli iniziatori host.
++
+[source, cli]
+----
+lun igroup create -ostype <os_type> -protocol fcp -vserver <SVM_name> -igroup <igroup_name> -initiator <initiator_wwpn1>,<initiator_wwpn2>
+----
++
+Trova gli WWPN iniziatori nella sezione gruppi di stoccaggio del foglio di lavoro di pianificazione del sopralluogo del sito.
+
++
+L'esempio seguente crea igroup per i LUN di destinazione con i tipi di sistema operativo e gli iniziatori specificati.
+
++
+[listing]
+----
+DataMig-ontap::*> lun igroup create -ostype windows -protocol fcp -vserver datamig -igroup dm-rx200s6-21 -initiator 21:00:00:24:ff:30:14:c4,21:00:00:24:ff:30:14:c5
+
+DataMig-ontap::*> lun igroup create -ostype linux -protocol fcp -vserver datamig  -igroup dm-rx200s6-22 -initiator 21:00:00:24:ff:30:04:85,21:00:00:24:ff:30:04:84
+
+DataMig-ontap::*> lun igroup create -ostype vmware -protocol fcp -vserver datamig -igroup dm-rx200s6-20 -initiator 21:00:00:24:ff:30:03:ea,21:00:00:24:ff:30:03:eb
+----
++
+[NOTE]
+====
+Utilizzare lo stesso ID LUN dell'origine. Fare riferimento alla sezione LUN di origine del foglio di lavoro per la pianificazione del sondaggio del sito.
+
+====
+. Mappare i LUN di destinazione su un igroup.
++
+[source, cli]
+----
+lun map -vserver <SVM_name> -path <volume_path|storage_unit_path> -igroup <igroup_name> -lun-id <lun_id>
+----
++
+Nell'esempio seguente i LUN di destinazione vengono mappati ai rispettivi igroup con i percorsi e gli ID LUN specificati.
+
++
+[listing]
+----
+DataMig-ontap::*> lun map -vserver datamig -path /vol/winvol/bootlun -igroup dm-rx200s6-21 -lun-id 0
+DataMig-ontap::*> lun map -vserver datamig -path /vol/linuxvol/bootlun -igroup dm-rx200s6-22 -lun-id 0
+DataMig-ontap::*> lun map -vserver datamig -path /vol/esxvol/bootlun -igroup dm-rx200s6-20 -lun-id 0
+----
+. Offline i LUN di destinazione.
++
+[source, cli]
+----
+lun offline -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
++
+L'esempio seguente mette offline i LUN di destinazione in  `datamig` SVM.
+
++
+[listing]
+----
+DataMig-ontap::*> lun offline -vserver datamig -path /vol/esxvol/bootlun
+DataMig-ontap::*> lun offline -vserver datamig -path /vol/esxvol/linuxrdmvlun
+DataMig-ontap::*> lun offline -vserver datamig -path /vol/esxvol/solrdmplun
+----
+. Creare la relazione di importazione LUN tra i LUN di destinazione e di origine.
++
+[source, cli]
+----
+lun import create -vserver <SVM_name> -path <volume_path|storage_unit_path> -foreign-disk <serial_number>
+----
++
+L'esempio seguente crea la relazione di importazione LUN per i LUN di destinazione in  `datamig` SVM con i rispettivi percorsi e numeri di serie dei dischi esterni.
+
++
+[listing]
+----
+DataMig-ontap::*> lun import create -vserver datamig -path /vol/winvol/bootlun -foreign-disk 83017542001E
+DataMig-ontap::*> lun import create -vserver datamig -path /vol/linuxvol/ext3lun -foreign-disk 830175420013
+DataMig-ontap::*> lun import create -vserver datamig -path /vol/esxvol/linuxrdmvlun -foreign-disk 830175420018
+DataMig-ontap::*> lun import create -vserver datamig -path /vol/esxvol/solrdmplun -foreign-disk 830175420019
+----
+. Verificare che la relazione di importazione LUN sia stata creata.
++
+[source, cli]
+----
+lun import show -vserver <SVM_name> -fields vserver, foreign-disk, path, operation, admin-state, operational-state, percent-complete
+----
++
+L'esempio seguente mostra la relazione di importazione LUN creata per i LUN di destinazione in  `datamig` SVM con i rispettivi dischi e percorsi esterni.
+
++
+[listing]
+----
+DataMig-ontap::*> lun import show -vserver datamig
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+datamig 83017542000E   /vol/winvol/fdrive  import    stopped
+                                                           stopped            0
+datamig 83017542000F   /vol/winvol/gdrive  import    stopped
+                                                           stopped            0
+datamig 830175420010   /vol/linuxvol/bootlun
+                                           import    stopped
+                                                           stopped            0
+3 entries were displayed.
+----
+
+
+.Cosa succederà ora?
+link:task_fli_offline_importing_the_data.html["Importare i dati dalle LUN esterne alle LUN ONTAP"] .
+
+.Informazioni correlate
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_is_an_unaligned_I%2F%2FO%3F["Scopri di più sull'I/O non allineato"] .
+* https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html["Scopri di più sull'abilitazione dell'allocazione dello spazio per i protocolli SAN"] .
+

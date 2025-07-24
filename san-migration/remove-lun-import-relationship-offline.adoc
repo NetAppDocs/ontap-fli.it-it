@@ -1,0 +1,153 @@
+---
+permalink: san-migration/remove-lun-import-relationship-offline.html 
+sidebar: sidebar 
+keywords: fli offline, verify, migration, results 
+summary: Un lavoro di verifica è facoltativo, ma consigliato. Si tratta di un confronto blocco per blocco delle LUN di origine e di destinazione. Verificare che i processi richiedano quasi lo stesso tempo o un tempo leggermente superiore rispetto al tempo di migrazione. 
+---
+= Rimuovere la relazione di importazione LUN dopo una migrazione offline FLI ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una volta completata la migrazione offline dell'importazione della LUN esterna (FLI), la relazione di importazione della LUN può essere rimossa in sicurezza. L'host ora accede al nuovo array NetApp per tutti gli I/O sulla nuova LUN ONTAP e la LUN di origine non è più in uso, quindi la relazione di importazione non è più necessaria.
+
+A partire da ONTAP 9.17.1, la migrazione dei dati di LUN estranee utilizzando la migrazione offline FLI è supportata da link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemi ASA r2"^]. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. ASA creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Ogni volume contiene una sola unità di archiviazione. Pertanto, per i sistemi ASA r2, non è necessario includere il nome del volume nel file  `-path` opzione durante la creazione del LUN; dovresti invece includere il percorso dell'unità di archiviazione.
+
+.Fasi
+. Eliminare la relazione di importazione per rimuovere i processi di importazione dei dati.
++
+[source, cli]
+----
+lun import delete -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
++
+Questo esempio mostra il comando per eliminare la relazione di importazione per i LUN denominati *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.
+
++
+[listing]
+----
+DataMig-ontap::*> lun import delete -vserver datamig -path /vol/winvol/bootlun
+
+DataMig-ontap::*> lun import delete -vserver datamig -path /vol/winvol/fdrive
+
+DataMig-ontap::*> lun import delete -vserver datamig -path /vol/winvol/gdrive
+----
+. Verificare che i processi di importazione siano stati eliminati.
++
+[source, cli]
+----
+lun import show -vserver <SVM_name>
+----
++
+Questo esempio mostra il comando per verificare che i processi di importazione siano stati eliminati per l'SVM *datamig*.
+
++
+[listing]
+----
+DataMig-ontap::*> lun import show -vserver datamig
+There are no entries matching your query.
+----
+. Contrassegnare l'attributo LUN esterno su `false`.
++
+[source, cli]
+----
+storage disk modify -serial-number <serial_number> -is-foreign false
+----
++
+Questo esempio mostra il comando per contrassegnare l'attributo LUN esterno su  `false` per le LUN denominate *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.
+
++
+[listing]
+----
+DataMig-ontap::*> storage disk modify { -serial-number 83017542001E }
+-is-foreign false
+
+DataMig-ontap::*> storage disk modify { -serial-number 83017542000E }
+-is-foreign false
+
+DataMig-ontap::*> storage disk modify { -serial-number 83017542000F }
+-is-foreign false
+----
+. Verificare che i LUN esterni siano contrassegnati come  `false` .
++
+[source, cli]
+----
+storage disk show -array-name <array_name> -fields disk, serial-number, container-type, owner, import-in-progress, is-foreign
+----
++
+Questo esempio mostra il comando per verificare che i LUN esterni siano contrassegnati come  `false` sulla matrice *HITACHI_DF600F_1*.
+
++
+[listing]
+----
+DataMig-ontap::*> storage disk show -array-name HITACHI_DF600F_1 -fields disk, serial-number, container-type, owner,import-in-progress, is-foreign
+
+disk     owner is-foreign container-type import-in-progress serial-number
+-------- ----- ---------- -------------- ------------------ -------------
+HIT-1.2  -     false      unassigned     false              83017542001E
+HIT-1.3  -     false      unassigned     false              83017542000E
+HIT-1.4  -     false      unassigned     false              83017542000F
+3 entries were displayed.
+----
+. Portare online i LUN di destinazione.
++
+[source, cli]
+----
+lun online -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
++
+Questo esempio mostra il comando per portare online le LUN di destinazione per le LUN denominate *bootlun*, *fdrive* e *gdrive* nel volume *winvol* e nella SVM *datamig*.
+
++
+[listing]
+----
+DataMig-ontap::*> lun online -vserver datamig -path /vol/winvol/bootlun
+
+DataMig-ontap::*> lun online -vserver datamig -path /vol/winvol/fdrive
+
+DataMig-ontap::*> lun online -vserver datamig -path /vol/winvol/gdrive
+----
+. Verificare che i LUN siano in linea.
++
+[source, cli]
+----
+lun show -vserver <SVM_name>
+----
++
+Questo esempio mostra il comando per verificare che i LUN siano online per l'SVM *datamig*.
+
++
+[listing]
+----
+DataMig-ontap::*> lun show -vserver datamig
+Vserver   Path                            State   Mapped   Type        Size
+--------- ------------------------------- ------- -------- -------- --------
+datamig   /vol/esxvol/bootlun             online  mapped   vmware       20GB
+datamig   /vol/esxvol/linuxrdmvlun        online  mapped   linux         2GB
+datamig   /vol/esxvol/solrdmplun          online  mapped   solaris       2GB
+3 entries were displayed.
+----
+. Facoltativamente, visualizza il registro eventi per verificare i risultati della migrazione.
++
+[source, cli]
+----
+event log show –event fli*
+----
++
+Questo esempio mostra un output di esempio del comando per visualizzare il registro eventi per i risultati della migrazione FLI.
+
++
+[listing]
+----
+DataMig-ontap::*> event log  show –event fli*
+
+7/7/2014 18:37:21   DataMig-ontap-01 INFORMATIONAL fli.lun.verify.complete: Import verify of foreign LUN 83017542001E of size 42949672960 bytes from array model DF600F belonging to vendor HITACHI  with NetApp LUN QvChd+EUXoiS is successfully completed.
+7/7/2014 18:37:15   DataMig-ontap-01 INFORMATIONAL fli.lun.verify.complete: Import verify of foreign LUN 830175420015 of size 42949672960 bytes from array model DF600F belonging to vendor HITACHI  with NetApp LUN QvChd+EUXoiX is successfully completed.
+7/7/2014 18:02:21   DataMig-ontap-01 INFORMATIONAL fli.lun.import.complete: Import of foreign LUN 83017542000F of size 3221225472 bytes from array model DF600F belonging to vendor HITACHI  is successfully completed. Destination NetApp LUN is QvChd+EUXoiU.
+----
+
+
+.Cosa succederà ora?
+link:concept_fli_offline_post_migration_tasks.html["Eseguire attività post-migrazione per una migrazione offline FLI"] .

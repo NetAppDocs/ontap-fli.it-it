@@ -1,23 +1,50 @@
 ---
 permalink: san-migration/concept_fli_offline_workflow.html 
-redirect: ontap-fli/san-migration/task_rebooting_the_host_to_validate_system_state.html 
 sidebar: sidebar 
 keywords: fli, offline, workflow 
-summary: In questa sezione viene fornito un esempio del flusso di lavoro offline FLI, uno dei quattro flussi di lavoro FLI. 
+summary: 'In una migrazione offline FLI, il sistema client viene portato offline durante la migrazione dei dati dall"array di storage esterno di terze parti al sistema di storage NetApp' 
 ---
-= Workflow offline FLI
+= Riepilogo del flusso di lavoro della migrazione offline FLI ONTAP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-In questa sezione viene fornito un esempio del flusso di lavoro offline FLI, uno dei quattro flussi di lavoro FLI.
+La migrazione dei dati tramite Foreign LUN Import (FLI) è un processo che prevede diversi passaggi chiave per garantire il corretto trasferimento dei dati da array di storage di terze parti ai sistemi di storage NetApp . FLI supporta migrazioni offline e online. In una migrazione offline FLI, il sistema client viene portato offline durante la migrazione dei dati dall'array di storage esterno di terze parti al sistema di storage NetApp .
 
-Questo flusso di lavoro utilizza un array HDS AMS2100 come array di origine. Il flusso di lavoro offline ha le seguenti attività:
+.Prima di iniziare
+* Dovresti completare il link:concept_migration_discover_phase_workflow.html["scoperta"] , link:concept_migration_analyze_phase_workflow.html["analisi"] , E link:concept_migration_plan_phase_workflow.html["pianificazione"] fasi del processo di migrazione.
+* Dovresti link:configure-fc-adapter-initiator.html["configura i tuoi adattatori FC per la modalità iniziatore"] .
+* Dovresti link:concept_target_and_initiator_port_zoning.html["suddividi in zone le porte di destinazione dell'array esterno con le porte di avvio dell'archiviazione ONTAP"] .
 
-. Preparazione per il cutover
-. Importazione dei dati
-. Verifica dei risultati della migrazione (opzionale)
-. Attività post-migrazione offline FLI
 
+Il flusso di lavoro offline FLI include la preparazione degli host e dei LUN esterni per l'importazione, la creazione della relazione di importazione LUN e l'importazione dei dati.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Uno"]link:prepare-host-offline-migration.html["Prepara il tuo host"] .
+[role="quick-margin-para"]
+Prima di eseguire una migrazione offline FLI, è necessario riavviare gli host e verificare la configurazione multipathing dell'host.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Due"]link:prepare-foreign-lun-offline.html["Prepara i tuoi LUN esteri"] .
+[role="quick-margin-para"]
+Nel processo di migrazione offline FLI, è necessario eseguire passaggi manuali dall'array esterno per presentare la LUN di origine esterna al sistema di archiviazione ONTAP ; è quindi necessario eseguire ulteriori passaggi manuali per rilevare la LUN di origine esterna sul sistema di archiviazione ONTAP .
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Tre"]link:create-lun-import-relationship-offline.html["Creare la relazione di importazione LUN"] .
+[role="quick-margin-para"]
+La creazione della relazione di importazione LUN per le migrazioni offline FLI include l'identificazione delle LUN dell'array di origine come esterne in ONTAP, la creazione e la configurazione del volume di destinazione per contenere le LUN esterne, la creazione delle LUN di destinazione e, infine, la definizione della relazione di importazione.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quattro"]link:task_fli_offline_importing_the_data.html["Importare i dati LUN dall'array esterno"] .
+[role="quick-margin-para"]
+Utilizzare FLI per importare i dati LUN dall'array esterno.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["Cinque"]link:task_fli_offline_verifying_migration_results.html["Verificare i risultati della migrazione"] .
+[role="quick-margin-para"]
+Eseguire un confronto blocco per blocco delle LUN di origine e di destinazione per verificare che la migrazione sia completa e accurata.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["Sei"]link:remove-lun-import-relationship-offline.html["Rimuovere la relazione di importazione LUN"] .
+[role="quick-margin-para"]
+Una volta completata la migrazione offline di FLI, la relazione di importazione LUN può essere rimossa in modo sicuro.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-7.png["Sette"]link:concept_fli_offline_post_migration_tasks.html["Eseguire attività post-migrazione"] .
+[role="quick-margin-para"]
+Esaminare i registri per individuare eventuali errori, verificare la configurazione multipathing dell'host ed eseguire test applicativi per verificare che la migrazione sia stata completata correttamente.

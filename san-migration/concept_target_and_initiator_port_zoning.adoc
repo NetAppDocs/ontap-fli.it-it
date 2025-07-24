@@ -4,14 +4,14 @@ sidebar: sidebar
 keywords: target, initiator, port, zoning 
 summary: 'La migrazione FLI richiede l"accesso alle LUN dello storage di origine da parte dello storage NetApp. Ciò si ottiene tramite lo zoning delle porte di destinazione dello storage di origine con le porte di iniziazione dello storage di destinazione.' 
 ---
-= Zoning delle porte di destinazione e iniziatore
+= Zonizzazione delle porte di destinazione e di avvio per le migrazioni ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-La migrazione FLI richiede l'accesso alle LUN dello storage di origine da parte dello storage NetApp. Ciò si ottiene tramite lo zoning delle porte di destinazione dello storage di origine con le porte di iniziazione dello storage di destinazione.
+La migrazione FLI richiede che le LUN di origine dell'array esterno siano accessibili dallo storage NetApp . Questo si ottiene suddividendo le porte di destinazione dello storage di origine in porte di avvio dello storage di destinazione NetApp .
 
 Le zone storage-to-host di origine esistenti non vengono modificate e disattivate dopo la migrazione. Le zone di storage host-to-destination vengono create per consentire l'accesso delle LUN migrate dallo storage di destinazione da parte dell'host.
 
@@ -37,3 +37,48 @@ Segui queste Best practice per lo zoning:
 Dopo aver eseguito la suddivisione in zone delle porte di destinazione dello storage di origine con le porte di iniziatore dello storage di destinazione, lo storage di origine sarà visibile nello storage di destinazione utilizzando il comando show dell'array di storage.quando lo storage array viene rilevato per la prima volta, i controller NetApp potrebbero non visualizzare automaticamente l'array. Risolvere il problema ripristinando la porta dello switch a cui sono collegate le porte ONTAP Initiator.
 
 ====
+Uno scenario di migrazione standard con FLI richiede quattro zone distinte. È necessario includere porte specifiche in ciascuna zona.
+
+* Zona 1: Dallo storage di origine allo storage di destinazione (fabric di produzione A)
++
+La zona 1 deve contenere tutti gli iniziatori dello storage di destinazione su tutti i nodi e tutte le porte di destinazione dello storage di origine nel fabric A. I membri della zona includono:
+
++
+** ONTAP -- Node1 -- 0a
+** ONTAP -- Node2 -- 0a
+** AMS2100 -- Ctrl0 -- 0a
+** AMS2100 -- CTRL1 -- 1a
+
+
+* Zona 2: Dallo storage di origine allo storage di destinazione (fabric di produzione B)
++
+La zona 2 deve contenere tutte le porte di iniziatore dello storage di destinazione su tutti i nodi e tutte le porte di destinazione dello storage di origine nel fabric B. I membri della zona 2 includono:
+
++
+** ONTAP -- Node1 -- 0b
+** ONTAP -- Node2 -- 0b
+** AMS2100 -- Ctrl0 -- 0e
+** AMS2100 -- CTRL1 -- 1e
+
+
+* Zona 3: Storage da host a destinazione (fabric di produzione A)
++
+La zona 3 deve contenere la porta 1 dell'adattatore bus host (HBA) e le porte del controller di destinazione nel fabric di produzione A. I membri della zona 3 includono:
+
++
+** ONTAP -- lif1
+** ONTAP -- lif3
+** Host -- HBA0
+
+
+* Zona 4: Storage da host a destinazione (fabric di produzione B)
++
+La zona 4 deve contenere la porta HBA 2 e le porte del controller di destinazione nel fabric di produzione B. I membri della zona 4 includono:
+
++
+** ONTAP -- lif2
+** ONTAP -- lif4
+** Host -- HBA1
+
+
+
