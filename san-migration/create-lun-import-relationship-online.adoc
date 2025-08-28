@@ -231,7 +231,7 @@ DGC-1.9 600601603F103100662E70861000E511
 Prima di creare la relazione di importazione LUN per una migrazione online FLI, è necessario creare un volume sul sistema di archiviazione ONTAP che contenga la LUN che verrà importata dall'array esterno.
 
 .Informazioni su questo compito
-A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite migrazione offline FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Pertanto, non è necessario creare un volume prima di creare la relazione di importazione LUN. È possibile saltare questo passaggio se si utilizza un sistema ASA r2.
+A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite la migrazione online FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 differiscono dagli altri sistemi ONTAP (ASA, AFF e FAS) nell'implementazione del loro livello di archiviazione. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di archiviazione (LUN o namespace). Pertanto, non è necessario creare un volume prima di creare la relazione di importazione LUN. È possibile saltare questo passaggio se si utilizza un sistema ASA r2.
 
 Scopri di più su link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemi ASA r2"^] .
 
@@ -417,4 +417,4 @@ lun import create -vserver <SVM_name> -path <volume_path|storage_unit_path> -for
 link:map-source-lun-to-destination-online-migration.html["Mappare la LUN di origine sulla LUN di destinazione ONTAP"] .
 
 .Informazioni correlate
-https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_is_an_unaligned_I%2F%2FO%3F["Scopri di più sull'I/O non allineato"] .
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_is_an_unaligned_I%2F%2FO%3F["Scopri di più sull'I/O non allineato"^] .
