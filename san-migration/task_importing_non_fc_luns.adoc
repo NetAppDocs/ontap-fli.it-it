@@ -2,7 +2,7 @@
 permalink: san-migration/task_importing_non_fc_luns.html 
 sidebar: sidebar 
 keywords: import, non-fc luns 
-summary: 'Poiché l"importazione di LUN esterne (FLI) sfrutta la tecnologia FlexArray per montare LUN esterne, può connettersi solo agli array di origine utilizzando FCP. Solo i LUN FC sono supportati da FLI. Tuttavia, esiste una soluzione alternativa che consente di importare LUN iSCSI. Poiché si importano le LUN iSCSI come LUN FC, a differenza di altri flussi di lavoro 7-Mode online FLI in ONTAP, la finestra di interruzione si estenderebbe a questo intero flusso di lavoro:' 
+summary: 'FLI supporta solo le LUN FC. Tuttavia, esiste una soluzione alternativa che consente di importare iSCSI LUN. Poiché importerai i LUN iSCSI come LUN FC, a differenza di altri flussi di lavoro FLI online 7-Mode in ONTAP , la finestra di interruzione coprirà l"intero flusso di lavoro:' 
 ---
 = Importazione di LUN non FC
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: 'Poiché l"importazione di LUN esterne (FLI) sfrutta la tecnologia Flex
 
 
 [role="lead"]
-Poiché l'importazione di LUN esterne (FLI) sfrutta la tecnologia FlexArray per montare LUN esterne, può connettersi solo agli array di origine utilizzando FCP. Solo i LUN FC sono supportati da FLI. Tuttavia, esiste una soluzione alternativa che consente di importare LUN iSCSI. Poiché si importano le LUN iSCSI come LUN FC, a differenza di altri flussi di lavoro 7-Mode online FLI in ONTAP, la finestra di interruzione si estenderebbe a questo intero flusso di lavoro:
+FLI supporta solo le LUN FC. Tuttavia, esiste una soluzione alternativa che consente di importare iSCSI LUN. Poiché importerai i LUN iSCSI come LUN FC, a differenza di altri flussi di lavoro FLI online 7-Mode in ONTAP , la finestra di interruzione coprirà l'intero flusso di lavoro:
 
 Poiché si importano le LUN iSCSI come LUN FC, a differenza di altri flussi di lavoro 7-Mode online FLI in ONTAP, la finestra di interruzione si estenderebbe a questo intero flusso di lavoro.
 

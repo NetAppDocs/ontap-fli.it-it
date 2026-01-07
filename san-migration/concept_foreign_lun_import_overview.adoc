@@ -15,13 +15,11 @@ L'importazione di LUN esterne (FLI) è una funzionalità integrata in ONTAP che 
 
 Tutte le migrazioni FLI operano a livello di LUN. FLI è uno strumento strettamente basato su blocchi; le migrazioni basate su file, record, NFS e CIFS non sono supportate. Per una discussione su altre metodologie di migrazione per i protocolli a livello di file, come NFS e CIFS/SMB, consultare https://library.netapp.com/ecm/ecm_get_file/ECMP12363719["Guida di riferimento rapido agli strumenti per la migrazione dei dati"].
 
-FLI sfrutta la tecnologia NetApp FlexArray® per rilevare i LUN degli array RAID esterni e estrarre i dati da essi. FlexArray consente a un controller NetApp ONTAP di agire come iniziatore davanti a uno o più array di terze parti. FlexArray può montare LUN da questi array come storage back-end e quindi presentare lo spazio di tali LUN come storage unificato NetApp (consentendo l'accesso ai protocolli FCP, FCoE, iSCSI, NFS e CIFS/SMB) agli host nel tuo ambiente SAN o NAS.
-
-FLI non richiede una licenza FlexArray. FLI sfrutta la tecnologia FlexArray per copiare il LUN esterno in un array ONTAP NetApp e consentire agli host e alle applicazioni che utilizzano tale LUN di puntare all'array NetApp che ospita il LUN in questione. Anche se ONTAP non richiede più una migrazione professionale, si consiglia vivamente di coinvolgere i servizi professionali nell'ambito, nella pianificazione e nella formazione per tutte le migrazioni, tranne quelle più semplici.
+Sebbene ONTAP non richieda più una migrazione gestita da servizi professionali, NetApp consiglia vivamente il coinvolgimento di servizi professionali nella definizione dell'ambito, nella pianificazione e nella formazione per tutte le migrazioni, tranne quelle più semplici.
 
 FLI è stato sviluppato per migrare LE LUN SAN a ONTAP. FLI supporta una serie di requisiti di migrazione, tra cui, a titolo esemplificativo ma non esaustivo, i seguenti:
 
-* Migrazione dei dati tra array storage eterogenei da EMC, Hitachi, HP e altri vendor a NetApp, come supportato dalla configurazione FlexArray.
+* Migrazione di dati tra array di storage eterogenei di EMC, Hitachi, HP e altri fornitori a NetApp.
 * Semplificazione e accelerazione delle migrazioni dei dati a blocchi durante il trasferimento, il consolidamento e la sostituzione degli array del data center.
 * Consolidamento di migrazioni e riallineamenti LUN in un singolo workflow.
 

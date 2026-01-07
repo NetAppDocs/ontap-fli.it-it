@@ -14,12 +14,13 @@ summary: I LUN devono soddisfare i seguenti requisiti prima di iniziare una migr
 I LUN devono soddisfare i seguenti requisiti prima di iniziare una migrazione FLI.
 
 * FLI richiede almeno una porta FC su ciascun controller e la migrazione DEI LUN direttamente in modalità Initiator.
-* Il LUN esterno deve essere contrassegnato come estraneo nell'array di destinazione per impedire le assegnazioni da ONTAP.
-* Il LUN esterno deve trovarsi in una relazione di importazione prima di iniziare l'importazione.
-* Il LUN deve avere le stesse dimensioni del LUN esterno e le stesse dimensioni del blocco di dischi. Entrambi questi requisiti vengono presi in considerazione durante le fasi di creazione del LUN.
+* La LUN esterna deve essere contrassegnata come esterna nell'array di destinazione per impedire assegnazioni da parte di ONTAP.
+* Prima di iniziare l'importazione, il LUN estero deve trovarsi in una relazione di importazione.
+* La LUN deve avere le stesse dimensioni della LUN esterna. Questo requisito viene soddisfatto durante le fasi di creazione della LUN.
+* La dimensione del blocco LUN esterno deve essere 512b. Le LUN NetApp supportano solo blocchi di dimensioni pari a 512 b.
 * Il LUN non deve espandersi o contrarsi.
 * Il LUN deve essere mappato ad almeno un igroup.
-* Il LUN di NetApp deve essere portato offline prima di creare una relazione. Tuttavia, una volta creata la relazione LUN, è possibile ripristinarla online in caso di FLI online.
+* Prima di creare una relazione, è necessario disattivare la LUN NetApp . Tuttavia, dopo aver creato la relazione LUN, è possibile ripristinarla online in caso di FLI online.
 
 
 
