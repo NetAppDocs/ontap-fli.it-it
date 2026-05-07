@@ -3,40 +3,40 @@ section: sample-site
 title: Esempio di foglio di lavoro Site Survey and Planning
 entries:
 - title: Panoramica
-  url: "/san-migration/reference_sample_site_survey_and_planning_worksheet.html"
+  url: "/sample-site/reference_sample_site_survey_and_planning_worksheet.html"
 - title: Scheda Contatti del foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_contacts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_contacts_tab.html"
 - title: Scheda del questionario del foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_questionnaire_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_questionnaire_tab.html"
 - title: Scheda interruttori del foglio di lavoro Site Survey and Planning (analisi
     del sito
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_switches_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_switches_tab.html"
 - title: Scheda Source Storage Devices (dispositivi di storage di origine) del foglio
     di lavoro Site Survey and Pl
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html"
 - title: Foglio di lavoro Site Survey and Planning scheda Destination Storage Devices
     (dispositivi di storage di
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html"
 - title: Scheda host del foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_hosts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_hosts_tab.html"
 - title: Scheda HBA (Site Survey and Planning) e informazioni zona del foglio di lavoro
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html"
 - title: Scheda LUN di origine del foglio di lavoro Site Survey and Planning (analisi
     del sito e pianificazione)
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_source_luns_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_source_luns_tab.html"
 - title: Scheda Storage Groups del foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_storage_groups_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_storage_groups_tab.html"
 - title: Scheda Dettagli LUN del foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_lun_details_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_lun_details_tab.html"
 - title: Foglio di lavoro Site Survey and Planning scheda NetApp LUN Layout
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html"
 - title: Scheda Pianificazione della migrazione del foglio di lavoro Site Survey and
     Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html"
 - title: Scheda Stato aggregato del foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html"
 - title: Scheda Configurazione FAS del foglio di lavoro per l'analisi e la pianificazione
     del sito
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_fas_config_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_fas_config_tab.html"
 - title: Scheda script SDS CLI per il foglio di lavoro Site Survey and Planning
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html"
