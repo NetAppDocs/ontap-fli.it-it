@@ -1,0 +1,157 @@
+---
+permalink: phases/remediation-aix.html 
+sidebar: sidebar 
+keywords: ontap, fli, foreign lun import, aix host, pre-migration, offline fli, online fli 
+summary: Prima di eseguire la migrazione ONTAP FLI su un host AIX, completare questi passaggi pre-migrazione. Sono previsti passaggi separati per le migrazioni offline e online. 
+---
+= Remediation host ONTAP FLI AIX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di eseguire la migrazione ONTAP FLI su un host AIX, completare questi passaggi pre-migrazione. Sono previsti passaggi separati per le migrazioni offline e online.
+
+
+
+== Pre-migrazione - FLI offline
+
+Questi passaggi sono comuni sia per FLI online che offline. Prima di disattivare la LUN di origine dall'host, assicurarsi di aver completato i seguenti passaggi.
+
+[cols="5"]
+|===
+| Filesystem | Dispositivo di blocco | LVM (FS) | Cluster | Sanboot 
+
+
+| Passaggio 1: Acquisire i dettagli LUN per i filesystem interessati dalla migrazione. | Passaggio 1: Acquisire i dettagli delle LUN utilizzate come dispositivi a blocchi raw (senza filesystem) nell'ambito della migrazione. | Passaggio 1: Acquisire le LUN mappate all'host con configurazione LVM che rientrano nell'ambito della migrazione. | Passaggio 1: Acquisire i dettagli generali del cluster e i dischi coinvolti nella migrazione. | Passaggio 1: Acquisire i dettagli del LUN avviato da SAN e le informazioni sulla partizione associata. 
+
+
+| Passaggio 2: Smontare il filesystem. | Passaggio 2: rimuovere i dispositivi a blocchi SCSI associati al dispositivo multipath | Passaggio 2: Smontare il dispositivo LVM se è già montato. | Passaggio 2: Arrestare i servizi del cluster in modo controllato, seguendo la procedura consigliata. | Passaggio 2: Verificare l'elenco dei dispositivi di avvio sia dal sistema operativo che dal menu IPL (Initial Program Load)/SMS. Assicurarsi che tutti i dispositivi siano identificati correttamente dal loro nome. 
+
+
+| Passaggio 3: Rimuovere i dispositivi a blocchi SCSI associati al dispositivo multipath. | Passaggio 3: Eseguire nuovamente la scansione di tutti i dispositivi. | Passaggio 3: Eseguire un backup del VG e disattivare/varyoff il VG. Ad esempio: `varyoffvg vg_name` | Passaggio 3: Rimuovere i dispositivi a blocchi SCSI associati al dispositivo multipath. Ad esempio: `rmdev -Rdl hdiskx` |  
+
+
+| Passaggio 4: Eseguire una nuova scansione dell'host per assicurarsi che non vi siano voci obsolete nella mappatura dei dispositivi esistente. | Passaggio 4: Eseguire una nuova scansione dell'host per assicurarsi che non vi siano voci obsolete nella mappatura dei dispositivi esistente. | Passaggio 4: Eseguire nuovamente la scansione dell'host per assicurarsi che non vi siano voci obsolete nella mappatura dei dispositivi esistente. Ad esempio: `cfgmgr` | Passaggio 4: Eseguire una nuova scansione dell'host per assicurarsi che non vi siano voci obsolete nella mappatura dei dispositivi esistente. |  
+|===
+
+NOTE: Per l'elenco dei comandi più recente e aggiornato, consultare la documentazione del fornitore del sistema operativo.
+
+.Fasi
+. Identificare i dispositivi di archiviazione.
++
+[Source]
+----
+lsdev -Cc disk
+sanlun lun show all (This works only for NetApp storage)
+sanlun lun show all -pv
+lsmpio -l hdiskx
+----
+. Identificare il gruppo di volumi e i filesystem.
++
+[Source]
+----
+lspv
+lsvg <vg_name>
+lsvg -l <vg_name>
+lsvg -p <vs_name>
+----
+. Varyoffvg e smonta i filesystem.
++
+[Source]
+----
+df -g (to get the mount points)
+umount /mount_point
+varyoffvg <vg_name>
+df -g (to ensure its unmounted)
+----
+. Rimuovere i dispositivi di blocco scsi.
++
+rmdev -Rdl hdiskx
+
+. Verificare che il dispositivo sia scollegato.
++
+lspv |grep hdiskx
+
+. Eseguire una nuova scansione dopo lo scollegamento per confermare lo stato pulito.
++
+cfgmgr
+
+
+
+
+
+== Pre-migrazione - FLI online
+
+Di seguito sono riportati i passaggi specifici per la procedura FLI online, ma questi passaggi devono essere preceduti dai passaggi nella sezione Pre-Migration - Offline FLI riportata sopra.
+
+I seguenti passaggi devono essere eseguiti dopo il provisioning del LUN NetApp sull'host.
+
+A questo punto l'importazione LUN è già stata creata, la LUN è mappata all'igroup dell'host e c'è già un iniziatore iSCSI o FC connesso dall'host.
+
+Per FLI offline, la NetApp LUN rimane nello stato offline.
+
+[cols="4"]
+|===
+| Filesystem | Dispositivo di blocco | LVM (FS) | Sanboot 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati. | Passaggio 1: Accendere il server. 
+
+
+| Passaggio 2: Identificare i dispositivi multipath. Ad esempio: `lsdev -Cc disk; lsmpio -l hdiskx` | Passaggio 2: Identificare i dispositivi multipath. Ad esempio: `lsdev -Cc disk; lsmpio -l hdiskx` | Passaggio 2: Identificare i dispositivi multipath. Ad esempio: `lsdev -Cc disk; lsmpio -l hdiskx` | Passaggio 2: Verificare che l'elenco dei dispositivi di avvio dal menu IPL (Initial Program Load)/SMS elenchi i nuovi LUN che fanno riferimento all'elenco dei dispositivi provenienti dal nuovo dispositivo di storage. Impostare l'ordine di avvio sul percorso del nuovo elenco di dispositivi. 
+
+
+| Passaggio 3: Verificare i dettagli del filesystem. | Passaggio 3: Identificare l'ID del dispositivo multipath e presentarlo all'applicazione corrispondente. | Passaggio 3: Assicurarsi che i nuovi LUN vengano rilevati. | Passaggio 3: Assicurarsi che il server si avvii correttamente. 
+
+
+| Passaggio 4: Rimontare i dispositivi nelle rispettive cartelle. |  | Passaggio 4: I VG dovrebbero essere attivati automaticamente. |  
+
+
+|  |  | Passaggio 5: Verificare che il VG, il LV e i filesystem siano attivi e montabili. |  
+|===
+
+NOTE: Per l'elenco dei comandi più recente e aggiornato, consultare la documentazione del fornitore del sistema operativo.
+
+.Fasi
+. Identificare i dispositivi di archiviazione
++
+[Source]
+----
+lsdev -Cc disk
+sanlun lun show all (This works only for NetApp storage)
+sanlun lun show all -pv
+lsmpio -l hdiskx
+----
+. Identificare il gruppo di volumi e i filesystem.
++
+[Source]
+----
+lspv
+lsvg <vg_name>
+lsvg -l <vg_name>
+lsvg -p <vs_name>
+----
+. Varyoffvg e smonta i filesystem.
++
+[Source]
+----
+df -g (to get the mount points)
+umount /mount_point
+varyoffvg <vg_name>
+df -g (to ensure its unmounted)
+----
+. Rimuovere i dispositivi di blocco scsi.
++
+rmdev -Rdl
+
+. Verificare che il dispositivo sia scollegato.
++
+lspv |grep hdiskx
+
+. Eseguire una nuova scansione dopo lo scollegamento per confermare lo stato pulito.
++
+cfgmgr
+
+

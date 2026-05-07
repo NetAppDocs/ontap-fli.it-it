@@ -2,5 +2,5 @@
 section: release-notes
 title: Note di rilascio
 entries:
-- title: Novità di ONTAP 9.17.1
-  url: "/release-notes/whats-new-9171.html"
+- title: Novità nella migrazione dei dati SAN
+  url: "/release-notes/whats-new.html"

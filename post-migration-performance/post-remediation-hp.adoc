@@ -1,0 +1,115 @@
+---
+permalink: post-migration-performance/post-remediation-hp.html 
+sidebar: sidebar 
+keywords: host remediation, hp-ux, post-migration, fli, ontap 
+summary: Dopo la migrazione, gli host HP-UX richiedono interventi correttivi per garantire che le LUN appena importate vengano riconosciute e funzionino correttamente. 
+---
+= Eseguire la correzione dell'host ONTAP FLI HP post-migrazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo la migrazione, gli host HP-UX richiedono interventi correttivi per garantire che le LUN appena importate vengano riconosciute e funzionino correttamente.
+
+
+
+== Post-migrazione - FLI offline
+
+Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e aver verificato che gli iSCSI initiator host siano connessi.
+
+[cols="5"]
+|===
+| Filesystem | Dispositivo di blocco | LVM (FS) | Cluster | Sanboot 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati | Passaggio 1: Accendere il server 
+
+
+| Passaggio 2: identificare i dispositivi multipath | Passaggio 2: identificare i dispositivi multipath | Passaggio 2: identificare i dispositivi multipath | Passaggio 2: identificare i dispositivi multipath | Passaggio 2: dalla shell UEFI, verificare la tabella di mappatura dei dispositivi e avviare hpux dal nuovo dispositivo di archiviazione. Impostare il dispositivo di avvio primario sul nuovo Storage LUN 
+
+
+| Passaggio 3: Verifica i dettagli del filesystem | Passaggio 3: Identificare l'ID del dispositivo multipath e presentarlo all'applicazione corrispondente. | Passaggio 3: Assicurarsi che i nuovi file del dispositivo LVM vengano rilevati correttamente | Passaggio 3: Verifica i dettagli del filesystem | Passaggio 3: riavviare l'host per l'avvio dal LUN appena mappato che fa parte dell'LUN Import 
+
+
+| Passaggio 4: Rimontare i dispositivi nelle rispettive cartelle |  | Passaggio 4: Importare il VG/LVM | Passaggio 4: verificare la configurazione del cluster richiesta e avviare l'applicazione del cluster |  
+
+
+|  |  | Passaggio 5: Attivare il VG | Passaggio 5: Verificare lo stato del cluster e l'applicazione che lo sta utilizzando. |  
+
+
+|  |  | Passaggio 6: Elenca i LV presenti sul VG |  |  
+
+
+|  |  | Passaggio 7: Rimontare i moduli LVM nelle rispettive cartelle |  |  
+|===
+
+
+== Post-migrazione - FLI online
+
+Dopo aver eliminato l'importazione LUN, verificare se il LUN è impostato con `-space-reserve disabled` e `-space-allocation enabled`. In caso contrario, modificarlo di conseguenza.
+
+Affinché la funzionalità SCSI UNMAP funzioni correttamente, consultare la documentazione del Vendor per verificare le versioni software supportate. Per abilitare questa funzionalità è necessaria la combinazione Veritas VxVM + VxFS.
+
+[cols="4"]
+|===
+| Filesystem | Dispositivo di blocco | LVM (FS) | Sanboot 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host HP-UX mappati 
+|===
+.Fasi
+. Identificare i dispositivi di archiviazione.
++
+[source, cli]
+----
+ioscan -fnC disk
+insf -e
+sanlun lun show all
+sanlun lun show all -pv
+sanlun lun show -wwpn
+----
+. Importa VG e metti online il VG.
++
+[source, cli]
+----
+vgimport /dev/vg_name /dev/disk/disk_name
+vgchange -a y /dev/vg_name
+----
+. Identificare il gruppo di volumi e i filesystem.
++
+[source, cli]
+----
+vgdisplay -v /dev/vg_name
+vgdisplay /dev/vg_name
+lvdisplay /dev/vg_name/lv_name
+----
+. Monta il filesystem.
++
+[source, cli]
+----
+bdf
+mount /dev/vg_name/vol_name /mount_point
+----
+
+
+[cols="2"]
+|===
+|  | HP-UX 
+
+
+| Passo 1 | Acquisisci le informazioni sull'host. 
+
+
+| Passo 2 | Smontare il filesystem. 
+
+
+| Passo 3 | Esegui un backup del VG. 
+
+
+| Passo 4 | Disattiva il VG. 
+
+
+| Passo 5 | Esporta il VG. 
+|===

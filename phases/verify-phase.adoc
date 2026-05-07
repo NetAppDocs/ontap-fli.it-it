@@ -1,0 +1,70 @@
+---
+permalink: phases/verify-phase.html 
+sidebar: sidebar 
+keywords: verify phase, foreign lun import, fli, post-migration cleanup, application validation, fc zoning, iscsi cleanup, ontap configuration, migration documentation, san migration 
+summary: Scopri la fase di verifica che conferma il completamento della migrazione come previsto e rimuove le configurazioni temporanee utilizzate durante la finestra di migrazione. 
+---
+= Fase di verifica di ONTAP Foreign LUN Import (FLI)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di verifica conferma che la migrazione è stata completata come previsto e si concentra sulla pulizia post-migrazione. Ciò include la convalida del comportamento dell'applicazione, la conferma del corretto accesso all'host e dei percorsi verso le LUN ONTAP, la raccolta dei log di migrazione per scopi di audit e risoluzione dei problemi e la rimozione della connettività e della configurazione temporanee utilizzate solo per la migrazione.
+
+Nell'ambito della pulizia, si rimuovono i record degli initiator lato sorgente e le zone non più necessarie e si documenta la configurazione finale in modo che i team operativi abbiano uno stato "as-built" chiaro.
+
+Per iSCSI FLI, la fase di verifica dovrebbe includere anche la rimozione delle sessioni dell'iSCSI initiator software e degli initiator creati sui LIF intercluster. Se i LIF intercluster sono stati creati solo per l'importazione del LUN esterno, anche questi LIF devono essere eliminati.
+
+
+
+== Attività della fase di verifica ONTAP FLI
+
+Di seguito sono riportate le attività di verifica ONTAP FLI per ciascun componente.
+
+[cols="1,2"]
+|===
+| Componente | Attività 
+
+
+| Host  a| 
+* Eseguire la convalida a livello di applicazione sui LUN migrati. (controllo di coerenza del file system, errore di checksum, dbcc checkdb (MS SQL), rman (Oracle))
+* Verificare che tutti i file system, i datastore e i dischi cluster previsti siano accessibili e stabili dopo la migrazione e la correzione.
+* Verificare che il numero di percorsi I/O e il tipo di percorso corrispondano alle righe previste.
+
+
+
+
+| Fabric FC FLI  a| 
+* Rimuovere le zone di archiviazione host-to-source dal set di zone attive, o le regole di accesso equivalenti, se non sono già state rimosse durante il cutover iniziale.
+* Rimuovere le zone di connettività origine-destinazione create specificamente per la migrazione.
+* Eseguire il backup del set di zone aggiornato dopo la migrazione a scopo di rollback e audit.
+
+
+
+
+| rete iSCSI FLI  a| 
+* Rimuovere gli oggetti di connettività backend iSCSI FLI creati per la migrazione.
+* Le sessioni dell'iSCSI initiator devono essere eliminate e l'oggetto iSCSI Initiator creato sulle LIF intercluster deve essere eliminato.
+
+
+
+
+| NetApp storage array (Destinazione)  a| 
+* Verifica la correttezza dello storage dopo la migrazione, incluso l'allineamento delle LUN laddove richiesto dal tuo host o dal caso d'uso.
+* Raccogli i log di importazione della migrazione FLI a scopo di verifica e risoluzione dei problemi. Avvia AutoSupport al termine della migrazione.
+* Rimuovere tutte le copie Snapshot create manualmente e utilizzate esclusivamente per il rollback durante la finestra di migrazione.
+* Rimuovere da ONTAP gli artefatti di configurazione dell'array di origine che non sono più necessari, come gli oggetti dell'array di origine e i dettagli di associazione dei dischi esterni. Confermare la stessa cosa utilizzando il comando storage disk show.
+* Documentare la configurazione finale di ONTAP, inclusi i percorsi LUN, le mappature, gli igroup, gli initiator e il modello di accesso host.
+
+
+
+
+| Array di storage esterno (Source)  a| 
+* Rimuovere i gruppi initiator di archiviazione di destinazione (NetApp) e i gruppi host creati per presentare le LUN di origine a ONTAP durante la migrazione.
+* Rimuovere i gruppi initiator host e i record host correlati alla mappatura host originale quando si disattiva l'accesso alla sorgente.
+* Assicurarsi che le LUN sorgente migrate non vengano più presentate in un modo che possa causare una doppia presentazione all'host. Questo è fondamentale e deve essere garantito durante l'intera migrazione.
+
+
+|===

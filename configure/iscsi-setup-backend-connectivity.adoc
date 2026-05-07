@@ -1,0 +1,296 @@
+---
+permalink: configure/iscsi-setup-backend-connectivity.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= ONTAP Foreign LUN Import (FLI) best practice di cablaggio e zonizzazione FC raccomandate
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP iSCSI FLI utilizza un initiator iSCSI software ONTAP integrato con lo stack FLI e associa le sessioni iSCSI outbound alle LIF intercluster, dove la connettività di backend è gestita dal networking delle LIF intercluster, non dalle LIF dati host.
+
+Poiché le sessioni sono basate su LIF intercluster, pianifica il posizionamento, la raggiungibilità e la ridondanza delle LIF intercluster, che in genere si trovano sul nodo proprietario dell'array LUN e sul suo partner HA, con un posizionamento resiliente attraverso le porte per evitare singoli punti di guasto. Prima di creare le sessioni, valida il routing end-to-end con la raggiungibilità VLAN tra gli IP delle LIF intercluster e gli IP del portale iSCSI target dell'array esterno, inclusa l'autorizzazione della porta TCP 3260, poiché una rete funzionante è un prerequisito per la scoperta del LUN.
+
+Le sessioni devono essere create esplicitamente utilizzando sia l'indirizzo IP del portale di destinazione che l'IQN di destinazione. Le sessioni di rilevamento iSCSI non vengono utilizzate. Il modello di resilienza previsto è una connettività full mesh, in cui ogni nodo ONTAP partecipante stabilisce sessioni con ciascun portale di destinazione esterno, in modo che la LUN esterna sia visibile attraverso tutti i percorsi disponibili prima di avviare l'importazione.
+
+Il trasporto backend (iSCSI o FC) è indipendente dal protocollo frontend utilizzato per presentare la destinazione ONTAP LUN agli host. È possibile importare utilizzando un backend iSCSI e presentare tramite FC o iSCSI. Scegli tra migrazione offline o online in base al fatto che l'I/O dell'host debba essere interrotto per l'importazione completa o possa riprendere dopo un breve cutover mentre la copia continua in background.
+
+Indipendentemente dal fatto che il backend sia FC o iSCSI, il frontend trasporta il protocollo di trasporto SAN che può essere SCSI FC o iSCSI.
+
+.Prima di iniziare
+* Utilizzare il comando  `version` per confermare la release di ONTAP e che il cluster sia sulla release prevista per iSCSI FLI.
+
+
+.Informazioni su questo compito
+La configurazione della connettività backend iSCSI di ONTAP FLI include l'intercluster LIF, l'iSCSI initiator e le sessioni. Prima di avviare l'importazione, è necessario eseguire le seguenti operazioni per configurare e convalidare la connettività backend iSCSI:
+
+* Verifica che le LIF intercluster siano presenti su entrambi i nodi HA che utilizzerai per l'import (il nodo proprietario e l'HA partner) e che siano attive e raggiungibili.
+* Creare initiator iSCSI software ONTAP associati a LIF intercluster (un initiator per LIF).
+* Creare sessioni iSCSI da entrambi i nodi verso i portali di destinazione dell'array remoto e IQN.
+* Verificare che le sessioni siano integre e che il LUN esterno sia stato rilevato.
+
+
+.Fasi
+. Convalidare i LIF intercluster:
++
+[source, cli]
+----
+network interface show -service-policy default-intercluster -fields vserver,home-node,home-port,curr-node,curr-port,address,ipspace,status-admin,status-oper
+----
++
+*Esempio di output*
+
++
+[listing]
+----
+vserver         lif             address        home-node home-port curr-node  curr-port status-oper status-admin ipspace
+
+C1_vsim_cluster iSCSI_FLI_IC_1  172.21.180.220 vsim       e0d      vsim        e0d       up          up          Default
+C1_vsim2_cluster iSCSI_FLI_IC_2 172.21.180.228 vsim2      e0d      vsim2       e0d       up          up          Default
+2 entries were displayed.
+----
+. Verificare che le porte di rete siano attive e si trovino nello spazio IP corretto:
++
+[source, cli]
+----
+network port show -port e0d -fields port ,ipspace ,broadcast-domain ,link ,mtu,speed-admin ,speed-oper ,health-status
+----
++
+*Esempio di output*
+
++
+[listing]
+----
+node  port link mtu  speed-admin speed-oper ipspace broadcast-domain health-status
+----- ---- ---- ---- ----------- ---------- ------- ---------------- -------------
+vsim  e0d  up   1500 auto        1000       Default Default          healthy
+vsim2 e0d  up   1500 auto        1000       Default Default          healthy
+2 entries were displayed.
+----
+. Verificare la raggiungibilità di ciascun portale target estero da ONTAP (ripetere per ogni portale target):
++
+[source, cli]
+----
+network ping -lif <IC_LIF_NAME> -destination <FOREIGN_TARGET_IP>
+----
++
+*Esempio di output*
+
++
+[listing]
+----
+C1_vsim_cluster::*>  network ping -node vsim -destination 172.21.180.238
+172.21.180.238 is alive
+C1_vsim_cluster::*> network ping -node vsim -destination 172.21.180.238
+172.21.180.238 is alive
+C1_vsim_cluster::*>
+----
+. Verificare se l'iSCSI initiator esiste oppure crearne uno iSCSI initiator associato a un LIF intercluster (ripetere l'operazione su entrambi i nodi HA):
++
+[source, cli]
+----
+storage iswi initiator create -node <NODE_A> -lif <IC_LIF_A> -initiator-name <INIT_NAME_A>
+----
++
+[source, cli]
+----
+storage iswi initiator create -node <NODE_B> -lif <IC_LIF_B> -initiator-name <INIT_NAME_B>
+----
+. Imposta il livello di privilegio su avanzato:
++
+[source, cli]
+----
+set -privilege advanced
+----
++
+*Esempio di output*
+
++
+[listing]
+----
+C1_vsim_cluster::> set -privilege advanced
+Warning: These advanced commands are potentially dangerous; use them only when
+         directed to do so by NetApp personnel.
+Do you want to continue? {y|n}: y
+----
+. Visualizza l'elenco degli iSCSI initiator:
++
+[source, cli]
+----
+storage iscsi-initiator show
+----
++
+*Esempio di output*
+
++
+[listing]
+----
+C1_vsim_cluster::*> storage iscsi-initiator show
+This table is currently empty.
+----
+. Creare gli iSCSI initiator:
++
+[source, cli]
+----
+storage iscsi-initiator create -node <node_name> -initiator-name <initiator_name> -lif <lif_name>
+----
++
+*Esempio*
+
++
+[listing]
+----
+C1_vsim_cluster::*>  storage iscsi-initiator create -node vsim  -initiator-name init207m  -lif iSCSI_FLI_IC_1
+C1_vsim2_cluster::*> storage iscsi-initiator create -node vsim2 -initiator-name init207n  -lif iSCSI_FLI_IC_2
+----
+. Verificare che gli initiator siano stati creati:
++
+[source, cli]
+----
+storage iscsi-initiator show
+----
++
+*Esempio di output*
+
++
+[listing]
+----
+C1_sti84-vsim-ucs207m_cluster::*> storage iswi initiator show
+       Initiator Logical        Source
+ Node  Name      Interface      Name                   ISID              State
+----- ---------  -----------    ---------------------  ----------------  -------------
+vsim  init207m   iSCSI_FLI_IC_1 iqn.1992-08.com.netapp:sn.4086639599:vs.1  80:0a:75:00:00:00  online
+vsim2 init207n   iSCSI_FLI_IC_2 iqn.1992-08.com.netapp:sn.4086639600:vs.1  80:1f:61:00:00:00  online
+2 entries were displayed.
+----
+. Creare sessioni iSCSI verso la destinazione remota da entrambi i nodi per ogni <TARGET_IP>/<TARGET_IQN> coppia, assicurandosi che le sessioni formino una topologia full mesh in cui ogni nodo stabilisca una sessione verso ogni target portal:
++
+[source, cli]
+----
+storage iswi initiator session create -node <NODE_A> -initiator-name <INIT_NAME_A> -target-ip <TARGET_IP> -target-name <TARGET_IQN> -target-port 3260
+----
++
+[source, cli]
+----
+storage iswi initiator session create -node <NODE_B> -initiator-name <INIT_NAME_B> -target-ip <TARGET_IP> -target-name <TARGET_IQN> -target-port 3260
+----
++
+*Esempio*
+
++
+[listing]
+----
+C1_vsim_cluster::*> storage iswi initiator session create -node vsim -initiator-name init207m -target-name iqn.1992-08.com.netapp:sn.054a3ea61f7c11f1bc73005056acc5b1:vs.3 -target-ip 172.21.180.238
+C1_vsim_cluster::*> storage iswi initiator session create -node vsim2 -initiator-name init207n -target-name iqn.1992-08.com.netapp:sn.054a3ea61f7c11f1bc73005056acc5b1:vs.3 -target-ip 172.21.180.238
+
+C1_vsim_cluster::*> storage iswi initiator session create -node vsim2 -initiator-name init207n -target-name iqn.1992-08.com.netapp:sn.054a3ea61f7c11f1bc73005056acc5b1:vs.3 -target-ip 172.21.180.230
+C1_vsim_cluster::*> storage iswi initiator session create -node vsim -initiator-name init207m -target-name iqn.1992-08.com.netapp:sn.054a3ea61f7c11f1bc73005056acc5b1:vs.3 -target-ip 172.21.180.230
+----
++
+image::new-iscsi-sessions.png[Nuove sessioni iSCSI da entrambi i nodi verso ciascun target portal]
+
+. Verifica le sessioni:
++
+[source, cli]
+----
+storage iswi initiator session show -node <NODE_A> -initiator-name <INIT_NAME_A>
+----
++
+[source, cli]
+----
+storage iswi initiator session show -node <NODE_B> -initiator-name <INIT_NAME_B>
+----
++
+*Esempio*
+
++
+[listing]
+----
+C1_sti84-vsim-ucs207m_cluster::*> storage iswi initiator session show
+      Initiator  Target                                  Target-ip       Target Tpgroup-tag TSIH State
+Node  Name       Name                                                    Port
+----- --------- ---------------------------------------- --------------  ------ ------      ---- ------
+vsim  init207m  iqn.1992-08.com.netapp:sn.054a3eab1:vs.3 172.21.180.230  3260   1026          2  online
+vsim  init207m  iqn.1992-08.com.netapp:sn.054a3eab1:vs.3 172.21.180.238  3260   1032          1  online
+vsim2 init207n  iqn.1992-08.com.netapp:sn.054a3eab1:vs.3 172.21.180.230  3260   1026          1  online
+vsim2 init207n  iqn.1992-08.com.netapp:sn.054a3eab1:vs.3 172.21.180.238  3260   1032          2  online
+4 entries were displayed.
+----
+. Avvia le statistiche
++
+Questi dati statistici aiuteranno a valutare eventuali guasti durante l'iSCSI FLI.
+
++
+[source, cli]
+----
+statistics start -object <pbject> -sample-id <sample_id>
+----
++
+*Esempio*
+
++
+[listing]
+----
+C1_sti84-vsim-ucs207m::*> statistics start -object iswi_session -sample-id iswi_fli_import
+Statistics collection is being started for sample-id: iswi_fli_import
+----
+. Controlla le statistiche della sessione:
++
+[source, cli]
+----
+statistics show -sample-id <sample_id>
+----
++
+*Esempio*
+
++
+[listing]
+----
+C1_sti84-vsim-ucs207m_cluster::*> statistics show -sample-id iswi_fli_import
+Object: iswi_session
+Instance: (init207m)-(172.21.180.230)
+Start-time: 4/5/2026 08:37:15
+End-time: 4/5/2026 08:37:34
+Elapsed-time: 19s
+Scope: sti84-vsim-ucs207m
+
+    Counter                                                     Value
+    -------------------------------- --------------------------------
+    instance_name                         (init207m)-(172.21.180.230)
+    instance_uuid                          iqn.1992-08.com.netapp:sn.
+                                     054a3ea61f7c11f1bc73005056acc5b1
+                                                                :vs.3
+    node_name                                      sti84-vsim-ucs207m
+    process_name                                                    -
+    read_data                                                       0
+    read_ops                                                        0
+    session_state                                              Online
+    write_data                                                      0
+    write_ops                                                       0
+Object: iswi_session
+Instance: (init207m)-(172.21.180.238)
+Start-time: 4/5/2026 08:37:15
+End-time: 4/5/2026 08:37:34
+Elapsed-time: 19s
+----
+. Verifica la connettività sull'array esterno:
++
+In questa fase, l'array storage esterno iSCSI target deve essere in grado di rilevare e confermare un login e una sessione attivi dal NetApp iSCSI initiator. Utilizzare i comandi consigliati dal fornitore sull'array esterno per verificare che l'initiator sia connesso e che le sessioni siano integre.
+
++
+*Esempio*
+
++
+[listing]
+----
+pureport list --initiator --raw --filter "initiator.iqn='<HOST_IQN>'"
+pureport list -initiator
+purehost list --all
+----
+
+
+*Punto di controllo di individuazione*: una volta stabilite le sessioni, ONTAP dovrebbe aggiungere i percorsi di storage e individuare le LUN esterne nello stack di storage, prerequisito necessario per contrassegnare il disco come foreign e procedere con il flusso di lavoro di importazione.

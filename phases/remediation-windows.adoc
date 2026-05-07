@@ -1,0 +1,226 @@
+---
+permalink: phases/remediation-windows.html 
+sidebar: sidebar 
+keywords: ontap, fli, foreign lun import, windows host, pre-migration, offline fli, online fli 
+summary: Prima di eseguire la migrazione ONTAP FLI su un host Windows, completare questi passaggi pre-migrazione. Sono previsti passaggi separati per le migrazioni offline e online. 
+---
+= Remediation host Windows ONTAP FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di eseguire la migrazione ONTAP FLI su un host Windows, completare questi passaggi pre-migrazione. Sono previsti passaggi separati per le migrazioni offline e online.
+
+
+
+== Pre-migrazione - FLI offline
+
+Questi passaggi si applicano sia a FLI offline che online. Completare la seguente preparazione lato host prima di rimuovere la mappatura delle LUN di origine dall'host Windows.
+
+[cols="4"]
+|===
+| Dispositivi del filesystem | Unità fisiche (senza file system) | WSFC (WFC) | Hyper V 
+
+
+| Passaggio 1: Identificare i dischi del filesystem pianificati per la migrazione | Passaggio 1: Identificare i dischi fisici pianificati per la migrazione | Passaggio 1: Identificare i dischi del cluster pianificati per la migrazione | Passaggio 1: Interrompere tutte le applicazioni sulle macchine virtuali e arrestare le macchine virtuali. 
+
+
+| Passaggio 2: Chiudere le applicazioni in modo corretto | Passaggio 2 Shutdown le applicazioni in modo corretto | Passaggio 2 Shutdown le applicazioni in modo corretto | Passaggio 2: Mettere il disco offline dall'host. 
+
+
+| Passaggio 3: Mettere offline i dischi |  | Passaggio 3: Arrestare il cluster e interrompere i servizi del cluster su tutti i nodi del cluster | Passaggio 3: Scollega tutte le LUN dall'host. 
+|===
+
+
+=== Dispositivi del filesystem
+
+.Fasi
+. Identificare i dischi del filesystem che sono pianificati per la migrazione.
++
+Get-Disk | Format-Table Numero, FriendlyName, Dimensione, PartitionStyle
+
+. Chiudere le applicazioni in modo corretto.
++
+Stop-Service -Name <ServiceName>
+
+. Metti i dischi offline.
++
+Set-Disk -Number <DiskNumber> -IsOffline $true
+
+
+
+
+
+=== Unità fisiche (senza file system)
+
+.Fasi
+. Identificare i dischi fisici che sono stati pianificati per la migrazione.
++
+Get-PhysicalDisk | Format-Table FriendlyName, Size, MediaType
+
+. Chiudere le applicazioni in modo corretto.
++
+Stop-Service -Name <ServiceName>
+
+
+
+
+
+=== WSFC (Windows Server Failover Clustering)
+
+.Fasi
+. Identificare i dischi del cluster per i quali è prevista la migrazione.
++
+Get-ClusterResource | Where-Object ResourceType -eq "Physical Disk"
+
+. Chiudere le applicazioni in modo corretto.
++
+Stop-ClusterResource -Name <ResourceName>
+
+. Arrestare il cluster e interrompere i servizi del cluster su tutti i nodi del cluster.
++
+Stop-Cluster -Name <ClusterName>
+
+
+
+
+
+=== Hyper V
+
+.Fasi
+. Interrompere tutte le applicazioni sulle Virtual Machines e arrestare le Virtual Machines.
++
+Stop-VM -Name <VM_Name> -Force
+
+. Offline il disco dall'host.
++
+Set-Disk -Number <DiskNumber> -IsOffline $true
+
+. Scollega tutte le LUN dall'host dal lato dell'array di storage.
+. Assicurarsi che i dischi siano stati rimossi correttamente dall'host.
++
+Get-Disk | Where-Object OperationalStatus -ne "Online"
+
+
+
+
+
+== Pre-migrazione - FLI online
+
+Di seguito sono riportati i passaggi specifici per la procedura FLI online, ma questi passaggi devono essere preceduti dai passaggi della fase di pre-migrazione - offline FLI.
+
+I seguenti passaggi devono essere eseguiti dopo che il LUN NetApp è stato fornito all'host.
+
+A questo punto l'importazione LUN è già stata creata, la LUN è mappata all'igroup dell'host e dall'host è già presente un iSCSI o un Initiator FC connesso.
+
+Per FLI offline, la NetApp LUN rimane nello stato offline.
+
+[cols="2"]
+|===
+| Dispositivi del filesystem | Unità fisiche (senza file system) 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host mappati. 
+
+
+| Passaggio 2: Identificare le unità elencate e mettere online i dischi. | Passaggio 2: aggiungere il disco fisico all'applicazione richiesta e avviare. 
+
+
+| Passaggio 3: Verificare che tutti i dischi del file system siano disponibili e funzionanti. |  
+
+
+| Passaggio 4: Avviare le applicazioni necessarie. |  
+|===
+
+
+=== Dispositivi del filesystem
+
+.Fasi
+. Eseguire una nuova scansione dello storage su tutti gli host mappati.
++
+Update-HostStorageCache
+
+. Identifica le unità elencate e metti online i dischi.
++
+[Source]
+----
+Get-Disk | Where-Object IsOffline -eq $true
+Set-Disk -Number <DiskNumber> -IsOffline $false
+----
+. Verificare che tutti i dischi del filesystem siano disponibili e funzionanti.
++
+Get-Volume | Format-Table DriveLetter, FileSystemLabel, Size, SizeRemaining
+
+. Avviare le applicazioni necessarie.
++
+Start-Service -Name <ServiceName>
+
+
+
+
+
+=== Unità fisiche (senza file system)
+
+.Fasi
+. Eseguire una nuova scansione dello storage su tutti gli host mappati.
++
+Update-HostStorageCache
+
+. Aggiungi il disco fisico all'applicazione richiesta e avviala.
++
+Configurazione specifica dell'applicazione
+
+
+
+
+
+=== WSFC
+
+.Fasi
+. Eseguire una nuova scansione dello storage su tutti gli host mappati.
++
+Update-HostStorageCache
+
+. Identifica le unità elencate e metti online i dischi.
++
+[Source]
+----
+Get-Disk | Where-Object IsOffline -eq $true
+Set-Disk -Number <DiskNumber> -IsOffline $false
+----
+. Verifica che tutti gli host mappati dispongano delle unità disponibili e siano online.
++
+Get-ClusterResource | Where-Object ResourceType -eq "Physical Disk"
+
+. Avvia l'applicazione cluster WSFC e configura le risorse cluster necessarie.
++
+[Source]
+----
+Start-Cluster -Name <ClusterName>
+Start-ClusterResource -Name <ResourceName>
+----
+
+
+
+
+=== Hyper V
+
+.Fasi
+. Eseguire nuovamente la scansione della gestione dischi, tutti i dischi dovrebbero essere connessi.
++
+Update-HostStorageCache
+
+. Seleziona i dischi e mettili online, tutti dovrebbero risultare ONLINE e dovrebbero ottenere il nome originale e la lettera del disco.
++
+[Source]
+----
+Get-Disk | Where-Object IsOffline -eq $true
+Set-Disk -Number <DiskNumber> -IsOffline $false
+----
+. Prova ad accendere le macchine virtuali, che dovrebbero avviarsi senza problemi.
++
+Avvia-VM -Name <VM_Name>
+
+

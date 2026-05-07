@@ -6,13 +6,63 @@ indexpage:
     foreign
   lead: Importazione LUN esterna ONTAP
   tiles:
-  - title: Flussi di lavoro FLI
+  - title: Note di rilascio
+    url: "/release-notes.html"
     links:
-    - title: Workflow offline
-      url: "/san-migration/concept_fli_offline_workflow.html"
-    - title: Workflow online
-      url: "/san-migration/concept_fli_online_workflow.html"
-    - title: Workflow di transizione da FLI 7-Mode a ONTAP
-      url: "/san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html"
-    - title: FLI con automazione del workflow (WFA)
-      url: "/san-migration/concept_fli_using_workflow_automation_wfa.html"
+    - title: Novità di ONTAP per la migrazione dei dati SAN
+      url: release-notes/whats-new.html
+  - title: Inizia subito
+    url: "/get-started.html"
+    links:
+    - title: Scopri il programma di migrazione dei dati ONTAP
+      url: "/get-started/learn-about-data-migration.html"
+    - title: Scopri la migrazione dei dati SAN a ONTAP
+      url: "/get-started/learn-about-san-data-migration.html"
+    - title: Scopri di più su ONTAP Foreign LUN Import
+      url: "/get-started/learn-about-fli.html"
+  - title: Fasi FLI
+    url: "/phases.html"
+    links:
+    - title: Fase di scoperta dell'importazione di LUN esteri (FLI) di ONTAP
+      url: "/phases/discovery-phase.html"
+    - title: Fase di analisi di ONTAP Foreign LUN Import (FLI)
+      url: "/phases/analyze-phase.html"
+    - title: ONTAP Foreign LUN Import (FLI) Fase di pianificazione e preparazione
+      url: "/phases/plan-prepare-phase.html"
+    - title: ONTAP Fase di esecuzione dell'importazione di LUN esteri (FLI)
+      url: "/phases/execute-phase.html"
+    - title: Fase di verifica di ONTAP Foreign LUN Import (FLI)
+      url: "/phases/verify-phase.html"
+  - title: Configurazione FLI
+    url: "/configure.html"
+    links:
+    - title: Connettività e cablaggio ONTAP Foreign LUN Import (FLI)
+      url: "/configure/fc-connectivity-wiring.html"
+    - title: ONTAP Foreign LUN Import (FLI) best practice di cablaggio e zonizzazione
+        FC raccomandate
+      url: "/configure/iscsi-setup-backend-connectivity.html"
+  - title: Migrazione FLI
+    url: "/migrate.html"
+    links:
+    - title: Scopri i LUN esteri per la migrazione FLI
+      url: "/migrate/discover-foreign-luns.html"
+    - title: Creare la relazione di importazione ONTAP FLI LUN
+      url: "/migrate/create-import-relationship.html"
+    - title: Eseguire e monitorare l'importazione FLI LUN
+      url: "/migrate/execute-monitor.html"
+    - title: Verificare ed eliminare la relazione di importazione FLI LUN
+      url: "/migrate/verify-delete.html"
+  - title: FLI Post-Migrazione
+    url: "/post-migration-performance.html"
+    links:
+    - title: Eseguire la pulizia post-migrazione
+      url: "/post-migration-performance/clean-up.html"
+    - title: Eseguire la correzione di ESXi VMFSS ATS/CAW
+      url: "/post-migration-performance/esxi-remediation.html"
+    - title: Prestazioni FLI
+      url: "/post-migration-performance/performance.html"
+  - title: Esempio di foglio di lavoro Site Survey and Planning
+    url: "/sample-site.html"
+    links:
+    - title: Panoramica
+      url: "/san-migration/reference_sample_site_survey_and_planning_worksheet.html"

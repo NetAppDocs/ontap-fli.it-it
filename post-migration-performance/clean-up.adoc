@@ -1,0 +1,75 @@
+---
+permalink: post-migration-performance/clean-up.html 
+sidebar: sidebar 
+keywords: post-migration cleanup, foreign lun import, fli, data integrity, snapshot, autosupport, fc fli, iscsi fli, san migration, de-provision, import logs 
+summary: 'Completare la pulizia post-migrazione dopo FLI, confermando il completamento dell"importazione, verificando l"integrità dei dati e rimuovendo le configurazioni backend temporanee.' 
+---
+= Eseguire la pulizia post-migrazione di ONTAP FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una volta completata l'importazione del LUN e cancellata la relazione, è necessario eseguire diverse importanti operazioni di pulizia per finalizzare la migrazione, garantire l'integrità dei dati e rimuovere eventuali configurazioni temporanee implementate per il workflow FLI. Queste operazioni includono la conferma del completamento dell'importazione, la verifica dell'integrità dei dati, la rimozione del foreign LUN dal rilevamento ONTAP, la pulizia della connettività backend e la revisione dei log e della documentazione.
+
+Dopo la migrazione FLI, è necessario eseguire i seguenti passaggi per finalizzare la migrazione e garantire uno stato pulito:
+
+* Confermare che l'importazione LUN sia stata completata correttamente e che l'integrità dei dati sia stata verificata
+* Esegui una Snapshot a livello di volume
+* Rimuovere il LUN dall'initiator dell'array di storage NetApp.
++
+A seconda del fornitore di sistemi di storage, i passaggi possono variare. Seguire i passaggi consigliati dal fornitore dell'array di storage esterno.
+
+
+
+.Fasi
+. Impostare l'attributo LUN esterno su falso (utilizzare il numero di serie del disco esterno):
++
+[source, cli]
+----
+storage disk modify -serial-number <FOREIGN_SERIAL> -is-foreign false
+----
+. Assicurarsi che l'array LUN di storage esterno non sia più visibile in ONTAP:
++
+[source, cli]
+----
+storage disk show -array-name <ARRAY_NAME> -fields disk,serial-number,is-foreign,import-in-progress
+----
+. Per FC FLI, procedi come segue:
++
+.. Eliminare la suddivisione in zone tra l'iniziatore dell'array di storage NetApp e i WWPN di destinazione dell'array di storage esterno.
+.. Verifica sull'array di storage esterno che gli iniziatori dell'array di storage NetApp non siano più connessi.
+.. Convertire l'adattatore FC da initiator a target.
+
+
+. Per iSCSI FLI, procedere come segue:
++
+.. Eliminare le sessioni iSCSI tra l'array di storage esterno e l'array di storage NetApp.
+.. Eliminare l'iSCSI initiator sulla LIF intercluster.
+.. Eliminare il LIF intercluster se è stato creato per l'importazione di LUN esterni e non vi sono altre applicazioni che utilizzano il LIF intercluster.
+
+
+. Esamina i log per individuare eventuali errori e verificare che la migrazione sia andata a buon fine.
++
+I log di importazione vengono memorizzati nel file di log degli eventi del cluster.
+
++
+*Esempio*
+
++
+[listing]
+----
+DataMig-cmode::*> rows 0; event log show -nodes * -event fli*
+7/7/2014 18:37:21   DataMig-cmode-01 INFORMATIONAL fli.lun.verify.complete: Import verify of foreign LUN 83017542001E of size 42949672960 bytes from array model DF600F belonging to vendor HITACHI  with NetApp LUN QvChd+EUXoiS is successfully completed.
+~~~~~~ Output truncated ~~~~~~~
+
+The verification steps to compare the source and destination LUNs are covered in the execute migration phase. The importing and LUN verification steps are covered in the execute migration phase because they are linked to the import job and the foreign LUN.
+----
+. Raccogli un AutoSupport per documentare l'ambiente del cliente e raccogline un altro AutoSupport dopo il completamento per registrare la configurazione finale:
++
+[source, cli]
+----
+autosupport invoke -node <node_name> -type all -message “migration-final”
+----
+

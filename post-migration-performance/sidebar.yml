@@ -1,0 +1,24 @@
+---
+section: post-migration-performance
+title: FLI post-migrazione
+entries:
+- title: Panoramica post-migrazione
+  url: "/post-migration-performance/post-migration-overview.html"
+- title: Eseguire la pulizia post-migrazione
+  url: "/post-migration-performance/clean-up.html"
+- title: Eseguire la correzione di ESXi VMFSS ATS/CAW
+  url: "/post-migration-performance/esxi-remediation.html"
+- title: Eseguire la correzione dell'host ONTAP FLI ESXi post-migrazione
+  url: "/post-migration-performance/post-remediation-esxi.html"
+- title: Eseguire la correzione post-migrazione dell'host ONTAP FLI AIX
+  url: "/post-migration-performance/post-remediation-aix.html"
+- title: Eseguire la correzione dell'host ONTAP FLI HP post-migrazione
+  url: "/post-migration-performance/post-remediation-hp.html"
+- title: Eseguire la correzione post-migrazione dell'host ONTAP FLI Linux
+  url: "/post-migration-performance/post-remediation-linux.html"
+- title: Eseguire la correzione post-migrazione dell'host ONTAP FLI Solaris
+  url: "/post-migration-performance/post-remediation-solaris.html"
+- title: Eseguire la correzione post-migrazione dell'host Windows ONTAP FLI
+  url: "/post-migration-performance/post-remediation-windows.html"
+- title: Prestazioni FLI
+  url: "/post-migration-performance/performance.html"

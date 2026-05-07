@@ -1,0 +1,88 @@
+---
+permalink: migrate/verify-delete.html 
+sidebar: sidebar 
+keywords: verify import, delete import relationship, foreign lun import, fli, lun import delete, lun import verify, import cleanup, san migration, offline verification, asa r2 
+summary: 'Completa la migrazione eliminando la relazione di importazione al termine della copia e, facoltativamente, verifica l"integrità dei dati a livello di blocco prima della rimozione.' 
+---
+= Verificare ed eliminare la relazione di importazione FLI LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo che la copia di importazione è stata completata e lo stato di importazione è completo, è possibile finalizzare la migrazione rimuovendo l'associazione di importazione con lun import delete, che elimina in modo sicuro la relazione di importazione dopo che il LUN di origine non è più in uso e il LUN di destinazione è ora la copia attiva per l'I/O dell'host. In un flusso di lavoro FLI offline, in genere si porta online il LUN di destinazione dopo l'importazione e qualsiasi convalida in modo che l'host possa riscoprire e riprendere l'accesso al LUN migrato.
+
+Se è necessaria una conferma di integrità dei dati prima di eliminare la relazione, è possibile eseguire lun import verify, che effettua un confronto blocco per blocco ma è un'operazione invasiva poiché la verifica deve essere eseguita offline (ovvero, il LUN deve essere messo offline e inaccessibile agli host per tutta la durata della verifica). Le operazioni successive alla migrazione, come la correzione degli host, la zonizzazione e la pulizia degli initiator, la documentazione e la convalida operativa, vengono gestite nella fase successiva alla migrazione e sono intenzionalmente escluse dall'ambito di questa sezione.
+
+.Informazioni su questo compito
+A partire da ONTAP 9.17.1, la migrazione dei dati di LUN esterne tramite migrazione offline FLI è supportata con i sistemi ASA r2. I sistemi ASA r2 si differenziano dagli altri sistemi ONTAP (ASA, AFF e FAS) per l'implementazione del proprio storage layer. Nei sistemi ASA r2, i volumi vengono creati automaticamente quando viene creata un'unità di storage (LUN o namespace). Ogni volume contiene solo una unità di storage. Pertanto, per i sistemi ASA r2, non è necessario includere il nome del volume nell'opzione  `-path` durante la creazione della LUN; è necessario invece includere il percorso dell'unità di storage.
+
+.Fasi
+. Imposta il livello di privilegio su advanced:
++
+[source, cli]
+----
+set -privilege advanced
+----
+. Conferma lo stato dell'importazione (deve essere completata o interrotta prima dell'eliminazione):
++
+[source, cli]
+----
+lun import show -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Se l'importazione è ancora in corso e ha raggiunto il 100% di completamento:
++
+[source, cli]
+----
+lun import stop -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Elimina la relazione di importazione (finalizza):
++
+[source, cli]
+----
+lun import delete -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Verificare che la relazione sia stata rimossa:
++
+[source, cli]
+----
+lun import show -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Verificare che l'importazione non sia in corso (dovrebbe essere stata interrotta o completata):
++
+[source, cli]
+----
+lun import show -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Portare la LUN offline (la verifica deve essere effettuata offline):
++
+[source, cli]
+----
+lun offline -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Avviare la verifica blocco per blocco (facoltativa ma consigliata):
++
+[source, cli]
+----
+lun import verify start -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Monitorare l'avanzamento della verifica:
++
+[source, cli]
+----
+lun import show -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Interrompere la verifica (necessaria prima di mettere online il LUN):
++
+[source, cli]
+----
+lun import verify stop -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+. Riportare online il LUN (la finestra di interruzione termina qui):
++
+[source, cli]
+----
+lun online -vserver <SVM_NAME> -path /vol/<VOL>/<LUN_NAME>
+----
+

@@ -1,0 +1,60 @@
+---
+permalink: get-started/learn-about-data-migration.html 
+sidebar: sidebar 
+keywords: data migration, foreign lun import, fli, ontap, foreign array, san migration, fibre channel, iscsi, offline import, online import, import relationship, lun migration, migration methodology, scsi initiator, 7 mode 
+summary: Scopri il programma di migrazione dei dati ONTAP, inclusi i termini chiave e una metodologia in cinque fasi che copre dalla scoperta alla verifica per le migrazioni SAN. 
+---
+= Scopri il programma di migrazione dei dati ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il programma di migrazione dei dati offre soluzioni collaudate per aiutare i clienti a spostare i dati da array di terze parti a ONTAP e a migrare le LUN da sistemi NetApp 7 Mode a ONTAP, con Foreign LUN Import (FLI) come componente chiave di questo portfolio di migrazione. Per migliorare il successo della migrazione e ridurre gli sforzi, il programma fornisce gli strumenti, la guida e l’abilitazione necessari per eseguire le migrazioni in modo efficiente e coerente, aiutando i clienti ad adottare le tecnologie NetApp più rapidamente e con maggiore sicurezza.
+
+Le migrazioni di dati spesso comportano reali sfide operative: finestre di inattività prolungate, rischi per i carichi di lavoro di produzione, risorse limitate e lacune nelle competenze specialistiche. Poiché le aspettative di disponibilità continuano ad aumentare e i tempi di inattività diventano sempre meno accettabili, le migrazioni devono essere pianificate tenendo conto della continuità operativa. Dato che l'impatto sulle prestazioni, l'integrità dei dati e la potenziale perdita di dati sono preoccupazioni comuni in qualsiasi migrazione, comprendere i concetti e il flusso di lavoro fondamentali di FLI fin dall'inizio contribuisce a semplificare l'esecuzione e a ridurre la configurazione iniziale e i costi operativi.
+
+FLI è una funzionalità di migrazione dei dati ONTAP che copia i dati utente da una array LUN esterna (di terze parti) in una ONTAP LUN nativa. ONTAP esegue la migrazione fungendo da SCSI initiator: legge i blocchi dalla LUN esterna e li scrive nella destinazione ONTAP LUN.
+
+ONTAP FLI era supportato quando la LUN esterna veniva raggiunta tramite Fibre Channel (FC). A partire da ONTAP 9.19.1, è stato aggiunto il supporto iSCSI FLI per accedere alle array LUN esterne utilizzando il trasporto iSCSI sul backend. Con iSCSI FLI, il percorso backend verso l'array di origine è iSCSI/TCP, mentre l'accesso host frontend alla ONTAP LUN può essere sia FC che iSCSI (il backend e il frontend possono essere diversi).
+
+iSCSI e FC ONTAP FLI supportano sia le importazioni offline (nessuna attività di I/O sull'host durante l'importazione) sia le importazioni online (l'host rimane connesso, con una singola breve interruzione cutover).
+
+
+
+== Termini chiave
+
+array esterno:: Qualsiasi sistema storage che non esegue ONTAP (inclusa NetApp 7 Mode in un contesto di transizione dalla modalità 7 a ONTAP).
+LUN esterno:: Una LUN contenente i dati utente sull'array esterno nel formato nativo di tale array.
+Relazione di importazione:: Un accoppiamento persistente tra la LUN esterna (origine) e la LUN ONTAP (destinazione) utilizzato per copia dei dati.
+Importazione LUN:: Il processo che trasferisce i blocchi dal LUN esterno al LUN ONTAP.
+
+
+
+
+== Metodologia high-level
+
+Fase di rilevamento:: Effettua un inventario completo dell'ambiente—host, sistemi di storage e SAN/network fabrics—per comprendere cosa esiste e come tutto è connesso.
+Fase di analisi:: Esaminare l'inventario raccolto e determinare l'approccio di migrazione più appropriato per ciascun host e array di origine, in base a compatibilità, rischio e vincoli operativi.
+Fase di pianificazione:: Definire e convalidare il piano di migrazione, predisporre lo storage ONTAP di destinazione e preparare gli strumenti di migrazione e qualificazione necessari, nonché i manuali operativi.
+Fase di esecuzione:: Eseguire la migrazione (importazione/copia) e completare le azioni di ripristino dell'host e di cutover necessarie in base al flusso di lavoro selezionato (online o offline).
+Fase di verifica:: Verificare che i dati e la configurazione migrati si comportino come previsto, convalidare l'accesso all'host e il multipathing e documentare lo stato finale e i risultati per il passaggio di consegne operativo.
+
+
+
+
+== Pubblico previsto
+
+Queste informazioni sono destinate a clienti, partner e team sul campo NetApp che stanno pianificando o eseguendo migrazioni di dati SAN (block/LUN) verso ONTAP, in particolare migrazioni che utilizzano Foreign LUN Import (FLI) e le relative opzioni di migrazione.
+
+.Lettori primari
+* Gli amministratori dello storage/SAN del cliente sono responsabili della pianificazione della migrazione, della preparazione ONTAP, del coordinamento delle finestre di modifica e della convalida dell'accesso host/multipathing.
+* Responsabili della migrazione / proprietari di progetti tecnici che necessitano di una guida high-level per scegliere tra FLI, opzioni basate su appliance o metodi di migrazione basati su host/applicazioni, e per stimare tempi e impegno.
+* NetApp e ingegneri dei servizi professionali partner che supportano la definizione dell'ambito, la pianificazione, la qualificazione e l'abilitazione del cliente per la migrazione (consigliato per la maggior parte delle migrazioni, ad eccezione di quelle più semplici).
+
+
+.I lettori dovrebbero avere una conoscenza di base dei seguenti argomenti:
+* Concetti SAN (LUN masking/mapping, zoning o networking iSCSI, multipathing/ALUA) e pratiche standard di change-control.
+* Nozioni fondamentali di amministrazione di ONTAP e utilizzo degli strumenti di pianificazione a supporto (come raccolta di dati dell'ambiente e le utility di convalida dell'interoperabilità).
+

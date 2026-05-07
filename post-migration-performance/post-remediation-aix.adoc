@@ -1,0 +1,153 @@
+---
+permalink: post-migration-performance/post-remediation-aix.html 
+sidebar: sidebar 
+keywords: host remediation, aix, post-migration, fli, ontap 
+summary: Dopo la migrazione, gli host AIX richiedono passaggi di correzione per garantire che le LUN appena importate vengano riconosciute e funzionino correttamente. 
+---
+= Eseguire la correzione post-migrazione dell'host ONTAP FLI AIX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo la migrazione, gli host AIX richiedono passaggi di correzione per garantire che le LUN appena importate vengano riconosciute e funzionino correttamente.
+
+
+
+== Post-migrazione - FLI offline
+
+Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e aver verificato che gli iSCSI initiator host siano connessi.
+
+[cols="5"]
+|===
+| Filesystem | Dispositivo di blocco | LVM (FS) | Cluster | Sanboot 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati | Passaggio 1: Accendere il server 
+
+
+| Passaggio 2: identificare i dispositivi multipath | Passaggio 2: identificare i dispositivi multipath | Passaggio 2: identificare i dispositivi multipath | Passaggio 2: identificare i dispositivi multipath | Passaggio 2: Verificare che l'elenco dei dispositivi di avvio dal menu IPL (Initial Program Load)/SMS elenchi i nuovi LUN facendo riferimento all'elenco dei dispositivi proveniente dal nuovo dispositivo di storage. Impostare l'ordine di avvio sul percorso del nuovo elenco di dispositivi 
+
+
+| Passaggio 3: Verifica i dettagli del filesystem | Passaggio 3: Identificare l'ID del dispositivo multipath e presentarlo all'applicazione corrispondente. | Passaggio 3: Assicurarsi che i nuovi LUN vengano rilevati | Passaggio 3: Verifica i dettagli del filesystem | Passaggio 3: Assicurarsi che il server si avvii correttamente 
+
+
+| Passaggio 4: Rimontare i dispositivi nelle rispettive cartelle |  | Passaggio 4: Attivare il VG | Passaggio 4: verificare la configurazione del cluster richiesta e avviare l'applicazione del cluster | Passaggio 4: riavviare l'host per l'avvio dal LUN appena mappato che fa parte dell'importazione LUN 
+
+
+|  |  | Passaggio 5: Elenca i LV presenti sul VG | Passaggio 5: Verificare lo stato del cluster e l'applicazione che lo sta utilizzando. |  
+
+
+|  |  | Passaggio 6: Rimontare i moduli LVM nelle rispettive cartelle |  |  
+|===
+
+NOTE: Per l'elenco dei comandi più recente e aggiornato, consultare la documentazione del fornitore del sistema operativo.
+
+.Fasi
+. Eseguire una nuova scansione dopo lo scollegamento per confermare lo stato pulito.
++
+[source, cli]
+----
+cfgmgr
+----
+. Identificare i dispositivi di archiviazione.
++
+[source, cli]
+----
+lsdev -Cc disk
+sanlun lun show all
+sanlun lun show all -pv
+lsmpio -l hdiskx
+----
+. Verificare che il dispositivo sia collegato.
++
+[source, cli]
+----
+lspv |grep hdiskx
+----
+. Identificare il gruppo di volumi e i filesystem.
++
+[source, cli]
+----
+lspv
+lsvg <vg_name>
+lsvg -l <vg_name>
+lsvg -p <vs_name>
+----
+. Varyonvg e monta i filesystem.
++
+[source, cli]
+----
+varyonvg <vg_name>
+mount /mount_point
+df -g
+----
+
+
+
+
+== Post-migrazione - FLI online
+
+Dopo aver eliminato la relazione di importazione, verificare che il nuovo LUN funzioni in modo indipendente con UNMAP abilitato. Dopo aver eliminato l'importazione del LUN, verificare se il LUN è impostato con `-space-reserve disabled` e `-space-allocation enabled`. In caso contrario, modificarlo di conseguenza.
+
+[cols="4"]
+|===
+| Filesystem | Dispositivo di blocco | LVM (FS) | Sanboot 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host AIX mappati 
+
+
+|  |  | SCSI UNMAP viene abilitato automaticamente se il dispositivo è thin provisioned. | SCSI UNMAP viene abilitato automaticamente se il dispositivo è thin provisioned. 
+|===
+.Fasi
+. Eseguire una nuova scansione dopo lo scollegamento per confermare lo stato pulito.
++
+[source, cli]
+----
+cfgmgr
+----
+. Identificare i dispositivi di archiviazione.
++
+[source, cli]
+----
+lsdev -Cc disk
+sanlun lun show all
+sanlun lun show all -pv
+lsmpio -l hdiskx
+----
+. Verificare che il dispositivo sia collegato.
++
+[source, cli]
+----
+lspv |grep hdiskx
+----
+. Verificare UNMAP sul dispositivo:
++
+[source, cli]
+----
+chfs -a reclaim=normal /mount_point
+lvmstat -v vg_name -r
+----
+
+
+[cols="1,2"]
+|===
+|  | AIX/PowerVM 
+
+
+| Passo 1 | Acquisisci le informazioni sull'host. 
+
+
+| Passo 2 | Smontare il filesystem. 
+
+
+| Passo 3 | Esegui un backup del VG. 
+
+
+| Passo 4 | Disattiva il VG. 
+
+
+| Passo 5 | Esporta il VG. 
+|===

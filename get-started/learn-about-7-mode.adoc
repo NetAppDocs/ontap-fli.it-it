@@ -1,0 +1,20 @@
+---
+permalink: get-started/learn-about-7-mode.html 
+sidebar: sidebar 
+keywords: 7 mode transition, foreign lun import, fli, ontap, clustered ontap, lun migration, online workflow, offline workflow, 32 bit aggregates, misaligned lun, data migration, 7 mode to ontap 
+summary: Scopri come utilizzare Foreign LUN Import per migrare i LUN da un sistema NetApp 7-Mode a ONTAP in cluster utilizzando un flusso di lavoro online o offline. 
+---
+= Scopri come effettuare l'importazione di LUN esteri dalla modalità 7 a ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La migrazione dei dati tramite importazione di LUN esterni tra 7 Mode e cluster mode ONTAP quando il LUN di origine è ospitato su un sistema NetApp che esegue ONTAP 7 Mode e si desidera migrare quel LUN a clustered ONTAP. Questo approccio è particolarmente utile per scenari legacy come LUN ospitati su aggregati a 32 bit o LUN non allineati, perché l'importazione di LUN esterni può essere utilizzata anche per altri casi d'uso.
+
+La migrazione dei dati tramite importazione di LUN esterne può essere eseguita utilizzando un flusso di lavoro online o offline. Dal punto di vista operativo, segue la stessa sequenza e le stesse regole delle migrazioni FLI standard online e offline; l'unica differenza è che l'array di origine è un controller NetApp 7 Mode anziché un array di terze parti.
+
+In altre parole, il flusso di lavoro principale per la migrazione FLI è lo stesso sia che la sorgente sia un array esterno o un NetApp 7 Mode array; cambia solo la piattaforma di origine.
+
+iSCSI FLI non è supportato per l'importazione da una sorgente NetApp 7 Mode.

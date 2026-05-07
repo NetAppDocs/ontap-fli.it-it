@@ -1,0 +1,37 @@
+---
+permalink: get-started/key-features-benefits.html 
+sidebar: sidebar 
+keywords: fli, foreign lun import, ontap fli, block migration, san migration, online migration, offline migration, key features, benefits, multipathing, fibre channel, iscsi, lun import, data migration, load balancing 
+summary: Scopri le caratteristiche e i vantaggi principali di ONTAP FLI, incluse le opzioni di migrazione online e offline e la migrazione LUN a livello di blocco per ambienti SAN. 
+---
+= Scopri le caratteristiche principali e i vantaggi di ONTAP Foreign LUN Import
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Foreign LUN Import (FLI) è una funzionalità integrata di migrazione a blocchi che copia i dati da una array LUN di terze parti a una LUN nativa ONTAP e supporta sia la migrazione offline che online. FLI è progettato per migrare le LUN SAN da una gamma di array di terze parti in ONTAP e offre una metodologia di migrazione coerente che contribuisce a standardizzare la pianificazione, l'esecuzione e la convalida su host e array diversi.
+
+
+
+== Caratteristiche principali
+
+* Migrazioni online e offline per soddisfare i requisiti di interruzione dell'attività aziendale.
+* La migrazione a livello di blocco, indipendente dal sistema operativo, non si basa sui gestori di volumi host o sulle utilità del sistema operativo per spostare i dati.
+* Funziona in ambienti SAN eterogenei ed è progettato per migrare array LUN da una varietà di array di terze parti in ONTAP.
+* Il trasporto backend è flessibile con la connettività backend sia FC che iSCSI, sebbene le configurazioni supportate dipendano dalla convalida dell'interoperabilità.
+* Supporto nativo per multipathing e bilanciamento del carico che sfrutta i modelli di pathing SAN standard.
+* Controllo e visibilità tramite interfaccia a riga di comando, che consentono un'esecuzione ripetibile e il monitoraggio operativo.
+
+
+
+
+== Principali vantaggi
+
+* ONTAP FLI è incluso in ONTAP. Non è necessario un appliance di migrazione separato per eseguire importazioni di array LUN basate su FLI.
+* Riduce il rischio di tempi di inattività consentendo un flusso di lavoro online in cui l'accesso all'host può essere ripristinato dopo una breve cutover mentre l'import continua in background.
+* Una metodologia di migrazione coerente che contribuisce a standardizzare la pianificazione, l'esecuzione e la convalida su host e array diversi.
+* Supporta scenari di transizione complessi, incluse le migrazioni da 7 Mode a ONTAP, dove le considerazioni relative all'allineamento e al formato possono essere affrontate come parte del flusso di lavoro di transizione.
+* Modello operativo fortemente supportato, sebbene i servizi professionali non siano obbligatori, NetApp raccomanda servizi professionali o partner qualificati per la definizione dell'ambito, la pianificazione e la formazione per qualsiasi operazione che vada oltre le semplici migrazioni.
+

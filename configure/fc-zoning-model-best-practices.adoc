@@ -1,0 +1,35 @@
+---
+permalink: configure/fc-zoning-model-best-practices.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= ONTAP Pratiche di cablaggio e zonizzazione FC raccomandate per l'importazione di LUN esteri ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'importazione di LUN da fonti esterne (Foreign LUN Import, FLI) richiede che le LUN di origine siano accessibili da ONTAP, il che si ottiene tramite la zonizzazione delle porte target di origine verso le porte initiator ONTAP. Le zone esistenti da origine a host in genere non vengono modificate durante la migrazione e possono essere rimosse o disattivate dopo la migrazione.
+
+.Lo scenario standard FC FLI utilizza 4 zone distinte
+* Zona 1: Storage di origine a storage di destinazione (Fabric A)
+* Zona 2: Storage di origine verso storage di destinazione (Fabric B)
+* Zona 3: Host allo storage di destinazione (Fabric A)
+* Zona 4: Dall'host allo storage di destinazione (Fabric B)
+
+
+.Best practice di zoning
+* Non mescolare porte target di origine e porte target di destinazione nella stessa zona.
+* Non mescolare le porte initiator di destinazione e le porte host nella stessa zona.
+* Non mescolare le porte di destinazione target e di destinazione initiator nella stessa zona.
+* Zona con almeno due porte per storage controller per ridondanza, ove possibile.
+* Preferire la zonizzazione con un singolo initiator e un singolo target.
+* Utilizzare i WWPN delle porte fisiche appropriati per il modello di zonizzazione richiesto dal workflow FLI. Non utilizzare i WWPN NPIV laddove ciò sia esplicitamente vietato dalle linee guida di zonizzazione per la migrazione.
+
+
+image::new-fc-zoning-model.png[Esempio di modello di zonizzazione FC per ONTAP FLI]
+
+
+NOTE: Dopo aver assegnato i target di origine agli initiator di destinazione, lo storage di origine dovrebbe diventare visibile da ONTAP tramite i comandi di discovery. Se l'array non appare al primo tentativo, in alcuni ambienti potrebbe essere necessario reimpostare la porta dello switch collegata agli initiator ONTAP.

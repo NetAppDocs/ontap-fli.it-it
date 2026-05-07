@@ -1,0 +1,193 @@
+---
+permalink: phases/remediation-esxi.html 
+sidebar: sidebar 
+keywords: ontap, fli, foreign lun import, esxi host, pre-migration, offline fli, online fli 
+summary: Prima di eseguire la migrazione ONTAP FLI su un host ESXi, completare questi passaggi pre-migrazione. Ci sono passaggi separati per le migrazioni offline e online. 
+---
+= Ripristino host ONTAP FLI ESXi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di eseguire la migrazione ONTAP FLI su un host ESXi, completare questi passaggi pre-migrazione. Sono previsti passaggi separati per le migrazioni offline e online.
+
+
+
+== Pre-migrazione - FLI offline
+
+Questa serie di passaggi è comune sia per FLI Online che Offline. Prima di disattivare la LUN di origine dall'host, assicurarsi di aver completato i seguenti passaggi.
+
+[cols="4"]
+|===
+| VM/VMDK | RDM | WSFC | VMSC 
+
+
+ a| 
+Passaggio 1: Arrestare correttamente le macchine virtuali guest.
+ a| 
+Passaggio 1: Per le VM che utilizzano RDM, identificare la mappatura del backend con il dispositivo nmp e rimuovere i dischi RDM in modo corretto.
+ a| 
+Passaggio 1: Se WFSC è presente, arrestare il cluster in modo controllato e seguire i passaggi di ripristino di Windows per rimuovere i dischi.
+ a| 
+Passaggio 1: Se è configurato VM-HA o VMSC, disabilitare HA, rilasciare i dischi heartbeat, se presenti, e regolare la configurazione del cluster secondo necessità.
+
+
+
+ a| 
+Passaggio 2: Smontare i datastore destinati alla migrazione; se condivisi, smontarli da tutti gli host.
+ a| 
+Passaggio 2: Scollegare i dispositivi NMP rilevanti coinvolti nella migrazione.
+ a| 
+Passaggio 2: Arrestare correttamente le macchine virtuali guest.
+ a| 
+Passaggio 2: Smontare i datastore destinati alla migrazione; se condivisi, smontarli da tutti gli host.
+
+
+
+ a| 
+Passaggio 3: Verificare la modalità di blocco VMFS (solo ATS o ATS+SCSI). Se è solo ATS, passare a SCSI (necessario solo per Online FLI).
+ a| 
+ a| 
+Passaggio 3: Smontare i datastore destinati alla migrazione; se condivisi, smontarli da tutti gli host. a
+ a| 
+Passaggio 3: Scollegare i dispositivi NMP rilevanti coinvolti nella migrazione.
+
+
+
+ a| 
+Passaggio 4: Scollegare i dispositivi NMP rilevanti coinvolti nella migrazione.
+|   a| 
+Passaggio 4: Scollegare i dispositivi NMP rilevanti coinvolti nella migrazione.
+|  
+|===
+.Punti chiave da sapere
+* L'impostazione *solo ATS* è memorizzata nell'intestazione VMFS, che risiede nella prima estensione del datastore. Se il datastore si estende su più estensioni, è necessario correggere solo la prima estensione.
+* Se il datastore è condiviso tra più host ESXi, in genere è sufficiente aggiornarlo da un solo host; gli altri host recepiscono la modifica dopo una nuova scansione/rimontaggio.
+* Durante la modifica della modalità ATS-only, non devono essere in esecuzione operazioni di I/O attive sul datastore. VMware consiglia di evacuare/migrare o arrestare le VM e di smontare/rimontare secondo necessità per applicare la modifica.
+
+
+
+
+=== Esempi di comandi ESX: Sync Block
+
+Metti l'host in modalità di manutenzione::
+
+
+esxcli system maintenanceMode set --enable true
+
+Identificare i dispositivi di archiviazione e i datastore::
+
+
+[Source]
+----
+esxcli storage core device list
+esxcli storage filesystem list
+----
+Verifica la modalità di blocco VMFS ATS::
+
+
+vmkfstools --queryfs -h /vmfs/volumes/<DATASTORE_NAME>
+
+Smontare il datastore (ripetere l'operazione su tutti gli host ESXi se condivisi)::
+
+
+esxcli storage filesystem unmount -l <DATASTORE_NAME>
+
+Scollegare il dispositivo di supporto (dispositivo NMP / naa)::
+
+
+esxcli storage core device set -d <naa.ID> --state=off
+
+Verificare che il dispositivo sia scollegato::
+
+
+esxcli storage core device list -d <naa.ID>
+
+Eseguire una nuova scansione dopo lo smontaggio per confermare lo stato pulito::
+
+
+esxcli storage core adapter rescan --all
+
+Esci dalla modalità di manutenzione al termine::
+
+
+esxcli system maintenanceMode set --enable false
+
+
+
+== Pre-migrazione - FLI online
+
+Di seguito sono riportati i passaggi specifici della procedura FLI online, ma questi passaggi devono essere preceduti dai passaggi della procedura FLI offline di pre-migrazione.
+
+I seguenti passaggi devono essere eseguiti dopo il provisioning del LUN NetApp sull'host.
+
+A questo punto l'importazione LUN è già stata creata, la LUN è mappata all'igroup dell'host e c'è già un iniziatore iSCSI o FC connesso dall'host.
+
+In caso di FLI offline, la LUN NetApp rimane nello stato offline.
+
+[cols="3"]
+|===
+| VM/VMDK | RDM | VMSC 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host ESXi mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host ESXi mappati. | Passaggio 1: Eseguire una nuova scansione dello storage su tutti gli host ESXi mappati. 
+
+
+| Passaggio 2: Elencare i dettagli del volume/dispositivo per confermare i dettagli del filesystem sulla LUN. | Passaggio 2: Identificare i nuovi ID NAA e aggiungere nuovamente gli RDM alle rispettive VM. | Passaggio 2: Elencare i dettagli del volume/dispositivo per confermare i dettagli del filesystem sulla LUN. 
+
+
+| Passaggio 3: Identificare i dettagli del datastore e montare nuovamente i datastore su ESXi. | Passaggio 3: Accendere le macchine virtuali guest e avviare le applicazioni. | Passaggio 3: Identificare i dettagli del datastore e montare nuovamente i datastore su ESXi. 
+
+
+| Passaggio 4: Accendere le macchine virtuali guest e avviare le applicazioni. |  | Passaggio 4: Accendere le macchine virtuali guest e avviare le applicazioni. 
+
+
+|  |  | Passaggio 5: Accendere le macchine virtuali guest e avviare le applicazioni 
+|===
+
+NOTE: Per l'elenco dei comandi più recente e aggiornato, consultare la documentazione del fornitore del sistema operativo.
+
+Metti l'host in modalità di manutenzione::
+
+
+esxcli system maintenanceMode set --enable true
+
+Identificare i dispositivi di archiviazione e i datastore::
+
+
+[Source]
+----
+esxcli storage core device list
+esxcli storage filesystem list
+----
+Verifica la modalità di blocco VMFS ATS::
+
+
+vmkfstools --queryfs -h /vmfs/volumes/<DATASTORE_NAME>
+
+Smontare il datastore (ripetere l'operazione su tutti gli host ESXi se condivisi)::
+
+
+esxcli storage filesystem unmount -l <DATASTORE_NAME>
+
+Se viene rilevato solo ATS, convertire in ATS+SCSI::
+
+
+vmkfstools --configATSOnly 0 /vmfs/volumes/<DATASTORE_NAME>
+
+Scollegare il dispositivo di supporto (dispositivo NMP / naa)::
+
+
+esxcli storage core device set -d <naa.ID> --state=off
+
+Verificare che il dispositivo sia scollegato::
+
+
+esxcli storage core device list -d <naa.ID>
+
+Eseguire una nuova scansione dopo lo smontaggio per confermare lo stato pulito::
+
+
+esxcli storage core adapter rescan --all

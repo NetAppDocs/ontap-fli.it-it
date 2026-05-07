@@ -1,0 +1,18 @@
+---
+section: get-started
+title: Inizia subito
+entries:
+- title: Panoramica
+  url: "/get-started/learn-about-data-migration.html"
+- title: migrazione dei dati SAN a ONTAP
+  url: "/get-started/learn-about-san-data-migration.html"
+- title: Importazione LUN esterna
+  url: "/get-started/learn-about-fli.html"
+- title: Migrazione FLI da 7-mode a ONTAP
+  url: "/get-started/learn-about-7-mode.html"
+- title: Caratteristiche e vantaggi principali
+  url: "/get-started/key-features-benefits.html"
+- title: Prerequisiti FLI
+  url: "/get-started/prerequisites.html"
+- title: Configurazioni e piattaforme supportate
+  url: "/get-started/supported-configurations.html"

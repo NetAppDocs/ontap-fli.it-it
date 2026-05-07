@@ -1,0 +1,68 @@
+---
+permalink: phases/remediation-linux.html 
+sidebar: sidebar 
+keywords: ontap, fli, foreign lun import, linux host, pre-migration, offline fli, online fli 
+summary: Prima di eseguire la migrazione ONTAP FLI su un host Linux, completare questi passaggi pre-migrazione. Ci sono passaggi separati per le migrazioni offline e online. 
+---
+= Remediation host Linux ONTAP FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di eseguire la migrazione ONTAP FLI su un host Linux, completare questi passaggi pre-migrazione. Ci sono passaggi separati per le migrazioni offline e online.
+
+
+
+== Pre-migrazione - FLI offline
+
+Questi passaggi sono comuni sia per FLI online che offline. Prima di disattivare la LUN di origine dall'host, assicurarsi di aver completato i seguenti passaggi.
+
+[cols="3"]
+|===
+| File system (LVM e Non-LVM) | Pacemaker con LVM (SCSI3 PR) | SANBOOT 
+
+
+| Passaggio 1: Raccogliere la configurazione end-to-end del dispositivo a blocchi: stato/percorsi multipath, layout LVM sul dispositivo a blocchi e impostazioni GRUB/bootloader che confermino il dispositivo di avvio e i parametri di avvio corretti. | Passaggio 1: Raccogliere la configurazione end-to-end del dispositivo a blocchi: stato/percorsi multipath, layout LVM sul dispositivo a blocchi e impostazioni GRUB/bootloader che confermino il dispositivo di avvio e i parametri di avvio corretti. | Passaggio 1: Raccogliere la configurazione end-to-end di avvio SAN: stato/percorsi multipath, layout LVM sulla LUN di avvio e impostazioni GRUB/bootloader che confermino il dispositivo di avvio e i parametri di avvio corretti. 
+
+
+| Passaggio 2: Assicurarsi che le  `/etc/fstab` voci relative ai rispettivi dispositivi dati (LVM/Non-LVM) siano referenziate tramite il loro UUID FS. | Passaggio 2: Disabilitare i gruppi di risorse del cluster per le rispettive LUN da migrare. Una volta disabilitati, eliminare i gruppi di risorse. | Passaggio 2: Assicurarsi che le  `/etc/fstab` voci per il dispositivo di avvio SAN, inclusi i dispositivi dati (lvm/nonlvm), siano referenziate tramite il loro UUID del file system. 
+
+
+| Passaggio 3: Assicurarsi che tutte le operazioni sui punti di montaggio di destinazione siano in pausa. Verificare che non vi siano processi che accedono ancora al dispositivo a blocchi. Se necessario, drenare/terminare gli handle dei processi aperti. | Passaggio 3: Eseguire il backup della configurazione del gruppo di volumi LVM in un file per i rispettivi gruppi di risorse appena disabilitati/eliminati. Successivamente, disattivare i gruppi di volumi. | Passaggio 3: Assicurarsi di aver aggiornato la  `GRUB_CMDLINE_LINUX` riga con i riferimenti UUID corretti. Ricreare una nuova configurazione GRUB basata sui riferimenti UUID del dispositivo. 
+
+
+| Passaggio 4: smontare il filesystem ed eseguire il backup della configurazione del gruppo di volumi LVM. Disattivare il VG ed esportare il VG | Passaggio 4: Rimuovere le LUN di origine dalla configurazione PCS stonith. | Passaggio 4: Convalidare le modifiche con le nuove impostazioni di grub e ricreare la nuova immagine initrd per riflettere le modifiche con il dispositivo di avvio SAN. 
+
+
+| Passaggio 5: svuota la configurazione multipath per il dispositivo e rimuovi tutti i file obsoleti del dispositivo SCSI. | Passaggio 5: svuotare la configurazione multipath per il dispositivo e rimuovere tutti i file obsoleti del dispositivo SCSI. NOTA: se vengono visualizzate prenotazioni persistenti LUN, cancellarle e assicurarsi che non siano presenti chiavi PR | Passaggio 5: riavviare l'host per assicurarsi che l'host si avvii correttamente dopo le modifiche sopra descritte. Una volta che l'host si avvia correttamente, comprendere che la pre-remediation dell'host per la migrazione FLI è pronta. 
+
+
+| Passaggio 6: Ricaricare la configurazione multipath in modo che l'host disponga dell'elenco dei dispositivi aggiornato. Se necessario, eseguire una nuova scansione del bus SCSI dell'host. | Passaggio 6: Eseguire una nuova scansione dell'host per assicurarsi che non vi siano voci obsolete nella mappatura dei dispositivi esistente. | Passaggio 6: Ora arrestare l'host sanboot per procedere con il flusso di lavoro ONTAP FLI. 
+|===
+
+
+== Pre-migrazione - FLI online
+
+Di seguito sono riportati i passaggi specifici della procedura FLI online, ma questi passaggi devono essere preceduti dai passaggi della procedura FLI offline di pre-migrazione. I seguenti passaggi devono essere eseguiti dopo che la NetApp LUN è stata configurata sull'host. Questi passaggi devono essere eseguiti dopo che la NetApp LUN è stata configurata sull'host. E sono applicabili solo alla procedura FLI online.
+
+[cols="3"]
+|===
+| File system (LVM e Non-LVM) | Pacemaker con LVM (SCSI3 PR) | SANBOOT 
+
+
+| Passaggio 1: Eseguire una nuova scansione dello spazio di archiviazione su tutti gli host Linux mappati. | Passaggio 1: Eseguire una nuova scansione dello spazio di archiviazione su tutti gli host Linux mappati. | Passaggio 1: Accendere il server. 
+
+
+| Passaggio 2: Individuare i dispositivi multipath. | Passaggio 2: Individuare i dispositivi multipath. Assicurarsi che le LUN migrate siano aggiunte alla configurazione di PCS Stonith. | Passaggio 2: Nel BIOS o UEFI dell'HBA del server, configurare il nuovo dispositivo di avvio presentato a questo HBA host. 
+
+
+| Passaggio 3: Importa i gruppi di volumi ed esegui l'attivazione del VG. | Passaggio 3: Eseguire il ripristino del backup della configurazione del VG per i VG/LVM appena rilevati, seguito dall'attivazione del VG. | Passaggio 3: Riavviare l'host per l'avvio dal LUN appena mappato che fa parte di LUN Import. 
+
+
+| Passaggio 4: Montare la configurazione LVM sui rispettivi punti di montaggio. | Passaggio 4: Creare i nuovi gruppi di risorse PCS e aggiungere le risorse corrispondenti per i LV e i filesystem disponibili. NOTA: Si prega di notare che i nuovi oggetti LVM attivati mantengono intatte le strutture di LV e filesystem. |  
+
+
+|  | Passaggio 5: Verificare che lo stato del cluster PCS per tutte le risorse sia online e disponibile. |  
+|===

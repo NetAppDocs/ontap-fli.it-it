@@ -1,0 +1,74 @@
+---
+permalink: phases/plan-overview.html 
+sidebar: sidebar 
+keywords: plan and prepare phase, foreign lun import, fli, migration planning, test migration, cutover, intercluster lif, iscsi fli, gap analysis, san migration, fc fli, zoning 
+summary: 'Scopri la fase di pianificazione e preparazione, che trasforma i risultati della fase di scoperta e analisi in un piano di migrazione eseguibile e convalida la predisposizione dell"ambiente.' 
+---
+= ONTAP Foreign LUN Import (FLI) Fase di pianificazione e preparazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di pianificazione e preparazione trasforma i risultati della scoperta e dell'analisi in un piano di migrazione eseguibile e conferma che l'ambiente sia pronto per la finestra di migrazione. La maggior parte del lavoro di progetto si concentra in questa fase, poiché è qui che si finalizza l'approccio di cutover, online o offline, si convalida la connettività end-to-end e si verifica il flusso di lavoro attraverso una o più migrazioni di prova prima di passare alla produzione.
+
+Per iSCSI FLI, questa fase deve anche convalidare i vincoli di progettazione del backend iSCSI. L'initiator software ONTAP iSCSI utilizza LIF IC, richiede IP del portale di destinazione e IQN di destinazione espliciti, nessuna sessione di discovery ed è progettato per funzionare entro limiti di scala definiti (importazioni per nodo, sessioni per LIF/nodo, initiator per LIF, dimensione massima di importazione).
+
+
+
+== Risultati della fase di pianificazione e preparazione di ONTAP FLI
+
+* Finalizzare il piano di remediation utilizzando la gap analysis dell'host, includendo le modifiche apportate prima della migrazione e quelle apportate durante la finestra di cutover, come ad esempio le modifiche MPIO.
+* Creare la mappatura LUN da origine a destinazione, associando gli identificatori e i numeri di serie delle LUN di origine ai nomi e ai percorsi delle LUN ONTAP di destinazione, inclusa la mappatura di rollback.
+* Convalidare la connettività backend da ONTAP all'array foreign utilizzando la raggiungibilità IC LIF e una topologia di sessione full mesh in cui ogni nodo HA stabilisce sessioni con ogni target portal. Questo è il prerequisito per un rilevamento affidabile delle LUN foreign.
+* Eseguire una o più migrazioni di prova per confermare la correttezza della configurazione e per raccogliere campioni di throughput utili a stimare la durata della produzione e l'impegno di personale necessario.
+
+
+
+
+== Attività della fase di pianificazione e preparazione di ONTAP FLI
+
+Di seguito sono riportate le attività di pianificazione e preparazione di ONTAP FLI per ciascun componente.
+
+[cols="1,2"]
+|===
+| Componente | Attività 
+
+
+| Host  a| 
+* Finalizzare il piano di ripristino dell'host utilizzando la gap analysis, specificando se la modifica debba avvenire prima della migrazione, durante cutover o dopo la migrazione.
+* Scegliere la modalità di migrazione, online o offline, in base alla tolleranza ai tempi di inattività e alla criticità del carico di lavoro; allineare di conseguenza le tempistiche di remediation.
+* Convalidare e documentare le fasi di riscoperta e correzione lato host per il caso d'uso previsto, LUN standard, disco cluster, datastore RDM/VMFS, ecc. da utilizzare durante la finestra di migrazione.
+
+
+
+
+| Fabric / Rete  a| 
+* Ambienti FC: eseguire il backup dei set di zone esistenti e pianificare le modifiche alle zone necessarie per cutover e la pulizia post-migrazione.
+* iSCSI backend environments: convalidare la raggiungibilità IP end-to-end tra le LIF ONTAP IC e gli IP del portale di destinazione dell'array esterno (routing/VLAN/firewall incl. TCP/3260) e garantire la ridondanza.
+* Non aggiungere nuove IC LIF su una sottorete diversa solo per raggiungere destinazioni estere quando le IC LIF esistenti sono già in uso su un'altra sottorete (considerare come pianificazione non supportata).
+
+
+
+
+| Array di storage NetApp (ONTAP di destinazione)  a| 
+* Confermare la predisposizione del cluster ONTAP per iSCSI FLI (release/ECV supportate) e assicurarsi che la configurazione del backend iSCSI utilizzata solo per la migrazione venga rimossa dopo la migrazione (importante per la predisposizione all'aggiornamento/ripristino).
+* Identificare e confermare gli IC LIF sul nodo proprietario del LUN e sul partner HA e pianificare la resilienza (in genere due IC LIF per nodo su porte diverse).
+* Creare initiator iSCSI software (un initiator per ogni IC LIF) e stabilire sessioni full mesh (ogni nodo HA per ogni foreign target portal e IQN) e verificare che le sessioni siano integre.
+* Individua le LUN esterne in ONTAP utilizzando il comando storage disk show, verifica l'integrità del percorso e le proprietà di base, incluso il requisito di 512B, e quindi contrassegna le LUN esterne come foreign.
+* Configurare una LUN di destinazione di test con parità di dimensione utilizzando il parametro -foreign-disk, mapparla utilizzando il protocollo front end pianificato (FC o iSCSI) ed eseguire almeno una migrazione di test per convalidare il flusso di lavoro end-to-end e acquisire throughput.
+* Assicurarsi che il piano rispetti i vincoli iSCSI FLI (nessuna sessione di discovery, nessun MCS, solo ERL0, limiti di importazione e sessione e dimensione massima di importazione).
+
+
+
+
+| Array di storage esterno (Source)  a| 
+* Vengono raccolti gli IP dei portali di destinazione e gli IQN di destinazione, le sessioni vengono create esplicitamente e non vengono utilizzate sessioni di discovery.
+* Creare un oggetto di accesso lato fornitore (equivalente a host/gruppo host) per gli initiator ONTAP e mappare una piccola LUN di test (in genere ~1 GB) solo agli initiator ONTAP per la qualificazione e il test.
+* Verificare che la destinazione estera visualizzi gli accessi e le sessioni dell'iniziatore ONTAP e che i LUN corretti siano mappati per l'importazione.
+* Assicurarsi che all'host di produzione non venga presentata simultaneamente la stessa LUN di origine durante cutover per evitare la doppia presentazione.
+* Completare la qualificazione degli array esteri utilizzando gli strumenti e l'approccio di qualificazione supportati prima delle importazioni in produzione.
+
+
+|===

@@ -1,0 +1,27 @@
+---
+permalink: configure/fc-connectivity-wiring.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= Connettività e cablaggio ONTAP Foreign LUN Import (FLI)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'importazione di LUN esterni tramite FC si basa su una progettazione SAN a doppio fabric, in modo che i controller ONTAP di destinazione possano accedere in modo affidabile ai LUN dell'array esterno durante il rilevamento e l'importazione. Per una distribuzione supportata, ogni storage controller in uso deve avere un percorso attivo primario in entrambi i fabric, il che significa che le porte target dell'array di origine e le porte ONTAP initiator per i nodi che eseguono l'importazione devono trovarsi in una zona comune nel Fabric A e nel Fabric B. Non è necessario includere tutti i nodi del cluster ONTAP, ma solo i nodi che effettivamente importeranno e migreranno i LUN. Sebbene i percorsi indiretti possano funzionare, best practice prevede l'utilizzo di percorsi attivi e ottimizzati tra origine e destinazione.
+
+
+
+== Pratiche di cablaggio e zonizzazione FC raccomandate da ONTAP FLI
+
+* Utilizzare due fabric (A e B) per ridondanza.
+* Assicurarsi che i percorsi primari e attivi di ciascun controller in uso siano presenti in entrambi i fabric.
+* Utilizzare almeno due porte ONTAP initiator e due porte array target dell'array sorgente, ove possibile, per evitare singoli punti di guasto.
+* Non zonare le porte ONTAP initiator con l'host. Le porte ONTAP initiator vengono utilizzate solo per connettersi alle porte di destinazione dell'array sorgente per l'importazione e il rilevamento.
+* Configura in zona solo i nodi ONTAP che partecipano alle importazioni, non è necessario configurare in zona l'intero cluster.
+
+
+image::new-zoning.png[Esempio di zonizzazione FC per ONTAP FLI]

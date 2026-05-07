@@ -1,0 +1,109 @@
+---
+permalink: phases/discovery-phase.html 
+sidebar: sidebar 
+keywords: discovery phase, foreign lun import, fli, active iq onecollect, fc fli, iscsi fli, intercluster lif, wwpn, iqn, foreign array, lun discovery, san migration 
+summary: 'Scopri la fase di scoperta, che raccoglie informazioni sull"ambiente di origine e sulla connettività per gettare le basi della pianificazione della migrazione.' 
+---
+= Fase di scoperta dell'importazione di LUN esteri (FLI) di ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase di discovery ONTAP FLI è il primo passo del processo di migrazione. È fondamentale raccogliere tutte le informazioni necessarie sull'ambiente di origine, sulla connettività e sul sistema ONTAP di destinazione per garantire una migrazione senza intoppi. La fase di discovery pone le basi per la pianificazione, la preparazione, l'esecuzione e la verifica della migrazione.
+
+
+
+== Preparati per una migrazione iSCSI con ONTAP FLI
+
+La fase di rilevamento ONTAP FLI raccoglie i dettagli tecnici necessari per completare la migrazione:
+
+* Pianifica il flusso di lavoro di migrazione (online vs offline)
+* Eseguire la correzione dell'host in modo sicuro
+* Verificare la connettività e il rilevamento del LUN estero su ONTAP prima di creare la relazione di importazione
+
+
+Per la raccolta di dati strutturata e ripetibile su host, controller NetApp e fabric, è possibile utilizzare NetApp Active IQ OneCollect. OneCollect è progettato per raccogliere informazioni da storage, host, fabric e switch per la pianificazione e la convalida della migrazione.
+
+Per FC FLI, la fase di rilevamento deve acquisire i WWPN delle porte di destinazione dell'array estero.
+
+Per iSCSI FLI, la fase di rilevamento deve:
+
+* Acquisire gli IP del portale di destinazione dell'array estero e gli IQN di destinazione
+* Verificare la raggiungibilità dell'IC LIF
+* Pianifica sessioni iSCSI full mesh (ogni nodo HA connesso a ciascun target portal) per garantire che la foreign LUN venga rilevata attraverso tutti i percorsi disponibili
+
+
+
+
+== Attività della fase di scoperta ONTAP FLI
+
+Ciascun componente ha una serie di compiti per raccogliere dati o convalidare la connettività.
+
+[cols="1,2"]
+|===
+| Componente | Attività 
+
+
+| Host  a| 
+* Identificare la versione del sistema operativo host, lo stack e la configurazione del multipathing e qualsiasi modello di consumo speciale, come filesystem, raw device o cluster disk, per guidare le fasi di remediation e cutover dell'host.
+* Acquisire l'inventario delle LUN, inclusi dimensioni, identificativi o numeri di serie, layout o offset delle partizioni e modalità di utilizzo di ciascuna LUN da parte delle applicazioni, ai fini della pianificazione e del rollback.
+* Per gli ambienti frontend FC, registrare i WWPN dell'iniziator host. Questi vengono utilizzati per la zonizzazione e il mascheramento, se applicabile alla progettazione complessiva della migrazione e del cutover.
+* Per gli ambienti frontend iSCSI, se utilizzati dopo la migrazione, registrare gli IQN dell'iniziatore host e gli IP del portale di destinazione che l'host utilizzerà per l'accesso dopo cutover.
+
+
+
+
+| Fabric e networking  a| 
+* Per gli ambienti FC:
++
+** Documentare la configurazione di zonizzazione corrente (da e verso le zone dell'host e dell'array di origine) in modo che possa essere rimossa o aggiornata in sicurezza dopo cutover.
+** Acquisire gli identificativi dello switch e le porte coinvolte.
+
+
+* Per ambienti iSCSI:
++
+** Documentare la VLAN, la sottorete e il percorso di routing tra le ONTAP IC LIF e i portali di destinazione dell'array esterno
+** Verificare che non vi siano firewall o ACL che blocchino la comunicazione.
+
+
+
+
+
+
+| NetApp storage array (destinazione)  a| 
+* Confermare la versione di ONTAP e la prontezza ECV per iSCSI FLI.
++
+
+NOTE: La creazione dell'initiator viene bloccata se il cluster non si trova al livello supportato.
+
+* Identificare i nodi partecipanti, come il nodo proprietario del LUN e il suo partner HA, e registrare le LIF intercluster disponibili su tali nodi. Pianificare la ridondanza; pianificare le LIF intercluster, gli initiator e le sessioni su entrambi i nodi HA.
+* Registra IC LIF IPspace e sottorete e verifica che possano raggiungere i portali di destinazione esterni. Evita di creare nuovi IC LIF in una sottorete diversa se gli IC LIF esistenti sono già in uso altrove nel cluster.
+* Verifica i vincoli lato destinazione che devi applicare durante la pianificazione, come la dimensione massima di importazione, il requisito di dimensione del blocco di 512B e i limiti di scalabilità di sessione e importazione relativi a iSCSI FLI.
+
+
+
+
+| Array di archiviazione esterna (Source)  a| 
+* Identificare gli indirizzi IP del portale di destinazione dell'array esterno e gli IQN di destinazione; le sessioni di rilevamento iSCSI non sono supportate per iSCSI FLI, quindi questi devono essere esplicitamente noti in anticipo.
+* Identificare le LUN specifiche mappate sull'host di origine, incluse le dimensioni della LUN e la dimensione del blocco. Assicurarsi che la LUN sia stabile, non in fase di espansione e idonea alla pianificazione dell'importazione.
+* Registra gli accessi host e gli oggetti di mascheramento, come i record host e initiator, in modo da poter annullare o rimappare la mappatura in modo sicuro durante cutover e verificare la predisposizione al rollback.
+* Pianificare ed eseguire la qualificazione di array esteri.
++
+
+NOTE: La qualificazione sul campo è necessaria per iSCSI FLI; non si deve presumere che gli array qualificati FC siano automaticamente qualificati per iSCSI.
+
+
+
+|===
+
+
+== Documenti consigliati per la fase di discovery ONTAP FLI
+
+* Un unico foglio di inventario che mappa: Host → LUN di origine → Foreign target portal/IQN → ONTAP IC LIF/nodi → LUN di destinazione per un'esecuzione pulita e rollback.
+* Un pacchetto OneCollect (o equivalente) acquisito prima dell'esecuzione delle modifiche per ridurre i tempi di analisi in caso di problemi.
+
+
+.Informazioni correlate
+link:https://mysupport.netapp.com/site/tools["Strumenti"]

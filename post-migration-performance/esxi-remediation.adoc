@@ -1,0 +1,56 @@
+---
+permalink: post-migration-performance/esxi-remediation.html 
+sidebar: sidebar 
+keywords: esxi remediation, vmfs, ats, caw, vaai, vmkfstools, datastore, online fli, foreign lun import, fli, vmware, ats-only 
+summary: Correggere i datastore VMware ESXi con intestazioni VMFS solo ATS che possono impedire il montaggio quando presentati tramite una relazione di importazione FLI online. 
+---
+= Eseguire la correzione di ONTAP FLI ESXi VMFSS ATS/CAW
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante una migrazione FLI online, la relazione di importazione temporanea non supporta VMware ATS o CAW (VAAI Atomic Test and Set o SCSI Compare And Write). Se il datastore è VMFS5 ed è stato creato su storage che supporta ATS, VMware potrebbe contrassegnare l'intestazione VMFS come "solo ATS". In tale stato, il datastore potrebbe non essere montato quando viene presentato tramite una relazione FLI online.
+
+.Informazioni su questo compito
+* L'impostazione "Solo ATS" è memorizzata nell'intestazione VMFS, che risiede sul primo extent del datastore. Se il datastore si estende su più extent, è necessario correggere solo il primo extent.
+* Se il datastore è condiviso tra più host ESXi, in genere è sufficiente aggiornarlo da un solo host; gli altri host recepiscono la modifica dopo una nuova scansione e un nuovo rimontaggio.
+* Durante la modifica della modalità ATS-only, non devono essere in esecuzione operazioni di I/O attive sul datastore. VMware consiglia di evacuare e migrare le macchine virtuali oppure di arrestarle, smontarle e rimontarle secondo necessità per applicare la modifica.
+
+
+.Fasi
+. Verificare la modalità ATS corrente del datastore.
++
+Eseguire questo comando su un host ESXi per il volume VMFS:
+
++
+[source, cli]
+----
+vmkfstools -Ph -v1 /vmfs/volumes/<DATASTORE_NAME_OR_UUID>
+----
+. Disabilita ATS-only.
++
+
+IMPORTANT: Assicurarsi che le macchine virtuali siano state migrate e arrestate e che il datastore sia smontato da tutti gli host, ove richiesto dal piano di modifica. Eseguire sul percorso del dispositivo del primo extent LUN (naa.*):
+
++
+[source, cli]
+----
+vmkfstools --configATSOnly 0 /vmfs/devices/disks/naa.<naa_id>:1
+----
++
+Questa operazione modifica il volume per consentire il blocco non ATS (pubblico).
+
+. Eseguire una nuova scansione degli adattatori di archiviazione (o rimontare il datastore) in modo che gli host rileggano la modalità aggiornata.
+. Riattiva ATS.
++
+Dopo il completamento della migrazione, se si desidera ripristinare il comportamento ATS-only:
+
++
+[source, cli]
+----
+vmkfstools --configATSOnly 1 /vmfs/devices/disks/naa.<naa_id>:1
+----
+. Eseguire nuovamente la scansione e rimontare per applicare la modifica.
+
