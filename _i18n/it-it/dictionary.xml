@@ -1300,7 +1300,6 @@
   <block id="f54f8723cdd855de6b42f8c6088ea7cf" category="paragraph">Avvia-VM -Name &lt;VM_Name&gt;</block>
   <block id="3530aa78abbe00fb441a6a913266c4f5" category="summary">Scopri la fase di verifica che conferma il completamento della migrazione come previsto e rimuove le configurazioni temporanee utilizzate durante la finestra di migrazione.</block>
   <block id="c7b5ec48b58689a14b9ca8360ae61c36" category="doc">Fase di verifica di ONTAP Foreign LUN Import (FLI)</block>
-  <block id="2dc59e510103c83c15f9b3fff186d965" category="paragraph">La fase di verifica conferma che la migrazione è stata completata come previsto e si concentra sulla pulizia post-migrazione. Ciò include la convalida del comportamento dell'applicazione, la conferma del corretto accesso all'host e dei percorsi verso le LUN ONTAP, la raccolta dei log di migrazione per scopi di audit e risoluzione dei problemi e la rimozione della connettività e della configurazione temporanee utilizzate solo per la migrazione.</block>
   <block id="312705c3917e0ecf74999294476290b4" category="paragraph">Nell'ambito della pulizia, si rimuovono i record degli initiator lato sorgente e le zone non più necessarie e si documenta la configurazione finale in modo che i team operativi abbiano uno stato "as-built" chiaro.</block>
   <block id="f67442f7dd9efc703506d4e505684839" category="paragraph">Per iSCSI FLI, la fase di verifica dovrebbe includere anche la rimozione delle sessioni dell'iSCSI initiator software e degli initiator creati sui LIF intercluster. Se i LIF intercluster sono stati creati solo per l'importazione del LUN esterno, anche questi LIF devono essere eliminati.</block>
   <block id="c8253ba169277559e143f0f27d32ba7a" category="section-title">Attività della fase di verifica ONTAP FLI</block>
@@ -1546,4 +1545,5 @@
   <block id="144e3bff2769f72c63f6e00004097fcc" category="sidebar">FLI post-migrazione</block>
   <block id="259c870f8a8594516755af0729eb847a" category="sidebar">Panoramica post-migrazione</block>
   <block id="5d793778d9d63a7b0602b47ee814bd26" category="sidebar">Novità nella migrazione dei dati SAN</block>
+  <block id="d6fe85b2a7716d9377c34dd3d6ea37c4" category="paragraph">La fase di verifica conferma che la migrazione è stata completata come previsto e si concentra sulla pulizia post-migrazione. Ciò include la convalida del comportamento dell'applicazione, la conferma del corretto accesso host e dei percorsi verso le LUN ONTAP, la raccolta dei log di migrazione per scopi di audit e risoluzione dei problemi e la rimozione della connettività e della configurazione temporanee utilizzate solo per la migrazione.</block>
 </blocks>

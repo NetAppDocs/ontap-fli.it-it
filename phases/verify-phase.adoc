@@ -11,7 +11,7 @@ summary: Scopri la fase di verifica che conferma il completamento della migrazio
 
 
 [role="lead"]
-La fase di verifica conferma che la migrazione è stata completata come previsto e si concentra sulla pulizia post-migrazione. Ciò include la convalida del comportamento dell'applicazione, la conferma del corretto accesso all'host e dei percorsi verso le LUN ONTAP, la raccolta dei log di migrazione per scopi di audit e risoluzione dei problemi e la rimozione della connettività e della configurazione temporanee utilizzate solo per la migrazione.
+La fase di verifica conferma che la migrazione è stata completata come previsto e si concentra sulla pulizia post-migrazione. Ciò include la convalida del comportamento dell'applicazione, la conferma del corretto accesso host e dei percorsi verso le LUN ONTAP, la raccolta dei log di migrazione per scopi di audit e risoluzione dei problemi e la rimozione della connettività e della configurazione temporanee utilizzate solo per la migrazione.
 
 Nell'ambito della pulizia, si rimuovono i record degli initiator lato sorgente e le zone non più necessarie e si documenta la configurazione finale in modo che i team operativi abbiano uno stato "as-built" chiaro.
 
