@@ -15,6 +15,7 @@ ONTAP Foreign LUN Import (FLI) è una funzionalità integrata di migrazione a bl
 
 
 
+[[key-features]]
 == Caratteristiche principali
 
 * Migrazioni online e offline per soddisfare i requisiti di interruzione dell'attività aziendale.
@@ -27,6 +28,7 @@ ONTAP Foreign LUN Import (FLI) è una funzionalità integrata di migrazione a bl
 
 
 
+[[key-benefits]]
 == Principali vantaggi
 
 * ONTAP FLI è incluso in ONTAP. Non è necessario un appliance di migrazione separato per eseguire importazioni di array LUN basate su FLI.

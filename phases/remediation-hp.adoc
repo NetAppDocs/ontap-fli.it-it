@@ -15,6 +15,7 @@ Prima di eseguire la migrazione ONTAP FLI su un host HP, completare questi passa
 
 
 
+[[pre-migration-offline-fli]]
 == Pre-migrazione - FLI offline
 
 Questi passaggi sono comuni sia per FLI online che offline. Prima di disattivare la LUN di origine dall'host, assicurarsi di aver completato i seguenti passaggi.
@@ -43,6 +44,7 @@ Questi passaggi sono comuni sia per FLI online che offline. Prima di disattivare
 |===
 
 
+[[pre-migration-online-fli]]
 == Pre-migrazione - FLI online
 
 Di seguito sono riportati i passaggi specifici della procedura FLI online, ma questi passaggi devono essere preceduti dai passaggi della procedura FLI offline di pre-migrazione. I passaggi seguenti devono essere eseguiti dopo che la NetApp LUN è stata configurata sull'host.

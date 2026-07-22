@@ -15,6 +15,7 @@ Dopo la migrazione, gli host Windows richiedono interventi correttivi per garant
 
 
 
+[[post-migration-offline-fli]]
 == Dopo la migrazione - FLI offline
 
 Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e aver verificato che gli iSCSI initiator host siano connessi.
@@ -37,6 +38,7 @@ Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e 
 |===
 
 
+[[post-migration-online-fli]]
 == Post migrazione - FLI online
 
 Dopo aver eliminato l'importazione LUN, verificare se la LUN è configurata con -space-reserve disabilitato e -space-allocation abilitato. In caso contrario, modificarla di conseguenza.
@@ -53,6 +55,7 @@ Dopo aver eliminato l'importazione LUN, verificare se la LUN è configurata con 
 |===
 
 
+[[filesystem-devices]]
 === Dispositivi del filesystem
 
 .Fasi
@@ -85,6 +88,7 @@ Start-Service -Name <ServiceName>
 
 
 
+[[physical-drives-no-filesystem]]
 === Unità fisiche (senza file system)
 
 .Fasi
@@ -99,6 +103,7 @@ Update-HostStorageCache
 
 
 
+[[wsfc]]
 === WSFC
 
 .Fasi
@@ -132,6 +137,7 @@ Start-ClusterResource -Name <ResourceName>
 
 
 
+[[hyper-v]]
 === Hyper V
 
 .Fasi

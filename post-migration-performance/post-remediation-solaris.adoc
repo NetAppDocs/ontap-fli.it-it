@@ -15,6 +15,7 @@ Dopo la migrazione, gli host Solaris richiedono passaggi di correzione per garan
 
 
 
+[[post-migration-offline-fli]]
 == Post-migrazione - FLI offline
 
 Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e aver verificato che gli iSCSI initiator host siano connessi.
@@ -77,6 +78,7 @@ df -g (to ensure its unmounted)
 
 
 
+[[post-migration-online-fli]]
 == Post-migrazione - FLI online
 
 Dopo aver eliminato l'importazione LUN, verificare se la LUN è configurata con -space-reserve disabilitato e -space-allocation abilitato. In caso contrario, modificarla di conseguenza.

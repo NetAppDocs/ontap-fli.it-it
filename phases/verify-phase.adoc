@@ -19,6 +19,7 @@ Per iSCSI FLI, la fase di verifica dovrebbe includere anche la rimozione delle s
 
 
 
+[[ontap-fli-verify-phase-tasks]]
 == Attività della fase di verifica ONTAP FLI
 
 Di seguito sono riportate le attività di verifica ONTAP FLI per ciascun componente.

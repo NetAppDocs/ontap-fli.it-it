@@ -15,6 +15,7 @@ L'importazione di LUN esterni tramite FC si basa su una progettazione SAN a dopp
 
 
 
+[[ontap-fli-recommended-fc-wiring-and-zoning-practices]]
 == Pratiche di cablaggio e zonizzazione FC raccomandate da ONTAP FLI
 
 * Utilizzare due fabric (A e B) per ridondanza.

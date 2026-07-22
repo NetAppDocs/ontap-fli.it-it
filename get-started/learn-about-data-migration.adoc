@@ -23,6 +23,7 @@ iSCSI e FC ONTAP FLI supportano sia le importazioni offline (nessuna attività d
 
 
 
+[[key-terms]]
 == Termini chiave
 
 array esterno:: Qualsiasi sistema storage che non esegue ONTAP (inclusa NetApp 7 Mode in un contesto di transizione dalla modalità 7 a ONTAP).
@@ -33,6 +34,7 @@ Importazione LUN:: Il processo che trasferisce i blocchi dal LUN esterno al LUN 
 
 
 
+[[high-level-methodology]]
 == Metodologia high-level
 
 Fase di rilevamento:: Effettua un inventario completo dell'ambiente—host, sistemi di storage e SAN/network fabrics—per comprendere cosa esiste e come tutto è connesso.
@@ -44,6 +46,7 @@ Fase di verifica:: Verificare che i dati e la configurazione migrati si comporti
 
 
 
+[[intended-audience]]
 == Pubblico previsto
 
 Queste informazioni sono destinate a clienti, partner e team sul campo NetApp che stanno pianificando o eseguendo migrazioni di dati SAN (block/LUN) verso ONTAP, in particolare migrazioni che utilizzano Foreign LUN Import (FLI) e le relative opzioni di migrazione.

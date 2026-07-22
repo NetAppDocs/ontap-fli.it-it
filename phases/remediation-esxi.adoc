@@ -15,6 +15,7 @@ Prima di eseguire la migrazione ONTAP FLI su un host ESXi, completare questi pas
 
 
 
+[[pre-migration-offline-fli]]
 == Pre-migrazione - FLI offline
 
 Questa serie di passaggi è comune sia per FLI Online che Offline. Prima di disattivare la LUN di origine dall'host, assicurarsi di aver completato i seguenti passaggi.
@@ -70,6 +71,7 @@ Passaggio 4: Scollegare i dispositivi NMP rilevanti coinvolti nella migrazione.
 
 
 
+[[esx-example-commands-sync-block]]
 === Esempi di comandi ESX: Sync Block
 
 Metti l'host in modalità di manutenzione::
@@ -117,6 +119,7 @@ esxcli system maintenanceMode set --enable false
 
 
 
+[[pre-migration-online-fli]]
 == Pre-migrazione - FLI online
 
 Di seguito sono riportati i passaggi specifici della procedura FLI online, ma questi passaggi devono essere preceduti dai passaggi della procedura FLI offline di pre-migrazione.

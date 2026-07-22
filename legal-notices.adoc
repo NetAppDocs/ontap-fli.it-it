@@ -1,7 +1,7 @@
 ---
-permalink: legal-notices.html 
 sidebar: sidebar 
-keywords: legal, notices, copyright, trademarks, patents 
+permalink: legal-notices.html 
+keywords: copyrights, notice, trademarks, patents, privacy, open source 
 summary: 'Le note legali forniscono l"accesso a dichiarazioni di copyright, marchi, brevetti e altro ancora.' 
 ---
 = Note legali
@@ -10,38 +10,37 @@ summary: 'Le note legali forniscono l"accesso a dichiarazioni di copyright, marc
 :imagesdir: ./media/
 
 
+[role="lead"]
 Le note legali forniscono l'accesso a dichiarazioni di copyright, marchi, brevetti e altro ancora.
 
 
 
+[[copyright]]
 == Copyright
 
-http://www.netapp.com/us/legal/copyright.aspx[]
+link:https://www.netapp.com/company/legal/copyright/["https://www.netapp.com/company/legal/copyright/"^]
 
 
 
+[[trademarks]]
 == Marchi
 
 NETAPP, il logo NETAPP e i marchi elencati nella pagina dei marchi NetApp sono marchi di NetApp, Inc. Altri nomi di società e prodotti potrebbero essere marchi dei rispettivi proprietari.
 
-http://www.netapp.com/us/legal/netapptmlist.aspx[]
+link:https://www.netapp.com/company/legal/trademarks/["https://www.netapp.com/company/legal/trademarks/"^]
 
 
 
+[[patents]]
 == Brevetti
 
 Un elenco aggiornato dei brevetti di proprietà di NetApp è disponibile all'indirizzo:
 
-https://www.netapp.com/us/media/patents-page.pdf[]
+link:https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf["https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf"^]
 
 
 
+[[privacy-policy]]
 == Direttiva sulla privacy
 
-https://www.netapp.com/us/legal/privacypolicy/index.aspx[]
-
-
-
-== Traduzione automatica
-
-Per informazioni importanti sui contenuti localizzati, visitare il sito Web all'indirizzo link:https://www.netapp.com/company/legal/machine-translation/["netapp.com"]
+link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.com/company/legal/privacy-policy/"^]

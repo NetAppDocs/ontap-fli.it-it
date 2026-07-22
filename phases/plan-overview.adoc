@@ -17,6 +17,7 @@ Per iSCSI FLI, questa fase deve anche convalidare i vincoli di progettazione del
 
 
 
+[[ontap-fli-plan-and-prepare-phase-results]]
 == Risultati della fase di pianificazione e preparazione di ONTAP FLI
 
 * Finalizzare il piano di remediation utilizzando la gap analysis dell'host, includendo le modifiche apportate prima della migrazione e quelle apportate durante la finestra di cutover, come ad esempio le modifiche MPIO.
@@ -27,6 +28,7 @@ Per iSCSI FLI, questa fase deve anche convalidare i vincoli di progettazione del
 
 
 
+[[ontap-fli-plan-and-prepare-phase-tasks]]
 == Attività della fase di pianificazione e preparazione di ONTAP FLI
 
 Di seguito sono riportate le attività di pianificazione e preparazione di ONTAP FLI per ciascun componente.

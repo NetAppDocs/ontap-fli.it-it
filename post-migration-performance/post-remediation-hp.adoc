@@ -15,6 +15,7 @@ Dopo la migrazione, gli host HP-UX richiedono interventi correttivi per garantir
 
 
 
+[[post-migration-offline-fli]]
 == Post-migrazione - FLI offline
 
 Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e aver verificato che gli iSCSI initiator host siano connessi.
@@ -46,6 +47,7 @@ Per FLI offline, portare la LUN online dopo aver eliminato l'import della LUN e 
 |===
 
 
+[[post-migration-online-fli]]
 == Post-migrazione - FLI online
 
 Dopo aver eliminato l'importazione LUN, verificare se il LUN è impostato con `-space-reserve disabled` e `-space-allocation enabled`. In caso contrario, modificarlo di conseguenza.

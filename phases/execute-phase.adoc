@@ -15,6 +15,7 @@ La fase di esecuzione è quella in cui viene effettuata la migrazione. Comprende
 
 
 
+[[ontap-fli-execute-phase-tasks]]
 == Attività della fase di esecuzione ONTAP FLI
 
 Di seguito sono riportate le attività di esecuzione ONTAP FLI per ciascun componente.
