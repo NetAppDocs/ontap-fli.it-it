@@ -7,12 +7,10 @@ indexpage:
   lead: Importazione LUN esterna ONTAP
   tiles:
   - title: Note di rilascio
-    url: "/release-notes.html"
     links:
     - title: Novità di ONTAP per la migrazione dei dati SAN
       url: release-notes/whats-new.html
   - title: Inizia subito
-    url: "/get-started.html"
     links:
     - title: Scopri il programma di migrazione dei dati ONTAP
       url: "/get-started/learn-about-data-migration.html"
@@ -21,7 +19,6 @@ indexpage:
     - title: Scopri di più su ONTAP Foreign LUN Import
       url: "/get-started/learn-about-fli.html"
   - title: Fasi FLI
-    url: "/phases.html"
     links:
     - title: Fase di scoperta dell'importazione di LUN esteri (FLI) di ONTAP
       url: "/phases/discovery-phase.html"
@@ -34,7 +31,6 @@ indexpage:
     - title: Fase di verifica di ONTAP Foreign LUN Import (FLI)
       url: "/phases/verify-phase.html"
   - title: Configurazione FLI
-    url: "/configure.html"
     links:
     - title: Connettività e cablaggio ONTAP Foreign LUN Import (FLI)
       url: "/configure/fc-connectivity-wiring.html"
@@ -42,7 +38,6 @@ indexpage:
         FC raccomandate
       url: "/configure/iscsi-setup-backend-connectivity.html"
   - title: Migrazione FLI
-    url: "/migrate.html"
     links:
     - title: Scopri i LUN esteri per la migrazione FLI
       url: "/migrate/discover-foreign-luns.html"
@@ -53,7 +48,6 @@ indexpage:
     - title: Verificare ed eliminare la relazione di importazione FLI LUN
       url: "/migrate/verify-delete.html"
   - title: FLI Post-Migrazione
-    url: "/post-migration-performance.html"
     links:
     - title: Eseguire la pulizia post-migrazione
       url: "/post-migration-performance/clean-up.html"
@@ -62,7 +56,6 @@ indexpage:
     - title: Prestazioni FLI
       url: "/post-migration-performance/performance.html"
   - title: Esempio di foglio di lavoro Site Survey and Planning
-    url: "/sample-site.html"
     links:
     - title: Panoramica
       url: "/san-migration/reference_sample_site_survey_and_planning_worksheet.html"

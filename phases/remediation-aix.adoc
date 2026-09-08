@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: ontap, fli, foreign lun import, aix host, pre-migration, offline fli, online fli 
 summary: Prima di eseguire la migrazione ONTAP FLI su un host AIX, completare questi passaggi pre-migrazione. Sono previsti passaggi separati per le migrazioni offline e online. 
 ---
-= Remediation host ONTAP FLI AIX
+= Esegui la correzione degli host ONTAP FLI AIX prima della migrazione
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

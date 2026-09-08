@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords:  
 summary:  
 ---
-= Configurare gli adattatori FC per la modalità initiator per la migrazione ONTAP Foreign LUN Import (FLI)
+= Configura gli adattatori FC in modalità initiator in ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: site, survey and planning worksheet, storage groups tab 
 summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario disporre di una scheda contenente informazioni sui gruppi di storage.' 
 ---
-= Scheda Storage Groups del foglio di lavoro Site Survey and Planning
+= Foglio di lavoro ONTAP FLI per la Site Survey e la pianificazione, scheda Storage Groups
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

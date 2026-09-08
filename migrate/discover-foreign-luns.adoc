@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: discover foreign luns, foreign lun import, fli, ontap, storage disk show, mark foreign lun, fc backend, iscsi backend, foreign disk, lun discovery, san migration 
 summary: 'Rimuovere il LUN remoto dall"host e mapparlo all"initiator ONTAP in modo che ONTAP possa rilevare il LUN nel suo stack di storage.' 
 ---
-= Scopri i LUN esteri per la migrazione FLI
+= Scopri le LUN esterne per la migrazione FLI di ONTAP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

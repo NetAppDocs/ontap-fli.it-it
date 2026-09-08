@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: site, survey and planning worksheet, source luns tab 
 summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sui LUN di origine.' 
 ---
-= Scheda LUN di origine del foglio di lavoro Site Survey and Planning (analisi del sito e pianificazione)
+= Foglio di lavoro ONTAP FLI per l'indagine e la pianificazione del sito, scheda LUN di origine
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

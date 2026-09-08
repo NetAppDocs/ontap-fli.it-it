@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: site, survey and planning worksheet, fas config tab 
 summary: 'Nell"ambito del foglio di lavoro per l"analisi e la pianificazione del sito, è disponibile una scheda contenente informazioni sulla configurazione di FAS.' 
 ---
-= Scheda Configurazione FAS del foglio di lavoro per l'analisi e la pianificazione del sito
+= Foglio di lavoro ONTAP FLI Site Survey and Planning, scheda Config FAS
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

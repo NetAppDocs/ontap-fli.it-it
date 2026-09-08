@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: ontap, fli, foreign lun import, esxi host, pre-migration, offline fli, online fli 
 summary: Prima di eseguire la migrazione ONTAP FLI su un host ESXi, completare questi passaggi pre-migrazione. Ci sono passaggi separati per le migrazioni offline e online. 
 ---
-= Ripristino host ONTAP FLI ESXi
+= Esegui la correzione degli host ESXi pre-migrazione ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

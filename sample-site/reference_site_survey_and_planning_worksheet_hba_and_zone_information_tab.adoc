@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: site, survey and planning worksheet, hba and zone information tab 
 summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente informazioni sull"HBA e sulla zona.' 
 ---
-= Scheda HBA (Site Survey and Planning) e informazioni zona del foglio di lavoro
+= Foglio di lavoro ONTAP FLI per il rilevamento e la pianificazione del sito, scheda Informazioni HBA e Zona
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

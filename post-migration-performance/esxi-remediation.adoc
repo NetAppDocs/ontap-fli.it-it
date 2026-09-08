@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: esxi remediation, vmfs, ats, caw, vaai, vmkfstools, datastore, online fli, foreign lun import, fli, vmware, ats-only 
 summary: Correggere i datastore VMware ESXi con intestazioni VMFS solo ATS che possono impedire il montaggio quando presentati tramite una relazione di importazione FLI online. 
 ---
-= Eseguire la correzione di ONTAP FLI ESXi VMFSS ATS/CAW
+= Eseguire la correzione di ONTAP FLI ESXi VMFS ATS/CAW
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

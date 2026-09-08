@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: post-migration cleanup, foreign lun import, fli, data integrity, snapshot, autosupport, fc fli, iscsi fli, san migration, de-provision, import logs 
 summary: 'Completare la pulizia post-migrazione dopo FLI, confermando il completamento dell"importazione, verificando l"integrità dei dati e rimuovendo le configurazioni backend temporanee.' 
 ---
-= Eseguire la pulizia post-migrazione di ONTAP FLI
+= Esegui la pulizia post-migrazione di ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: verify import, delete import relationship, foreign lun import, fli, lun import delete, lun import verify, import cleanup, san migration, offline verification, asa r2 
 summary: 'Completa la migrazione eliminando la relazione di importazione al termine della copia e, facoltativamente, verifica l"integrità dei dati a livello di blocco prima della rimozione.' 
 ---
-= Verificare ed eliminare la relazione di importazione FLI LUN
+= Verifica ed elimina la relazione di importazione ONTAP FLI LUN
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: sample, site, survey and planning, worksheet 
 summary: Durante le fasi di analisi e pianificazione della metodologia di migrazione sarà necessario documentare la configurazione esistente, le configurazioni di destinazione, le lacune e i piani di correzione utilizzando un foglio di lavoro Site Survey and Planning. 
 ---
-= Esempio di foglio di lavoro Site Survey and Planning
+= Scheda di lavoro di esempio per il Site Survey e la pianificazione ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

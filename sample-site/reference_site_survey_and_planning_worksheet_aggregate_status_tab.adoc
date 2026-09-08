@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: site, survey and planning, worksheet, aggregate status tab 
 summary: 'Come parte del foglio di lavoro Site Survey and Planning (sondaggio e pianificazione del sito), dovresti avere una scheda contenente informazioni sullo stato aggregato.' 
 ---
-= Scheda Stato aggregato del foglio di lavoro Site Survey and Planning
+= Foglio di lavoro ONTAP FLI per indagine e pianificazione del sito - Scheda Stato aggregato
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

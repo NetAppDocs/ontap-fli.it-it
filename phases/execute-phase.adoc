@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: execute phase, foreign lun import, fli, offline fli, online fli, cutover, import jobs, san migration, zoning, host remediation, iscsi fli, fc fli 
 summary: 'Scopri la fase di esecuzione, che comprende tutte le attività necessarie per eseguire una migrazione FLI offline o online e trasferire l"accesso host a ONTAP.' 
 ---
-= ONTAP Fase di esecuzione dell'importazione di LUN esteri (FLI)
+= Scopri la fase di esecuzione di ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

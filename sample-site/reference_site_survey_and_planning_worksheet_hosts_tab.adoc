@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: site, survey and planning worksheet, hosts tab 
 summary: 'Nell"ambito del foglio di lavoro Site Survey and Planning, è necessario impostare una scheda contenente le informazioni sull"host del progetto di migrazione.' 
 ---
-= Scheda host del foglio di lavoro Site Survey and Planning
+= Foglio di lavoro ONTAP FLI per l'indagine e la pianificazione del sito - scheda Host
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

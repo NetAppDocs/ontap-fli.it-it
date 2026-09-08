@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: fli, foreign lun import, ontap fli, block migration, san migration, online migration, offline migration, key features, benefits, multipathing, fibre channel, iscsi, lun import, data migration, load balancing 
 summary: Scopri le caratteristiche e i vantaggi principali di ONTAP FLI, incluse le opzioni di migrazione online e offline e la migrazione LUN a livello di blocco per ambienti SAN. 
 ---
-= Scopri le caratteristiche principali e i vantaggi di ONTAP Foreign LUN Import
+= Caratteristiche e vantaggi principali di ONTAP Foreign LUN Import
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
